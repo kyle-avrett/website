@@ -1,0 +1,19 @@
+setup:
+    pnpm install
+
+lint:
+    pnpm lint
+
+typecheck:
+    pnpm typecheck
+
+dev: all
+    pnpm dev
+
+build: all
+    pnpm build
+
+preview: all
+    pnpm preview
+
+all: setup lint typecheck

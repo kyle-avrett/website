@@ -1,0 +1,42 @@
+setup:
+	uv sync
+
+format:
+	uv run ruff format
+
+lint:
+	uv run ruff check
+
+typecheck:
+	uv run ty check
+
+test:
+	uv run pytest
+
+make-migrations name:
+    uv run alembic revision --autogenerate -m "{{name}}"
+
+migrate:
+	uv run alembic upgrade head
+
+downgrade:
+    uv run alembic downgrade -1
+
+dev: all
+    sudo systemctl start postgresql.service
+    POSTGRES_HOST=localhost uv run alembic upgrade head
+    (sleep 2; xdg-open http://localhost:8000/docs >/dev/null 2>&1 || true) &  # open docs
+    POSTGRES_HOST=localhost uv run python \
+        -m debugpy     --listen 127.0.0.1:5678 \
+        -m fastapi dev --no-reload src/main.py --host 0.0.0.0
+
+build: all
+    sudo systemctl stop postgresql.service
+    docker compose build --no-cache
+
+preview: all
+    sudo systemctl stop postgresql.service
+    (sleep 2; xdg-open http://localhost:8000/docs >/dev/null 2>&1 || true) &  # open docs
+    docker compose up --build
+
+all: setup format lint typecheck test

@@ -1,0 +1,18 @@
+# api
+.pytest_cache/
+__pycache__/
+htmlcov/
+.coverage
+.env
+
+# frontend
+.quasar/
+dist/
+node_modules/
+.env
+
+# website
+.astro/
+dist/
+node_modules/
+.env

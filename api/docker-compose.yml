@@ -1,0 +1,43 @@
+services:
+  api:
+    image: ghcr.io/kyle-avrett/website-api:latest
+    restart: always
+    pull_policy: always
+    env_file:
+      - .env
+    depends_on:
+      database-migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  database:
+    image: postgres:18
+    restart: always
+    pull_policy: always
+    env_file:
+      - .env
+    volumes:
+      - database-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  database-migrate:
+    image: ghcr.io/kyle-avrett/website-api:latest
+    restart: no
+    pull_policy: always
+    command: ["alembic", "upgrade", "head"]
+    env_file:
+      - .env
+    depends_on:
+      database:
+        condition: service_healthy
+
+volumes:
+  database-data:

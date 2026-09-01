@@ -1,0 +1,21 @@
+setup:
+    pnpm install
+
+lint:
+    pnpm lint
+
+typecheck:
+    pnpm typecheck
+
+dev: all
+    pnpm dev
+
+build: all
+    pnpm build
+
+preview: all
+    pnpm build
+    (sleep 2; xdg-open http://localhost:4321 >/dev/null 2>&1 || true) &  # open
+    pnpm preview
+
+all: setup lint typecheck
