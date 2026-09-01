@@ -1,6 +1,0 @@
-{
-    "extends": "./.quasar/tsconfig.json",
-    "compilerOptions": {
-        "rootDir": "."
-    }
-}
