@@ -1,0 +1,11 @@
+[install]
+exact = false
+peer = true
+minimumReleaseAge = 86400
+
+[install.cache]
+disable = false
+
+[run]
+bun = true
+silent = false

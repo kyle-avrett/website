@@ -1,21 +1,19 @@
 setup:
-    pnpm install
+    bun install
 
 lint:
-    pnpm lint
+    bun lint
 
 typecheck:
-    pnpm typecheck
+    bun typecheck
 
 dev: all
-    pnpm dev
+    bun dev
 
 build: all
-    pnpm build
+    bun build
 
 preview: all
-    pnpm build
-    (sleep 2; xdg-open http://localhost:4321 >/dev/null 2>&1 || true) &  # open
-    pnpm preview
+    bun serve
 
 all: setup lint typecheck

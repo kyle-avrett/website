@@ -1,13 +1,12 @@
 mod api
-mod app
 mod website
 
 [parallel]
-dev: api::dev app::dev website::dev
+dev: api::dev website::dev
 
-build: api::build app::build website::build
+build: api::build website::build
 
 [parallel]
-preview: api::preview app::preview website::preview
+preview: api::preview website::preview
 
-all: api::all app::all website::all
+all: api::all website::all
