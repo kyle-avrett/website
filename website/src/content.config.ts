@@ -17,6 +17,7 @@ import { z } from 'zod';
 
 import { SITE } from './config';
 
+// SAFETY: SITE.locales is a non-empty readonly tuple defined in src/config.ts.
 const localeEnum = z.enum(SITE.locales as unknown as [string, ...string[]]);
 
 /**
@@ -30,7 +31,7 @@ const localeEnum = z.enum(SITE.locales as unknown as [string, ...string[]]);
  *   2. A public path (e.g. `/images/foo.jpg`) — copied as-is, NOT
  *      optimized.
  *   3. An external URL (https://…) — optimized at build if the host
- *      is allow-listed in `image.remotePatterns` in `astro.config.mjs`.
+ *      is allow-listed in `image.remotePatterns` in `astro.config.ts`.
  */
 const baseFrontmatter = ({ image }: SchemaContext) =>
     z.object({

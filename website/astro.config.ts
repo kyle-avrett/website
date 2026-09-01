@@ -1,4 +1,3 @@
-// @ts-check
 import { satteri, satteriHeadingIdsPlugin } from '@astrojs/markdown-satteri';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
@@ -9,14 +8,14 @@ import { defineConfig, fontProviders, svgoOptimizer } from 'astro/config';
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import process from 'node:process';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, URL } from 'node:url';
 import satteriExternalLinks from 'satteri-external-links';
 import { katex } from '@nullpinter/satteri-katex';
 import { satteriAlert } from './src/plugins/satteri-alert';
 import { satteriAsHTML } from './src/plugins/satteri-ashtml';
 import { satteriBaseLinks } from './src/plugins/satteri-base-links';
-import { satteriAutolinkHeadings } from './src/plugins/satteri-autolink-headings.ts';
-import { satteriMermaid } from './src/plugins/satteri-mermaid.ts';
+import { satteriAutolinkHeadings } from './src/plugins/satteri-autolink-headings';
+import { satteriMermaid } from './src/plugins/satteri-mermaid';
 
 import { SITE } from './src/config';
 
@@ -56,8 +55,7 @@ function collectUnlistedUrls() {
                         // Derive locale and slug from the entry id (e.g. "en/my-post.md").
                         const segs = entry.id.split(/[\\/]/);
                         const locale =
-                            segs[0] &&
-                            /** @type {readonly string[]} */ (SITE.locales).includes(segs[0])
+                            segs[0] && SITE.locales.some((siteLocale) => siteLocale === segs[0])
                                 ? segs[0]
                                 : SITE.defaultLocale;
                         const slug = segs
@@ -96,7 +94,7 @@ function rewriteSitemapXslToRelative() {
     return {
         name: 'chirpy:rewrite-sitemap-xsl',
         hooks: {
-            'astro:build:done': (/** @type {{ dir: URL }} */ { dir }) => {
+            'astro:build:done': ({ dir }: { dir: URL }) => {
                 const distDir = fileURLToPath(dir);
                 const files = readdirSync(distDir).filter(
                     (f) => f.startsWith('sitemap') && f.endsWith('.xml'),

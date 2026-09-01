@@ -134,7 +134,7 @@
     /* Reading column max width on post pages */
     --width-prose: 50rem;
 
-    /* Fonts — configured via Astro Fonts API (astro.config.mjs) */
+    /* Fonts — configured via Astro Fonts API (astro.config.ts) */
     --font-sans: var(--font-source-sans-3, system-ui, sans-serif);
     --font-mono: var(--font-jetbrains-mono, ui-monospace, monospace);
 }
@@ -585,7 +585,7 @@
  * Code blocks are rendered by `astro-expressive-code`. It emits its own
  * scoped styles (`.expressive-code`) and drives the active theme via the
  * `[data-theme='chirpy-light' | 'chirpy-dark']` attribute on <html>
- * (configured via `themeCssSelector` in astro.config.mjs).
+ * (configured via `themeCssSelector` in astro.config.ts).
  *
  * The few overrides below just make the code-block frames sit nicely
  * inside our prose container.
