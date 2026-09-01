@@ -54,7 +54,7 @@ than animations and ad slots.
 Almost everything is wired through a single typed config file at
 [`src/config.ts`](https://github.com/) — site title, author, navigation,
 social links, posts-per-page, default locale, Giscus credentials, and
-feature flags. Restart `bun run dev` after editing it.
+feature flags. Restart `pnpm dev` after editing it.
 
 New posts go in `src/content/posts/<locale>/`. Pair translations by
 setting the same `translationKey` in both files. The frontmatter

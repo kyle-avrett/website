@@ -1,19 +1,19 @@
 setup:
-    bun install
+    pnpm install
 
 lint:
-    bun lint
+    pnpm lint
 
 typecheck:
-    bun typecheck
+    pnpm typecheck
 
 dev: all
-    bun dev
+    pnpm dev
 
 build: all
-    bun build
+    pnpm build
 
 preview: all
-    bun serve
+    pnpm serve
 
 all: setup lint typecheck

@@ -60,7 +60,7 @@ La quasi-totalité de la configuration passe par un seul fichier typé
 [`src/config.ts`](https://github.com/) — titre du site, auteur,
 navigation, liens sociaux, articles par page, locale par défaut,
 identifiants Giscus, et indicateurs de fonctionnalités. Redémarrez
-`bun run dev` après l'avoir modifié.
+`pnpm dev` après l'avoir modifié.
 
 Les nouveaux articles vont dans `src/content/posts/<locale>/`. Appariez
 les traductions en utilisant la même `translationKey` dans les deux

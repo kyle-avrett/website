@@ -3,4 +3,4 @@ dist/
 node_modules/
 public/_pagefind/
 AGENTS.md
-bun.lockb
+pnpm-lock.yaml

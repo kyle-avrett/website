@@ -87,7 +87,7 @@ function collectUnlistedUrls() {
  *
  * Why: a root-relative href works in BOTH environments
  *   - production: same origin as the sitemap, browsers apply the XSL
- *   - `bun serve` / preview: same origin (localhost), no cross-origin
+ *   - `pnpm serve` / preview: same origin (localhost), no cross-origin
  *     XSLT block (which renders as a blank page in browsers).
  *
  * Crawlers ignore `<?xml-stylesheet ?>` entirely, so SEO is unaffected.
@@ -122,7 +122,7 @@ export default defineConfig({
     // so production builds need `base` to match that subpath — every
     // generated asset URL (CSS, JS, images, favicons) is prefixed with it.
     //
-    // In `bun run dev`, however, we want the site to open at plain
+    // In `pnpm dev`, however, we want the site to open at plain
     // `http://localhost:4321/` for a friction-free local experience. The
     // `BASE_PATH` env var (read from `.env`) lets each environment opt in:
     //   - `.env` (committed empty / unset)         → dev runs at `/`
