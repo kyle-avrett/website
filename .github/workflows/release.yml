@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: ${{ github.repository }}-api
 
 jobs:
   test:
@@ -30,6 +30,8 @@ jobs:
         run: uv sync --frozen --all-groups
 
       - name: pytest
+        env:
+          APP_NAME: ${{ env.IMAGE_NAME }}
         run: uv run pytest
 
       - name: ruff check
@@ -66,7 +68,7 @@ jobs:
         with:
           context: ./api
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-api:latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
   release:
     runs-on: ubuntu-latest
