@@ -38,6 +38,7 @@ const navItems = NAV.map((item) => ({ ...item, href: withBase(item.href) }));
                                 class="h-full w-full object-cover"
                                 loading="eager"
                                 decoding="async"
+                                fetchpriority="high"
                             />
                         ) : (
                             <Image
@@ -46,8 +47,7 @@ const navItems = NAV.map((item) => ({ ...item, href: withBase(item.href) }));
                                 width={112}
                                 height={112}
                                 class="h-full w-full object-cover"
-                                loading="eager"
-                                decoding="async"
+                                priority="true"
                             />
                         )
                     ) : (
