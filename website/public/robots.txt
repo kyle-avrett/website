@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: /sitemap-index.xml
+Sitemap: https://kyleavrett.com/sitemap-index.xml
