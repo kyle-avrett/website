@@ -10,10 +10,11 @@ const year = new Date().getFullYear();
     class="border-base-300 text-base-content/70 mt-10 flex flex-col gap-1 border-t py-6 text-sm lg:flex-row lg:items-center lg:justify-between"
 >
     <p>
-        © <time>{year}</time>
+        © <time>{year} </time>
         {SITE.author.name}. All rights reserved.
     </p>
-    <p>
-        <a href={withBase('/privacy-policy')} class="hover:text-primary"> Privacy Policy </a>
+    <p class="flex gap-3">
+        <a href={withBase('/privacy-policy')} class="hover:text-primary">Privacy Policy</a>
+        <a href={withBase('/sitemap-index.xml')} class="hover:text-primary">Sitemap</a>
     </p>
 </footer>
