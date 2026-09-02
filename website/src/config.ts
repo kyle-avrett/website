@@ -35,7 +35,6 @@ export const SITE: SiteConfig = {
         bio: 'Hands-on CTO / Head of Engineering',
     },
     defaultOgImage: ogDefaultImg.src,
-    postsPerPage: 12,
     isoDates: false,
     showFeaturedImages: true,
     boxedArticles: true,

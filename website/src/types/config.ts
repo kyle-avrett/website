@@ -10,7 +10,6 @@ export interface SiteConfig {
         bio?: string;
     };
     defaultOgImage: string;
-    postsPerPage: number;
     isoDates: boolean;
     showFeaturedImages: boolean;
     boxedArticles: boolean;
