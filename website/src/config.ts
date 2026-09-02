@@ -14,7 +14,6 @@ const GITHUB_HANDLE = import.meta.env.PUBLIC_GITHUB_HANDLE ?? '';
 const GITHUB_REPO = import.meta.env.PUBLIC_GITHUB_REPO ?? '';
 const TWITTER_HANDLE = import.meta.env.PUBLIC_TWITTER_HANDLE ?? '';
 const CONTACT_EMAIL = import.meta.env.PUBLIC_CONTACT_EMAIL ?? '';
-const THEME_REPO_URL = '';
 
 // website repo
 export const REPO = {
@@ -31,7 +30,6 @@ export const SITE: SiteConfig = {
     description: 'Hands-on CTO / Head of Engineering',
     author: {
         name: 'Kyle Avrett',
-        url: GITHUB_HANDLE ? `https://github.com/${GITHUB_HANDLE}` : undefined,
         avatar: avatarImg,
         bio: 'Hands-on CTO / Head of Engineering',
     },
@@ -42,15 +40,6 @@ export const SITE: SiteConfig = {
     boxedArticles: true,
     dynamicPostCardHeight: false,
     autoOgImage: true,
-    showPrivacyPolicy: true,
-    footer: {
-        leftText: undefined,
-        rightText: undefined,
-        showPrivacyPolicy: true,
-        showThemeCredits: false,
-        themeName: '',
-        themeUrl: THEME_REPO_URL,
-    },
     url: process.env.SITE_URL || 'https://kyleavrett.com',
 };
 

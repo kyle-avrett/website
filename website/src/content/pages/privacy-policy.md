@@ -3,18 +3,15 @@ title: Privacy Policy
 description: How this site collects, uses, and protects personal data.
 ---
 
-This Privacy Policy explains how **[SITE_NAME]** ("we", "us", or "our")
-collects, uses, and protects information when you visit **[SITE_URL]**.
-
-> Replace values in [BRACKETS] to customize this policy for your site.
-> This template is informational and not legal advice.
+This Privacy Policy explains how **kyleavrett.com** ("we", "us", or "our")
+collects, uses, and protects information when you visit **https://kyleavrett.com**.
 
 ## 1. Who we are
 
-- Website owner: **[OWNER_NAME / LEGAL_ENTITY]**
-- Contact email: **[CONTACT_EMAIL]**
-- Effective date: **[EFFECTIVE_DATE]**
-- Last updated: **[LAST_UPDATED_DATE]**
+- Website owner: **Kyle Avrett**
+- Contact email: **kyle@kyleavrett.com**
+- Effective date: **2026-09-02**
+- Last updated: **2026-09-02**
 
 ## 2. Information we collect
 
@@ -25,7 +22,7 @@ Depending on how you use this site, we may process:
 - Technical data: IP address, user agent, and performance/error logs.
 - Information you provide directly: email or message content when you contact us.
 - Comment data (if enabled): profile and comment metadata handled by
-  **[COMMENT_PROVIDER, e.g., Giscus/GitHub]**.
+  **Giscus/GitHub**.
 
 ## 3. How we use information
 
@@ -41,8 +38,8 @@ We use data to:
 
 This site may use cookies or local storage for:
 
-- Essential functionality (for example, saving theme preference).
-- Analytics (if enabled).
+- Essential functionality.
+- Analytics.
 - Third-party embeds or comment systems.
 
 You can control cookies through your browser settings. If your region requires
@@ -53,10 +50,10 @@ consent banners, add one and configure it to your legal requirements.
 We may use third-party processors that collect information under their own
 privacy terms:
 
-- Hosting/CDN: **[HOSTING_PROVIDER]**
-- Analytics: **[ANALYTICS_PROVIDER or "Not used"]**
-- Comments: **[COMMENT_PROVIDER or "Not used"]**
-- Email/newsletter: **[EMAIL_PROVIDER or "Not used"]**
+- Hosting/CDN: **Cloudflare Pages**
+- Analytics: **Rybbit**
+- Comments: **Giscus/GitHub**
+- Email/newsletter: **Google Workspace**
 
 Please review each provider's privacy policy before using related features.
 
@@ -76,9 +73,9 @@ Specify the legal basis in your data inventory for each processing activity.
 We retain data only as long as needed for the purposes above, including
 security and legal compliance.
 
-- Analytics data retention: **[RETENTION_PERIOD]**
-- Contact messages retention: **[RETENTION_PERIOD]**
-- Server logs retention: **[RETENTION_PERIOD]**
+- Analytics data retention: **90 Days**
+- Contact messages retention: **90 Days**
+- Server logs retention: **90 Days**
 
 ## 8. International transfers
 
@@ -90,14 +87,14 @@ may apply (for example, Standard Contractual Clauses).
 Depending on your location, you may have rights to access, correct, delete,
 restrict, or object to processing of your personal data.
 
-To make a request, contact: **[PRIVACY_CONTACT_EMAIL]**
+To make a request, contact: **kyle@kyleavrett.com**
 
 If you are in the EEA/UK, you may also lodge a complaint with your local data
 protection authority.
 
 ## 10. Children's privacy
 
-This site is not directed to children under **[MINIMUM_AGE, e.g., 13 or 16]**.
+This site is not directed to children under **13**.
 We do not knowingly collect personal data from children.
 
 ## 11. Security
@@ -114,6 +111,5 @@ posted on this page with an updated "Last updated" date.
 
 For privacy questions, contact:
 
-- Name: **[PRIVACY_CONTACT_NAME]**
-- Email: **[PRIVACY_CONTACT_EMAIL]**
-- Address (optional): **[POSTAL_ADDRESS]**
+- Name: **Kyle Avrett**
+- Email: **kyle@kyleavrett.com**
