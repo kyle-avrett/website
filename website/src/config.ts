@@ -10,6 +10,7 @@ export const SITE_IMAGES = {
 } as const;
 
 // socials
+const LINKEDIN_HANDLE = import.meta.env.PUBLIC_LINKEDIN_HANDLE ?? '';
 const GITHUB_HANDLE = import.meta.env.PUBLIC_GITHUB_HANDLE ?? '';
 const GITHUB_REPO = import.meta.env.PUBLIC_GITHUB_REPO ?? '';
 const TWITTER_HANDLE = import.meta.env.PUBLIC_TWITTER_HANDLE ?? '';
@@ -52,6 +53,11 @@ export const NAV: readonly NavItem[] = [
 
 // socials
 export const SOCIALS: readonly SocialLink[] = [
+    LINKEDIN_HANDLE && {
+        label: 'LinkedIn',
+      href: `https://linkedin.com/in/${LINKEDIN_HANDLE}`,
+        icon: 'simple-icons:linkedin',
+    },
     GITHUB_HANDLE && {
         label: 'GitHub',
         href: `https://github.com/${GITHUB_HANDLE}`,
