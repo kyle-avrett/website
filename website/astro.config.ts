@@ -276,13 +276,6 @@ export default defineConfig({
                             './node_modules/@fontsource/source-sans-3/files/source-sans-3-latin-700-normal.woff2',
                         ],
                     },
-                    {
-                        weight: '900',
-                        style: 'normal',
-                        src: [
-                            './node_modules/@fontsource/source-sans-3/files/source-sans-3-latin-900-normal.woff2',
-                        ],
-                    },
                 ],
             },
         },
