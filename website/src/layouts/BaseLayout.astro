@@ -129,8 +129,8 @@ const meta: SeoMeta =
                     {
                         !hidePanel && (
                             <aside class="chirpy-panel-rail" aria-label="Sidebar widgets">
+                                <slot name="aside" />
                                 <Panel />
-                                <slot name="aside-bottom" />
                             </aside>
                         )
                     }
