@@ -120,7 +120,7 @@ export default defineConfig({
     build: {
         format: 'file',
     },
-    prefetch: true,
+    prefetch: false,
 
     // Image optimization (https://docs.astro.build/en/guides/images/).
     //
@@ -282,26 +282,6 @@ export default defineConfig({
                         src: [
                             './node_modules/@fontsource/source-sans-3/files/source-sans-3-latin-900-normal.woff2',
                         ],
-                    },
-                ],
-            },
-        },
-        // Lato — secondary font from @fontsource/lato npm package
-        {
-            name: 'Lato',
-            cssVariable: '--font-lato',
-            provider: fontProviders.local(),
-            options: {
-                variants: [
-                    {
-                        weight: '300',
-                        style: 'normal',
-                        src: ['./node_modules/@fontsource/lato/files/lato-latin-300-normal.woff2'],
-                    },
-                    {
-                        weight: '400',
-                        style: 'normal',
-                        src: ['./node_modules/@fontsource/lato/files/lato-latin-400-normal.woff2'],
                     },
                 ],
             },

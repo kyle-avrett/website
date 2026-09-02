@@ -112,9 +112,5 @@ import { Icon } from 'astro-icon/components';
         });
     }
 
-    // `astro:page-load` fires on initial load AND after each client-side
-    // navigation (DOM is swapped so old listeners are gone). Using only
-    // this event avoids double-binding on first load which would fire two
-    // startViewTransition() calls and cancel the animation.
-    document.addEventListener('astro:page-load', init);
+    init();
 </script>
