@@ -1,9 +1,8 @@
 {
     "name": "website",
-    "version": "1.2.0",
+    "version": "1.0.0",
     "type": "module",
-    "description": "A Chirpy-inspired, single-template, multilingual Astro v7 theme with Tailwind v4, daisyUI, MDX, Pagefind, and Giscus.",
-    "license": "MIT",
+    "description": "The website for kyleavrett.com",
     "packageManager": "pnpm@11.3.0",
     "engines": {
         "node": ">=22.13.0",
@@ -17,7 +16,7 @@
         "format": "prettier --write \"**/*.{astro,ts,tsx,js,jsx,mjs,md,mdx,css,json}\"",
         "format:check": "prettier --check \"**/*.{astro,ts,tsx,js,jsx,mjs,md,mdx,css,json}\"",
         "test": "vitest run",
-        "dev": "astro dev",
+        "dev": "astro dev --open",
         "build": "astro build && pnpm run pagefind",
         "preview": "pnpm run build && pnpm preview",
         "pagefind": "pagefind --site dist --output-subdir _pagefind",
@@ -67,17 +66,5 @@
         "typescript": "^6.0.3",
         "vitest": "^4.0.14",
         "zod": "^4.4.3"
-    },
-    "keywords": [
-        "astro",
-        "astro-theme",
-        "chirpy",
-        "tailwindcss",
-        "daisyui",
-        "mdx",
-        "pagefind",
-        "giscus",
-        "i18n",
-        "blog"
-    ]
+    }
 }

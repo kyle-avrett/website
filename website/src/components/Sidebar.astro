@@ -113,7 +113,6 @@ const navItems = NAV.map((item) => ({
     <div
         class="border-base-300 mt-4 flex w-full flex-wrap items-center justify-center gap-2 border-t pt-4"
     >
-        <ThemeToggle locale={locale} />
         {
             SOCIALS.map((s) => (
                 <a
@@ -127,6 +126,7 @@ const navItems = NAV.map((item) => ({
                 </a>
             ))
         }
+        <ThemeToggle locale={locale} />
     </div>
 </aside>
 

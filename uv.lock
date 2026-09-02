@@ -1143,7 +1143,7 @@ wheels = [
 
 [[package]]
 name = "website-api"
-version = "0.1.0"
+version = "1.0.0"
 source = { virtual = "api" }
 dependencies = [
     { name = "alembic" },

@@ -1,7 +1,7 @@
 [project]
 name = "website-api"
-version = "0.1.0"
-description = "an api for kyleavrett.com"
+version = "1.0.0"
+description = "An api for kyleavrett.com"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
