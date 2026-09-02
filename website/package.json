@@ -10,20 +10,18 @@
         "pnpm": ">=11.0.0"
     },
     "scripts": {
-        "dev": "astro dev",
-        "start": "astro dev",
-        "build": "astro build && pnpm run pagefind",
-        "preview": "astro preview",
-        "serve": "pnpm run build && pnpm preview",
         "astro": "astro",
-        "pagefind": "pagefind --site dist --output-subdir _pagefind",
-        "postbuild": "echo \"Pagefind index generated in dist/_pagefind\"",
-        "typecheck": "astro check",
-        "test": "vitest run",
         "lint": "eslint . --max-warnings=0",
         "lint:fix": "eslint . --fix",
+        "typecheck": "astro check",
         "format": "prettier --write \"**/*.{astro,ts,tsx,js,jsx,mjs,md,mdx,css,json}\"",
-        "format:check": "prettier --check \"**/*.{astro,ts,tsx,js,jsx,mjs,md,mdx,css,json}\""
+        "format:check": "prettier --check \"**/*.{astro,ts,tsx,js,jsx,mjs,md,mdx,css,json}\"",
+        "test": "vitest run",
+        "dev": "astro dev",
+        "build": "astro build && pnpm run pagefind",
+        "preview": "pnpm run build && pnpm preview",
+        "pagefind": "pagefind --site dist --output-subdir _pagefind",
+        "postbuild": "echo \"Pagefind index generated in dist/_pagefind\""
     },
     "dependencies": {
         "@astrojs/markdown-satteri": "^0.3.3",

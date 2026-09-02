@@ -1,11 +1,17 @@
 setup:
     pnpm install
 
+format:
+    pnpm format
+
 lint:
     pnpm lint
 
 typecheck:
     pnpm typecheck
+
+test:
+	pnpm test
 
 dev: all
     pnpm dev
@@ -14,6 +20,6 @@ build: all
     pnpm build
 
 preview: all
-    pnpm serve
+    pnpm preview
 
-all: setup lint typecheck
+all: setup format lint typecheck test

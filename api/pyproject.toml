@@ -1,7 +1,7 @@
 [project]
-name = "app-starter"
+name = "website-api"
 version = "0.1.0"
-description = ""
+description = "an api for kyleavrett.com"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
