@@ -31,7 +31,7 @@ export function buildSeo(args: BuildSeoArgs): SeoMeta {
         title:
             args.title && args.title !== SITE.title ? `${args.title} — ${SITE.title}` : SITE.title,
         description: args.description ?? SITE.description,
-        canonical: new URL(args.fullPath, SITE.url).toString(),
+        canonical: new URL(args.fullPath, SITE.url).toString().replace(/\/$/, ''),
         ogImage: new URL(withBase(args.ogImage ?? SITE.defaultOgImage), SITE.url).toString(),
         type: args.type ?? 'website',
         publishedTime: args.publishedTime?.toISOString(),

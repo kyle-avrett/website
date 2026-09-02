@@ -115,7 +115,6 @@ export default defineConfig({
     //
     // In source code, build absolute paths through `withBase()` in
     // `src/utils/url.ts` so they pick up this value automatically.
-    base: process.env.BASE_PATH ?? '/',
     trailingSlash: 'never',
     build: {
         format: 'file',
