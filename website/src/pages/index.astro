@@ -1,21 +1,17 @@
 ---
-import BaseLayout from '~/layouts/BaseLayout.astro';
-import PostList from '~/components/PostList.astro';
-import Pagination from '~/components/Pagination.astro';
+import { getEntry, render } from 'astro:content';
+import PageLayout from '~/layouts/PageLayout.astro';
 import { SITE } from '~/config';
-import { getPosts } from '~/utils/posts';
-import { withBase } from '~/utils/url';
 
-const posts = await getPosts();
-const pageSize = SITE.postsPerPage;
-const lastPage = Math.max(1, Math.ceil(posts.length / pageSize));
-const currentPage = 1;
-const pagePosts = posts.slice(0, pageSize);
-
-const hrefForPage = (n: number) => withBase(n === 1 ? '/' : `/page/${n}`);
+const entry = await getEntry('pages', 'index');
+if (!entry) return Astro.rewrite('/404');
+const { Content } = await render(entry);
 ---
 
-<BaseLayout title={SITE.title} description={SITE.description}>
-    <PostList posts={pagePosts} />
-    <Pagination currentPage={currentPage} lastPage={lastPage} hrefForPage={hrefForPage} />
-</BaseLayout>
+<PageLayout
+    title={entry.data.title}
+    description={entry.data.description ?? SITE.description}
+    math={entry.data.math}
+>
+    <Content />
+</PageLayout>

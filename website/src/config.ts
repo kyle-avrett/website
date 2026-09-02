@@ -46,9 +46,8 @@ export const SITE: SiteConfig = {
 
 // navbar
 export const NAV: readonly NavItem[] = [
-    { label: 'Posts', href: '/', icon: 'lucide:newspaper' },
-    { label: 'Projects', href: '/categories', icon: 'lucide:folder' },
-    { label: 'About', href: '/about', icon: 'lucide:info' },
+    { label: 'Posts', href: '/posts', icon: 'lucide:newspaper' },
+    { label: 'Work', href: '/work', icon: 'lucide:briefcase-business' },
 ] as const;
 
 // socials
