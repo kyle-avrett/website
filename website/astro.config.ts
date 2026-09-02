@@ -116,9 +116,9 @@ export default defineConfig({
     // In source code, build absolute paths through `withBase()` in
     // `src/utils/url.ts` so they pick up this value automatically.
     base: process.env.BASE_PATH ?? '/',
-    trailingSlash: 'ignore',
+    trailingSlash: 'never',
     build: {
-        format: 'directory',
+        format: 'file',
     },
     prefetch: true,
 
@@ -221,7 +221,7 @@ export default defineConfig({
                       // turns it back into a root-relative path so local preview works.
                       xslURL: SITEMAP_XSL_HREF,
                       filter: (page) => {
-                          if (page.includes('/draft/') || page.endsWith('/404/')) return false;
+                          if (page.includes('/draft/') || page.endsWith('/404')) return false;
                           // Exclude unlisted posts from the sitemap.
                           for (const seg of unlistedPathSegments) {
                               if (page.includes(String(seg))) return false;

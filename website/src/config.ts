@@ -55,7 +55,7 @@ export const NAV: readonly NavItem[] = [
 export const SOCIALS: readonly SocialLink[] = [
     LINKEDIN_HANDLE && {
         label: 'LinkedIn',
-      href: `https://linkedin.com/in/${LINKEDIN_HANDLE}`,
+        href: `https://linkedin.com/in/${LINKEDIN_HANDLE}`,
         icon: 'simple-icons:linkedin',
     },
     GITHUB_HANDLE && {

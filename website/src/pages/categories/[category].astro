@@ -24,7 +24,7 @@ const posts = (await getPosts()).filter(
 
 <BaseLayout
     title={categoryName}
-    crumbs={[{ label: 'Categories', href: withBase('/categories/') }, { label: categoryName }]}
+    crumbs={[{ label: 'Categories', href: withBase('/categories') }, { label: categoryName }]}
 >
     <header class="mb-6">
         <p class="text-base-content/70 text-sm tracking-wide uppercase">Posts in</p>

@@ -17,7 +17,7 @@ export function postSlug(entry: Post): string {
 }
 
 export function postPath(entry: Post): string {
-    return withBase(`/posts/${postSlug(entry)}/`);
+    return withBase(`/posts/${postSlug(entry)}`);
 }
 
 /** Sort posts by pin status, then publication date descending. */
@@ -130,9 +130,9 @@ export function heroImage(post: Post): ImageMetadata | string | undefined {
 export { slugify } from './slugify';
 
 export function tagPath(tag: string): string {
-    return withBase(`/tags/${slugify(tag)}/`);
+    return withBase(`/tags/${slugify(tag)}`);
 }
 
 export function categoryPath(category: string): string {
-    return withBase(`/categories/${slugify(category)}/`);
+    return withBase(`/categories/${slugify(category)}`);
 }

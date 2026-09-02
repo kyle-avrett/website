@@ -24,7 +24,7 @@ const posts = (await getPosts()).filter((post) =>
 
 <BaseLayout
     title={`#${tagName}`}
-    crumbs={[{ label: 'Tags', href: withBase('/tags/') }, { label: `#${tagName}` }]}
+    crumbs={[{ label: 'Tags', href: withBase('/tags') }, { label: `#${tagName}` }]}
 >
     <header class="mb-6">
         <p class="text-base-content/70 text-sm tracking-wide uppercase">Posts tagged</p>

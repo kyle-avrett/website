@@ -26,7 +26,7 @@ const pageSize = SITE.postsPerPage;
 const start = (current - 1) * pageSize;
 const pagePosts = allPosts.slice(start, start + pageSize);
 
-const hrefForPage = (n: number) => withBase(n === 1 ? '/' : `/page/${n}/`);
+const hrefForPage = (n: number) => withBase(n === 1 ? '/' : `/page/${n}`);
 ---
 
 <BaseLayout title={`All posts — Page ${current}`}>
