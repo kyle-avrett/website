@@ -1,11 +1,10 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import { SITE, type Locale } from '../config';
+import { SITE } from '../config';
 
 interface Props {
     title: string;
     description: string;
-    locale: Locale;
     crumbs?: Array<{ label: string; href?: string }>;
     /** Load KaTeX CSS for this page only (no global load). */
     math?: boolean;

@@ -1,0 +1,39 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PostList from '~/components/PostList.astro';
+import Pagination from '~/components/Pagination.astro';
+import { SITE } from '~/config';
+import { getPosts } from '~/utils/posts';
+import { withBase } from '~/utils/url';
+
+interface Props {
+    current: number;
+    last: number;
+}
+
+export async function getStaticPaths() {
+    const posts = await getPosts();
+    const totalPages = Math.ceil(posts.length / SITE.postsPerPage);
+    return Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => ({
+        params: { page: String(index + 2) },
+        props: { current: index + 2, last: totalPages },
+    }));
+}
+
+const { current, last } = Astro.props as Props;
+const allPosts = await getPosts();
+const pageSize = SITE.postsPerPage;
+const start = (current - 1) * pageSize;
+const pagePosts = allPosts.slice(start, start + pageSize);
+
+const hrefForPage = (n: number) => withBase(n === 1 ? '/' : `/page/${n}/`);
+---
+
+<BaseLayout title={`All posts — Page ${current}`}>
+    <header class="mb-6">
+        <h1 class="text-3xl font-bold tracking-tight">All posts</h1>
+        <p class="text-base-content/70 text-sm">Page {current} of {last}</p>
+    </header>
+    <PostList posts={pagePosts} />
+    <Pagination currentPage={current} lastPage={last} hrefForPage={hrefForPage} />
+</BaseLayout>

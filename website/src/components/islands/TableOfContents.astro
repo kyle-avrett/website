@@ -12,17 +12,13 @@
  *  - The active H2 is the most recent H2 above (or containing) the
  *    currently visible heading reported by IntersectionObserver.
  */
-import { useTranslations } from '../../i18n/utils';
-import type { Locale } from '../../config';
 import type { MarkdownHeading } from 'astro';
 
 interface Props {
     headings: MarkdownHeading[];
-    locale: Locale;
 }
 
-const { headings, locale } = Astro.props;
-const t = useTranslations(locale);
+const { headings } = Astro.props;
 const items = headings.filter((h) => h.depth >= 2 && h.depth <= 4);
 
 // Pre-compute the "parent H2" slug for every item. For depth=2 it is the
@@ -45,7 +41,7 @@ const decorated = items.map((h) => {
                 id="toc-heading"
                 class="text-base-content/60 mb-3 text-xs font-semibold tracking-wide uppercase"
             >
-                {t('post.toc')}
+                Table of contents
             </h2>
             <ol class="toc-list space-y-1">
                 {decorated.map((h) => (

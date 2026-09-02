@@ -1,14 +1,12 @@
-/* global URL */
 import rss from '@astrojs/rss';
 import type { APIRoute } from 'astro';
 import { SITE } from '~/config';
 import { getPosts, postPath } from '~/utils/posts';
 
 export const GET: APIRoute = async (context) => {
-    const { locale } = context.props;
+    const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+    const siteWithBase = `${context.site?.origin ?? SITE.url.replace(/\/$/, '')}${base}`;
     if (import.meta.env.CI_SKIP_RSS_SITEMAP === 'true') {
-        const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-        const siteWithBase = `${(context.site ?? new URL(SITE.url)).origin}${base}`;
         return rss({
             title: SITE.title,
             description: SITE.description,
@@ -19,11 +17,7 @@ export const GET: APIRoute = async (context) => {
         });
     }
 
-    const posts = await getPosts(locale);
-    // `BASE_URL` ends with a '/' (e.g. '/' in dev, '/chirping-astro/' on Pages),
-    // so we slice it off when concatenating to avoid '//rss/styles.xsl'.
-    const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-    const siteWithBase = `${(context.site ?? new URL(SITE.url)).origin}${base}`;
+    const posts = await getPosts();
     return rss({
         title: SITE.title,
         description: SITE.description,
@@ -39,10 +33,3 @@ export const GET: APIRoute = async (context) => {
         customData: `<language>en-us</language>`,
     });
 };
-
-export function getStaticPaths() {
-    return SITE.locales.map((l) => ({
-        params: { locale: l === SITE.defaultLocale ? undefined : l },
-        props: { locale: l },
-    }));
-}

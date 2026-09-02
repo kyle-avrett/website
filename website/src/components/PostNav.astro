@@ -1,17 +1,13 @@
 ---
-import type { Locale } from '../config';
-import { useTranslations } from '../i18n/utils';
 import { type Post, postPath } from '../utils/posts';
 import { Icon } from 'astro-icon/components';
 
 interface Props {
     prev?: Post;
     next?: Post;
-    locale: Locale;
 }
 
-const { prev, next, locale } = Astro.props;
-const t = useTranslations(locale);
+const { prev, next } = Astro.props;
 ---
 
 <nav
@@ -33,7 +29,7 @@ const t = useTranslations(locale);
                             height={12}
                             class="inline -rotate-90 align-baseline"
                         />
-                        {t('post.previous')}
+                        Previous
                     </p>
                     <p class="font-semibold">{prev.data.title}</p>
                 </div>
@@ -52,7 +48,7 @@ const t = useTranslations(locale);
             >
                 <div class="card-body">
                     <p class="text-base-content/70 text-xs tracking-wide uppercase">
-                        {t('post.next')}
+                        Next
                         <Icon
                             name="lucide:arrow-up"
                             width={12}

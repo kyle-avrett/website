@@ -3,29 +3,18 @@
  * Chirpy-style topbar: hamburger (mobile only) | breadcrumb | site title (mobile) | search
  * Sits inside the main column, below the header.
  */
-import { SITE, type Locale } from '../config';
-import { useTranslations, localizedPath } from '../i18n/utils';
+import { SITE } from '../config';
+import { withBase } from '../utils/url';
 import { Icon } from 'astro-icon/components';
 import SearchButton from './islands/SearchButton.astro';
-import LanguageSwitcher from './islands/LanguageSwitcher.astro';
 
 interface Props {
-    locale: Locale;
-    /**
-     * Breadcrumb segments. The last segment is treated as the current page.
-     * Pass [] to show only "Home".
-     */
+    /** Breadcrumb segments. The last segment is the current page. */
     crumbs?: Array<{ label: string; href?: string }>;
-    /**
-     * Locales for which a translation actually exists. Forwarded to the
-     * language switcher so it only links to working pages.
-     */
-    availableLocales?: readonly Locale[];
 }
 
-const { locale, crumbs = [], availableLocales } = Astro.props;
-const t = useTranslations(locale);
-const home = localizedPath('/', locale);
+const { crumbs = [] } = Astro.props;
+const home = withBase('/');
 ---
 
 <header class="chirpy-topbar" aria-label="Top Bar">
@@ -34,7 +23,7 @@ const home = localizedPath('/', locale);
             type="button"
             data-sidebar-toggle
             class="btn btn-ghost btn-sm btn-square lg:hidden"
-            aria-label={t('nav.toggleMenu')}
+            aria-label="Toggle menu"
         >
             <Icon name="lucide:menu" width={18} height={18} />
         </button>
@@ -42,7 +31,7 @@ const home = localizedPath('/', locale);
         <nav aria-label="Breadcrumb" class="text-base-content/70 hidden truncate text-sm sm:block">
             <ol class="flex items-center gap-1">
                 <li>
-                    <a href={home} class="hover:text-primary">{t('nav.home')}</a>
+                    <a href={home} class="hover:text-primary">Home</a>
                 </li>
                 {
                     crumbs.map((crumb, i) => (
@@ -76,11 +65,6 @@ const home = localizedPath('/', locale);
     </div>
 
     <div class="chirpy-topbar__search">
-        <SearchButton locale={locale} />
-        {
-            SITE.multilingual && (
-                <LanguageSwitcher locale={locale} availableLocales={availableLocales} />
-            )
-        }
+        <SearchButton />
     </div>
 </header>

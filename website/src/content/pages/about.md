@@ -1,13 +1,12 @@
 ---
 title: About
-description: Chirping Astro — a Chirpy-inspired, multilingual Astro theme built for writers and tinkerers.
-translationKey: about
+description: A Chirpy-inspired Astro theme built for writers and tinkerers.
 ---
 
 **Chirping Astro** is an open-source theme that brings the look and feel of
 the popular [Chirpy Jekyll theme](https://chirpy.cotes.page/) to
-[Astro](https://astro.build/) — with first-class internationalization, a
-modern toolchain, and zero-JavaScript reading by default.
+[Astro](https://astro.build/), with a modern toolchain and zero-JavaScript
+reading by default.
 
 It is intended for personal blogs, technical journals, and documentation
 sites where typography, search, and quiet, focused reading matter more
@@ -20,11 +19,6 @@ than animations and ad slots.
   right rail with “Recently Updated” and “Trending Tags”.
 - **Light & dark themes** — the original Chirpy palette, ported to
   daisyUI v5 tokens, with a circular reveal transition between modes.
-- **Bilingual content (EN + FR)** — English served at the root, French
-  under `/fr/`. Posts are paired by `translationKey`, and a language
-  switcher in the topbar jumps between translations. Set
-  `multilingual: false` in `src/config.ts` to ship a single-language
-  site.
 - **Markdown + MDX** — Astro Content Collections with typed frontmatter,
   Shiki syntax highlighting, GFM, footnotes, an automatic table of
   contents, and a bundled `<Callout>` component.
@@ -35,8 +29,7 @@ than animations and ad slots.
   GitHub Discussions, with per-post opt-out.
 - **Smooth navigation** — Astro view transitions with a subtle fade and
   motion-reduced fallback for accessibility.
-- **SEO out of the box** — OpenGraph, Twitter cards, RSS feeds per locale,
-  hreflang, and a sitemap.
+- **SEO out of the box** — OpenGraph, Twitter cards, an RSS feed, and a sitemap.
 
 ## Built with
 
@@ -53,12 +46,11 @@ than animations and ad slots.
 
 Almost everything is wired through a single typed config file at
 [`src/config.ts`](https://github.com/) — site title, author, navigation,
-social links, posts-per-page, default locale, Giscus credentials, and
-feature flags. Restart `pnpm dev` after editing it.
+social links, posts-per-page, Giscus credentials, and feature flags.
+Restart `pnpm dev` after editing it.
 
-New posts go in `src/content/posts/<locale>/`. Pair translations by
-setting the same `translationKey` in both files. The frontmatter
-reference in this demo site explains every field.
+New posts go in `src/content/posts/`. The frontmatter reference in this
+demo site explains every field.
 
 ## License & credits
 

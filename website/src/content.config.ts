@@ -1,24 +1,8 @@
-/**
- * Content Collections (Astro v7 loader API).
- *
- * Folder convention: `src/content/<collection>/<locale>/**`
- *  - posts/en/**  -> EN posts
- *  - posts/fr/**  -> FR posts
- *  - pages/en/**  -> EN static pages (about, etc.)
- *  - pages/fr/**  -> FR static pages
- *
- * The locale is derived from the file path so authors do not need to set it
- * manually (but they may override it in frontmatter).
- */
+/** Content Collections (Astro v7 loader API). */
 
 import { glob } from 'astro/loaders';
 import { defineCollection, type SchemaContext } from 'astro:content';
 import { z } from 'zod';
-
-import { SITE } from './config';
-
-// SAFETY: SITE.locales is a non-empty readonly tuple defined in src/config.ts.
-const localeEnum = z.enum(SITE.locales as unknown as [string, ...string[]]);
 
 /**
  * Build the post / page frontmatter schema.
@@ -67,16 +51,6 @@ const baseFrontmatter = ({ image }: SchemaContext) =>
          * that don't use it.
          */
         mermaid: z.boolean().default(false),
-        /** Optional locale override; otherwise inferred from path. */
-        lang: localeEnum.optional(),
-        /**
-         * Maps translated variants together. Posts that share a translationKey
-         * across locales are considered translations of each other and the
-         * language switcher will jump between them on the same article.
-         *
-         * If omitted, falls back to the file slug (relative to the locale folder).
-         */
-        translationKey: z.string().optional(),
         /**
          * Unlisted posts/pages are NOT shown in any listing (home, archives,
          * tags, categories, RSS, sitemap) but remain accessible to anyone who

@@ -9,19 +9,12 @@ export const SITE_IMAGES = {
     ogDefault: ogDefaultImg,
 } as const;
 
-
-// locales
-export const locales = ['en'] as const;
-export type Locale = (typeof locales)[number];
-
-
 // socials
 const GITHUB_HANDLE = import.meta.env.PUBLIC_GITHUB_HANDLE ?? '';
 const GITHUB_REPO = import.meta.env.PUBLIC_GITHUB_REPO ?? '';
 const TWITTER_HANDLE = import.meta.env.PUBLIC_TWITTER_HANDLE ?? '';
 const CONTACT_EMAIL = import.meta.env.PUBLIC_CONTACT_EMAIL ?? '';
 const THEME_REPO_URL = '';
-
 
 // website repo
 export const REPO = {
@@ -31,7 +24,6 @@ export const REPO = {
         ? `https://github.com/${GITHUB_HANDLE}/${GITHUB_REPO}`
         : 'https://github.com',
 } as const;
-
 
 // site config
 export const SITE: SiteConfig = {
@@ -60,19 +52,14 @@ export const SITE: SiteConfig = {
         themeUrl: THEME_REPO_URL,
     },
     url: process.env.SITE_URL || 'https://kyleavrett.com',
-    locales: locales,
-    defaultLocale: 'en',
-    multilingual: false,
 };
-
 
 // navbar
 export const NAV: readonly NavItem[] = [
-    { key: 'posts', href: '/', icon: 'lucide:newspaper' },
-    { key: 'projects', href: '/categories', icon: 'lucide:folder' },
-    { key: 'about', href: '/about', icon: 'lucide:info' },
+    { label: 'Posts', href: '/', icon: 'lucide:newspaper' },
+    { label: 'Projects', href: '/categories', icon: 'lucide:folder' },
+    { label: 'About', href: '/about', icon: 'lucide:info' },
 ] as const;
-
 
 // socials
 export const SOCIALS: readonly SocialLink[] = [
@@ -94,7 +81,6 @@ export const SOCIALS: readonly SocialLink[] = [
     { label: 'RSS', href: '/rss.xml', icon: 'lucide:rss' },
 ].filter(Boolean) as SocialLink[];
 
-
 // comments
 export const GISCUS: GiscusConfig = {
     enabled: (import.meta.env.PUBLIC_GISCUS_ENABLED ?? 'false') === 'true',
@@ -109,7 +95,6 @@ export const GISCUS: GiscusConfig = {
     inputPosition: 'bottom',
     loading: 'lazy',
 };
-
 
 // pagefind
 export const PAGEFIND = {

@@ -4,7 +4,6 @@ description: 'Your first post with Chirping Astro. Learn how to configure your s
 pubDate: 2026-05-03
 tags: [getting-started, tutorial]
 categories: [Guide]
-translationKey: getting-started
 pinned: true
 toc: true
 ---
@@ -39,7 +38,7 @@ Key variables:
 
 ## Writing posts
 
-Create Markdown files in `src/content/posts/en/`:
+Create Markdown files in `src/content/posts/`:
 
 ```markdown
 ---

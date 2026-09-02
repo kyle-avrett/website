@@ -52,21 +52,8 @@ function collectUnlistedUrls() {
                     const entries = await getCollection('posts');
                     for (const entry of entries) {
                         if (!entry.data.unlisted) continue;
-                        // Derive locale and slug from the entry id (e.g. "en/my-post.md").
-                        const segs = entry.id.split(/[\\/]/);
-                        const locale =
-                            segs[0] && SITE.locales.some((siteLocale) => siteLocale === segs[0])
-                                ? segs[0]
-                                : SITE.defaultLocale;
-                        const slug = segs
-                            .slice(1)
-                            .join('/')
-                            .replace(/\.(md|mdx)$/i, '');
-                        if (locale === SITE.defaultLocale) {
-                            unlistedPathSegments.add(`posts/${slug}`);
-                        } else {
-                            unlistedPathSegments.add(`${locale}/posts/${slug}`);
-                        }
+                        const slug = entry.id.replace(/\.(md|mdx)$/i, '');
+                        unlistedPathSegments.add(`posts/${slug}`);
                     }
                 } catch {
                     // Content collections aren't available in all build contexts
@@ -126,9 +113,8 @@ export default defineConfig({
     //   - `.env` (committed empty / unset)         → dev runs at `/`
     //   - CI / Pages workflow sets BASE_PATH=/chirping-astro for the build
     //
-    // In source code, always build absolute paths through `withBase()` /
-    // `localizedPath()` in `src/i18n/utils.ts` so they pick up this value
-    // automatically (via `import.meta.env.BASE_URL`).
+    // In source code, build absolute paths through `withBase()` in
+    // `src/utils/url.ts` so they pick up this value automatically.
     base: process.env.BASE_PATH ?? '/',
     trailingSlash: 'ignore',
     build: {
@@ -160,19 +146,6 @@ export default defineConfig({
             { protocol: 'https', hostname: 'res.cloudinary.com' },
             { protocol: 'https', hostname: 'imagedelivery.net' },
         ],
-    },
-
-    // i18n config: EN is default and serves at root (no prefix), FR served at /fr.
-    // We rely on filesystem routing (src/pages and src/pages/[...locale]) for the actual
-    // routes, but still expose locales here so integrations like sitemap can
-    // generate hreflang alternates correctly.
-    i18n: {
-        locales: [...SITE.locales],
-        defaultLocale: SITE.defaultLocale,
-        routing: {
-            prefixDefaultLocale: false,
-            redirectToDefaultLocale: false,
-        },
     },
 
     markdown: {
@@ -240,10 +213,6 @@ export default defineConfig({
             : [
                   collectUnlistedUrls(),
                   sitemap({
-                      i18n: {
-                          defaultLocale: SITE.defaultLocale,
-                          locales: Object.fromEntries(SITE.locales.map((l) => [l, l])),
-                      },
                       // Browsers (and only browsers) apply this XSL to render a
                       // human-readable view of `sitemap-index.xml` and `sitemap-0.xml`.
                       // Search-engine crawlers ignore the processing instruction.

@@ -1,0 +1,42 @@
+---
+import { render } from 'astro:content';
+import PostLayout from '~/layouts/PostLayout.astro';
+import { getPosts, getUnlistedPosts, postSlug, sortPostsByDate, type Post } from '~/utils/posts';
+
+interface Props {
+    post: Post;
+    prev?: Post;
+    next?: Post;
+}
+
+export async function getStaticPaths() {
+    const [posts, unlistedPosts] = await Promise.all([getPosts(), getUnlistedPosts()]);
+    const chronological = sortPostsByDate(posts);
+
+    return [
+        ...posts.map((post) => {
+            const index = chronological.findIndex((entry) => entry.id === post.id);
+            return {
+                params: { slug: postSlug(post) },
+                props: {
+                    post,
+                    prev: chronological[index + 1],
+                    next: chronological[index - 1],
+                },
+            };
+        }),
+        ...unlistedPosts.map((post) => ({
+            params: { slug: postSlug(post) },
+            props: { post, prev: undefined, next: undefined },
+        })),
+    ];
+}
+
+const { post, prev, next } = Astro.props as Props;
+const { Content, headings } = await render(post);
+const body = post.body ?? '';
+---
+
+<PostLayout post={post} headings={headings} body={body} prev={prev} next={next}>
+    <Content />
+</PostLayout>

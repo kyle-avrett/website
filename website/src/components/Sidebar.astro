@@ -5,29 +5,18 @@
  * pinned to the bottom.
  */
 
-import { SITE, NAV, SOCIALS, type Locale } from '../config';
-import { useTranslations, localizedPath, withBase } from '../i18n/utils';
-import type { UIKey } from '../i18n/ui';
+import { SITE, NAV, SOCIALS } from '../config';
+import { withBase } from '../utils/url';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import ThemeToggle from './islands/ThemeToggle.astro';
 
-interface Props {
-    locale: Locale;
-}
-
-const { locale } = Astro.props;
-const t = useTranslations(locale);
-const home = localizedPath('/', locale);
+const home = withBase('/');
 const avatar = SITE.author.avatar;
 const isStringAvatar = typeof avatar === 'string';
 const avatarSrc = isStringAvatar ? avatar.trim() : '';
 
-const navItems = NAV.map((item) => ({
-    ...item,
-    href: localizedPath(item.href, locale),
-    label: t(`nav.${item.key}` as UIKey),
-}));
+const navItems = NAV.map((item) => ({ ...item, href: withBase(item.href) }));
 ---
 
 <aside id="sidebar" class="chirpy-sidebar" aria-label="Sidebar">
@@ -126,7 +115,7 @@ const navItems = NAV.map((item) => ({
                 </a>
             ))
         }
-        <ThemeToggle locale={locale} />
+        <ThemeToggle />
     </div>
 </aside>
 

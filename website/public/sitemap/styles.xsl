@@ -8,7 +8,6 @@
   version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml"
 >
   <xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes" />
   <xsl:template match="/">
@@ -101,8 +100,6 @@
           tbody tr:hover { background: var(--row-hover); }
           .num { color: var(--muted); font-variant-numeric: tabular-nums; width: 3rem; }
           .pri, .freq, .date { color: var(--muted); white-space: nowrap; font-size: .82rem; }
-          .alt { font-size: .75rem; color: var(--muted); margin-top: .25rem; }
-          .alt span { display: inline-block; margin-right: .5rem; }
           footer {
             margin-top: 3rem; padding-top: 1.25rem;
             border-top: 1px solid var(--border);
@@ -220,19 +217,6 @@
                             <xsl:attribute name="href"><xsl:value-of select="sitemap:loc" /></xsl:attribute>
                             <xsl:value-of select="sitemap:loc" />
                           </a>
-                          <xsl:if test="xhtml:link">
-                            <div class="alt">
-                              <xsl:for-each select="xhtml:link[@rel='alternate']">
-                                <span>
-                                  <xsl:value-of select="@hreflang" />:
-                                  <a>
-                                    <xsl:attribute name="href"><xsl:value-of select="@href" /></xsl:attribute>
-                                    <xsl:value-of select="@href" />
-                                  </a>
-                                </span>
-                              </xsl:for-each>
-                            </div>
-                          </xsl:if>
                         </td>
                         <td class="date"><xsl:value-of select="sitemap:lastmod" /></td>
                         <td class="freq"><xsl:value-of select="sitemap:changefreq" /></td>

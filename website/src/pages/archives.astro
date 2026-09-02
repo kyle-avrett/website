@@ -1,33 +1,19 @@
 ---
-import { SITE } from '~/config';
-
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import { useTranslations, formatDate } from '~/i18n/utils';
+import { formatDate } from '~/utils/date';
 import { getPosts, groupByYearMonth, postPath } from '~/utils/posts';
 
-export function getStaticPaths() {
-    return SITE.locales.map((l) => ({
-        params: { locale: l === SITE.defaultLocale ? undefined : l },
-        props: { locale: l },
-    }));
-}
-const { locale } = Astro.props;
-const t = useTranslations(locale);
-const posts = await getPosts(locale);
-const groups = groupByYearMonth(posts, locale);
+const posts = await getPosts();
+const groups = groupByYearMonth(posts);
 ---
 
-<BaseLayout
-    title={t('archives.title')}
-    pathWithoutLocale="/archives/"
-    crumbs={[{ label: t('archives.title') }]}
->
+<BaseLayout title="Archives" crumbs={[{ label: 'Archives' }]}>
     <header class="mb-6">
-        <h1 class="text-3xl font-bold tracking-tight">{t('archives.title')}</h1>
+        <h1 class="text-3xl font-bold tracking-tight">Archives</h1>
     </header>
     {
         groups.length === 0 ? (
-            <p class="text-base-content/70">{t('archives.empty')}</p>
+            <p class="text-base-content/70">No posts yet.</p>
         ) : (
             <div id="archives">
                 {groups.map((g, gi) => {
@@ -39,10 +25,10 @@ const groups = groupByYearMonth(posts, locale);
                                 {yearPosts.map((p) => (
                                     <li>
                                         <span class="day">
-                                            {formatDate(p.data.pubDate, locale, { day: '2-digit' })}
+                                            {formatDate(p.data.pubDate, { day: '2-digit' })}
                                         </span>
                                         <span class="month">
-                                            {formatDate(p.data.pubDate, locale, { month: 'short' })}
+                                            {formatDate(p.data.pubDate, { month: 'short' })}
                                         </span>
                                         <a href={postPath(p)}>{p.data.title}</a>
                                     </li>

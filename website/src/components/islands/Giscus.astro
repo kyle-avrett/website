@@ -10,18 +10,15 @@
  *
  * Set values in `src/config.ts` -> GISCUS, or via PUBLIC_GISCUS_* env vars.
  */
-import { GISCUS, type Locale } from '../../config';
-import { useTranslations } from '../../i18n/utils';
+import { GISCUS } from '../../config';
 import { Icon } from 'astro-icon/components';
 
 interface Props {
-    locale: Locale;
     /** Per-post override; defaults to true. */
     enabled?: boolean;
 }
 
-const { locale, enabled = true } = Astro.props;
-const t = useTranslations(locale);
+const { enabled = true } = Astro.props;
 
 const giscusGloballyEnabled = GISCUS.enabled;
 const giscusPostEnabled = enabled;
@@ -48,7 +45,7 @@ const state: CommentState =
 
 /**
  * Render a string that may contain `backticks` as inline <code> elements.
- * Keeps i18n step copy editable as plain strings without raw HTML.
+ * Keeps setup copy readable without raw HTML in the template.
  */
 function renderInlineCode(input: string): string {
     return input.replace(/`([^`]+)`/g, (_, code: string) => {
@@ -61,15 +58,15 @@ function renderInlineCode(input: string): string {
 }
 
 const setupSteps = [
-    t('post.commentsSetupStep1'),
-    t('post.commentsSetupStep2'),
-    t('post.commentsSetupStep3'),
-    t('post.commentsSetupStep4'),
+    'Visit `giscus.app` and select your public GitHub repository (Discussions must be enabled).',
+    'Copy the generated `data-repo-id`, `data-category` and `data-category-id` values.',
+    'Set the `PUBLIC_GISCUS_ENABLED`, `PUBLIC_GISCUS_REPO`, `PUBLIC_GISCUS_REPO_ID`, `PUBLIC_GISCUS_CATEGORY` and `PUBLIC_GISCUS_CATEGORY_ID` env vars in your `.env` file.',
+    'Rebuild the site. This notice will be replaced by the live comments thread.',
 ];
 ---
 
 <section class="border-base-300 mt-12 border-t pt-8" aria-labelledby="comments-heading">
-    <h2 id="comments-heading" class="mb-4 text-xl font-semibold">{t('post.comments')}</h2>
+    <h2 id="comments-heading" class="mb-4 text-xl font-semibold">Comments</h2>
 
     {
         state === 'live' && (
@@ -85,7 +82,7 @@ const setupSteps = [
                 data-emit-metadata={GISCUS.emitMetadata}
                 data-input-position={GISCUS.inputPosition}
                 data-loading={GISCUS.loading}
-                data-locale={locale === 'fr' ? 'fr' : 'en'}
+                data-lang="en"
             />
         )
     }
@@ -104,9 +101,12 @@ const setupSteps = [
                 </div>
                 <div class="min-w-0 flex-1">
                     <p class="text-base-content text-base font-semibold">
-                        {t('post.commentsSetupTitle')}
+                        Comments need configuration
                     </p>
-                    <p class="text-base-content/70 mt-1">{t('post.commentsSetupBody')}</p>
+                    <p class="text-base-content/70 mt-1">
+                        Giscus is enabled but not yet configured. Add the repository details below
+                        to start collecting comments.
+                    </p>
                     <ol class="text-base-content/80 marker:text-base-content/50 mt-4 list-decimal space-y-1.5 pl-5 marker:font-semibold">
                         {setupSteps.map((step) => (
                             <li set:html={renderInlineCode(step)} />
@@ -119,7 +119,7 @@ const setupSteps = [
                             rel="noopener noreferrer"
                             class="text-primary hover:text-primary/80 inline-flex items-center gap-1 text-sm font-medium underline-offset-4 hover:underline"
                         >
-                            {t('post.commentsSetupDocs')}
+                            Open giscus.app
                             <Icon name="lucide:arrow-up-right" width={14} height={14} />
                         </a>
                     </p>
@@ -130,7 +130,7 @@ const setupSteps = [
 
     {
         state === 'disabled' && (
-            <p class="text-base-content/70 text-sm italic">{t('post.commentsDisabled')}</p>
+            <p class="text-base-content/70 text-sm italic">Comments are disabled for this post.</p>
         )
     }
 </section>
@@ -165,7 +165,7 @@ const setupSteps = [
         set('data-emit-metadata', mount.dataset.emitMetadata);
         set('data-input-position', mount.dataset.inputPosition);
         set('data-loading', mount.dataset.loading);
-        set('data-lang', mount.dataset.locale);
+        set('data-lang', mount.dataset.lang);
         set('data-theme', giscusTheme());
 
         mount.appendChild(script);

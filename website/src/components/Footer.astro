@@ -1,13 +1,7 @@
 ---
-import { SITE, type Locale } from '../config';
-import { localizedPath, useTranslations } from '../i18n/utils';
+import { SITE } from '../config';
+import { withBase } from '../utils/url';
 
-interface Props {
-    locale: Locale;
-}
-
-const { locale } = Astro.props;
-const t = useTranslations(locale);
 const year = new Date().getFullYear();
 const footerLeftText = SITE.footer.leftText?.trim();
 const footerRightText = SITE.footer.rightText?.trim();
@@ -33,7 +27,7 @@ const resolvedLeftText = footerLeftText
                     <a href={SITE.author.url ?? '#'} rel="noopener" class="hover:text-primary">
                         {SITE.author.name}
                     </a>
-                    . {t('footer.copyright')}
+                    . All rights reserved.
                 </>
             )
         }
@@ -41,8 +35,8 @@ const resolvedLeftText = footerLeftText
             showPrivacyPolicy && (
                 <>
                     {' · '}
-                    <a href={localizedPath('/privacy', locale)} class="hover:text-primary">
-                        {t('footer.privacy')}
+                    <a href={withBase('/privacy')} class="hover:text-primary">
+                        Privacy Policy
                     </a>
                 </>
             )
@@ -57,7 +51,7 @@ const resolvedLeftText = footerLeftText
                         {showThemeCredits && (
                             <>
                                 {' · '}
-                                {t('footer.theme')}{' '}
+                                Theme{' '}
                                 <a
                                     href={SITE.footer.themeUrl}
                                     rel="noopener"
@@ -70,11 +64,11 @@ const resolvedLeftText = footerLeftText
                     </>
                 ) : (
                     <>
-                        {t('footer.poweredBy')}{' '}
+                        Powered by{' '}
                         <a href="https://astro.build" rel="noopener" class="hover:text-primary">
                             Astro
                         </a>{' '}
-                        · {t('footer.theme')}{' '}
+                        · Theme{' '}
                         <a href={SITE.footer.themeUrl} rel="noopener" class="hover:text-primary">
                             {SITE.footer.themeName}
                         </a>

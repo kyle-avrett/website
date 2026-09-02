@@ -1,7 +1,6 @@
 ---
 title: Privacy Policy
 description: How this site collects, uses, and protects personal data.
-translationKey: privacy
 ---
 
 This Privacy Policy explains how **[SITE_NAME]** ("we", "us", or "our")
