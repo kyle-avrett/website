@@ -1,12 +1,12 @@
 mod api
-mod website
+mod frontend
 
 [parallel]
-dev: api::dev website::dev
+dev: api::dev frontend::dev
 
-build: api::build website::build
+build: api::build frontend::build
 
 [parallel]
-preview: api::preview website::preview
+preview: api::preview frontend::preview
 
-all: api::all website::all
+all: api::all frontend::all
