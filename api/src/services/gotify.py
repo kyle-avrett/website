@@ -16,8 +16,8 @@ async def send_message(message: str, title: str = "New subscriber") -> None:
     if url.scheme not in {"http", "https"} or not url.hostname:
         raise ValueError("GOTIFY_URL must be http or https")
 
-    async with AsyncGotify(
+    client = AsyncGotify(
         base_url=settings.GOTIFY_URL.rstrip("/"),
         app_token=settings.GOTIFY_PASS,
-    ) as client:
-        await client.create_message(message, title=title)
+    )
+    await client.create_message(message, title=title)
