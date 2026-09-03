@@ -10,7 +10,6 @@ from sqlalchemy.ext.asyncio import (
 )
 
 from src.database import Base, get_db
-from src.item import Item  # noqa: F401
 from src.main import app
 
 # database connection

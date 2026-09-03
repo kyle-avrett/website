@@ -8,6 +8,12 @@ class Settings(BaseSettings):
     APP_NAME: str = ""
     CORS_ORIGINS: str = ""
 
+    # listmonk
+    LISTMONK_URL: str = ""
+    LISTMONK_USER: str = ""
+    LISTMONK_PASS: str = ""
+    LISTMONK_LIST: int = 0
+
     # database
     POSTGRES_DB: str = ""
     POSTGRES_HOST: str = ""
