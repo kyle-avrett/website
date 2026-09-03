@@ -10,7 +10,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.types import DateTime, String
 
 from src.database import Base, get_db
-from src.services import listmonk
+from src.services import gotify, listmonk
 
 # ----------------------------------------------------------------------------------------
 
@@ -66,6 +66,12 @@ async def create_subscriber(request: SubscriberRequest, db: Database):
     # create in listmonk
     await listmonk.create_subscriber(
         subscriber.name, subscriber.email, subscriber.source
+    )
+
+    # notify
+    await gotify.send_message(
+        f"{subscriber.name} <{subscriber.email}> subscribed"
+        + (f" from {subscriber.source}" if subscriber.source else "")
     )
 
     # return

@@ -14,6 +14,10 @@ class Settings(BaseSettings):
     LISTMONK_PASS: str = ""
     LISTMONK_LIST: int = 0
 
+    # gotify
+    GOTIFY_URL: str = ""
+    GOTIFY_PASS: str = ""
+
     # database
     POSTGRES_DB: str = ""
     POSTGRES_HOST: str = ""
