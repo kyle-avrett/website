@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     LISTMONK_USER: str = ""
     LISTMONK_PASS: str = ""
     LISTMONK_LIST: int = 0
+    LISTMONK_TEMPLATE_WELCOME_EMAIL: int = 0
 
     # gotify
     GOTIFY_URL: str = ""

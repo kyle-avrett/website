@@ -1,15 +1,26 @@
+from src.services import listmonk
+
+
 def test_subscriber_crud(client, monkeypatch):
     created_in_listmonk = []
+    sent_welcome_emails = []
     sent_messages = []
 
     async def fake_create_subscriber(name, email, source=None):
         created_in_listmonk.append((name, email, source))
+        return listmonk.ListmonkSubscriber(id=3, name=name, email=email)
+
+    async def fake_send_welcome_email(listmonk_subscriber):
+        sent_welcome_emails.append(listmonk_subscriber)
 
     async def fake_send_message(message, title="New subscriber"):
         sent_messages.append((message, title))
 
     monkeypatch.setattr(
         "src.routes.subscriber.listmonk.create_subscriber", fake_create_subscriber
+    )
+    monkeypatch.setattr(
+        "src.routes.subscriber.listmonk.send_welcome_email", fake_send_welcome_email
     )
     monkeypatch.setattr("src.routes.subscriber.gotify.send_message", fake_send_message)
 
@@ -25,6 +36,9 @@ def test_subscriber_crud(client, monkeypatch):
     assert subscriber["source"] == "site"
     assert subscriber["date_created"]
     assert created_in_listmonk == [("Kyle", "kyle@example.com", "site")]
+    assert sent_welcome_emails == [
+        listmonk.ListmonkSubscriber(id=3, name="Kyle", email="kyle@example.com")
+    ]
     assert sent_messages == [
         ("Kyle <kyle@example.com> subscribed from site", "New subscriber")
     ]

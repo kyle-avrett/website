@@ -55,7 +55,7 @@ Database = Annotated[AsyncSession, Depends(get_db)]
 
 @router.post("/subscriber", response_model=SubscriberResponse)
 async def create_subscriber(request: SubscriberRequest, db: Database):
-    # save to database
+    # database
     subscriber = Subscriber(
         name=request.name, email=request.email, source=request.source
     )
@@ -63,10 +63,11 @@ async def create_subscriber(request: SubscriberRequest, db: Database):
     await db.commit()
     await db.refresh(subscriber)
 
-    # create in listmonk
-    await listmonk.create_subscriber(
+    # listmonk
+    listmonk_subscriber = await listmonk.create_subscriber(
         subscriber.name, subscriber.email, subscriber.source
     )
+    await listmonk.send_welcome_email(listmonk_subscriber)
 
     # notify
     await gotify.send_message(
