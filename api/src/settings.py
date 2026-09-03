@@ -21,6 +21,12 @@ class Settings(BaseSettings):
     POSTGRES_PASSWORD: str = ""
 
     @property
+    def CORS_ORIGIN_LIST(self) -> list[str]:
+        return [
+            origin.strip() for origin in self.CORS_ORIGINS.split(",") if origin.strip()
+        ]
+
+    @property
     def DATABASE_URL(self) -> str:
         return f"postgresql+asyncpg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:5432/{self.POSTGRES_DB}"
 
