@@ -21,6 +21,7 @@ class Subscriber(Base):
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
     name: Mapped[str] = mapped_column(String(100), nullable=False)
     email: Mapped[str] = mapped_column(String(255), nullable=False)
+    source: Mapped[str | None] = mapped_column(String(2048), nullable=True)
     date_created: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), nullable=False
     )
@@ -32,6 +33,7 @@ class Subscriber(Base):
 class SubscriberRequest(BaseModel):
     name: str
     email: str
+    source: str | None = None
 
 
 class SubscriberResponse(BaseModel):
@@ -40,6 +42,7 @@ class SubscriberResponse(BaseModel):
     id: int
     name: str
     email: str
+    source: str | None = None
     date_created: datetime
 
 
@@ -53,13 +56,17 @@ Database = Annotated[AsyncSession, Depends(get_db)]
 @router.post("/subscriber", response_model=SubscriberResponse)
 async def create_subscriber(request: SubscriberRequest, db: Database):
     # save to database
-    subscriber = Subscriber(name=request.name, email=request.email)
+    subscriber = Subscriber(
+        name=request.name, email=request.email, source=request.source
+    )
     db.add(subscriber)
     await db.commit()
     await db.refresh(subscriber)
 
     # create in listmonk
-    await listmonk.create_subscriber(subscriber.name, subscriber.email)
+    await listmonk.create_subscriber(
+        subscriber.name, subscriber.email, subscriber.source
+    )
 
     # return
     return subscriber
@@ -85,6 +92,7 @@ async def update_subscriber(
 
     subscriber.name = request.name
     subscriber.email = request.email
+    subscriber.source = request.source
     await db.commit()
     await db.refresh(subscriber)
     return subscriber

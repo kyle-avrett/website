@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 from src.settings import settings
 
 
-def _create_subscriber(name: str, email: str) -> None:
+def _create_subscriber(name: str, email: str, source: str | None) -> None:
     # validation
     if not settings.LISTMONK_URL:
         raise ValueError("LISTMONK_URL not set")
@@ -27,6 +27,7 @@ def _create_subscriber(name: str, email: str) -> None:
             "email": email,
             "status": "enabled",
             "lists": [settings.LISTMONK_LIST],
+            "attribs": {"source": source} if source else {},
         }
     )
     token = base64.b64encode(
@@ -54,5 +55,5 @@ def _create_subscriber(name: str, email: str) -> None:
         connection.close()
 
 
-async def create_subscriber(name: str, email: str) -> None:
-    await asyncio.to_thread(_create_subscriber, name, email)
+async def create_subscriber(name: str, email: str, source: str | None = None) -> None:
+    await asyncio.to_thread(_create_subscriber, name, email, source)
