@@ -3,6 +3,7 @@
 
 interface ImportMetaEnv {
     readonly SITE_URL?: string;
+    readonly API_URL?: string;
     readonly CI_SKIP_CONTENT_COLLECTIONS?: string;
     readonly CI_SKIP_RSS_SITEMAP?: string;
     readonly ANALYTICS_SCRIPT?: string;

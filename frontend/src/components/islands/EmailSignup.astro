@@ -1,0 +1,91 @@
+---
+const apiUrl = import.meta.env.API_URL ?? '';
+---
+
+<form
+    class="card bg-base-200 border-base-300 w-full border shadow-sm"
+    data-email-signup
+    data-api-url={apiUrl}
+>
+    <div class="card-body gap-4">
+        <div>
+            <h2 class="card-title">Get new posts by email</h2>
+            <p class="text-base-content/70 text-sm">Sign up for email notifications when I post.</p>
+        </div>
+
+        <label class="form-control w-full">
+            <span class="label-text">Name</span>
+            <input
+                class="input input-bordered w-full"
+                name="name"
+                type="text"
+                autocomplete="name"
+                required
+            />
+        </label>
+
+        <label class="form-control w-full">
+            <span class="label-text">Email</span>
+            <input
+                class="input input-bordered w-full"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+            />
+        </label>
+
+        <div class="card-actions items-center justify-between gap-3">
+            <p class="text-base-content/70 min-h-5 text-sm" data-email-signup-status></p>
+            <button class="btn btn-primary" type="submit">Sign up</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    function initEmailSignup() {
+        document.querySelectorAll<HTMLFormElement>('[data-email-signup]').forEach((form) => {
+            const status = form.querySelector<HTMLElement>('[data-email-signup-status]');
+            const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+            const apiUrl = form.dataset.apiUrl?.replace(/\/+$/, '');
+            if (!status || !button) return;
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                if (!apiUrl) {
+                    status.textContent = 'Signup is not configured.';
+                    status.className = 'text-error min-h-5 text-sm';
+                    return;
+                }
+
+                const data = new FormData(form);
+                button.disabled = true;
+                status.textContent = 'Signing up…';
+                status.className = 'text-base-content/70 min-h-5 text-sm';
+
+                try {
+                    const response = await fetch(`${apiUrl}/api/v1/subscriber`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            name: data.get('name'),
+                            email: data.get('email'),
+                        }),
+                    });
+                    if (!response.ok) throw new Error('Signup failed');
+
+                    form.reset();
+                    status.textContent = 'You’re signed up.';
+                    status.className = 'text-success min-h-5 text-sm';
+                } catch {
+                    status.textContent = 'Signup failed. Try again later.';
+                    status.className = 'text-error min-h-5 text-sm';
+                } finally {
+                    button.disabled = false;
+                }
+            });
+        });
+    }
+
+    initEmailSignup();
+</script>
