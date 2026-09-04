@@ -56,15 +56,15 @@ export const SOCIALS: readonly SocialLink[] = [
         href: `https://linkedin.com/in/${LINKEDIN_HANDLE}`,
         icon: 'simple-icons:linkedin',
     },
-    GITHUB_HANDLE && {
-        label: 'GitHub',
-        href: `https://github.com/${GITHUB_HANDLE}`,
-        icon: 'simple-icons:github',
-    },
     TWITTER_HANDLE && {
         label: 'Twitter',
         href: `https://x.com/${TWITTER_HANDLE}`,
         icon: 'simple-icons:x',
+    },
+    GITHUB_HANDLE && {
+        label: 'GitHub',
+        href: `https://github.com/${GITHUB_HANDLE}`,
+        icon: 'simple-icons:github',
     },
     CONTACT_EMAIL && {
         label: 'Email',
