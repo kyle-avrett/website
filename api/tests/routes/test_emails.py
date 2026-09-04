@@ -1,7 +1,7 @@
 from src.services import listmonk
 
 
-def test_subscriber_crud(client, monkeypatch):
+def test_email_crud(client, monkeypatch):
     created_in_listmonk = []
     sent_welcome_emails = []
     sent_messages = []
@@ -17,26 +17,24 @@ def test_subscriber_crud(client, monkeypatch):
         sent_messages.append((title, message))
 
     monkeypatch.setattr(
-        "src.routes.subscriber.listmonk.create_subscriber", fake_create_subscriber
+        "src.routes.emails.listmonk.create_subscriber", fake_create_subscriber
     )
     monkeypatch.setattr(
-        "src.routes.subscriber.listmonk.send_welcome_email", fake_send_welcome_email
+        "src.routes.emails.listmonk.send_welcome_email", fake_send_welcome_email
     )
-    monkeypatch.setattr(
-        "src.routes.subscriber.gotify.notify_website", fake_notify_website
-    )
+    monkeypatch.setattr("src.routes.emails.gotify.notify_website", fake_notify_website)
 
     response = client.post(
-        "/api/v1/subscriber",
+        "/api/v1/emails",
         json={"name": "Kyle", "email": "kyle@example.com", "source": "site"},
     )
     assert response.status_code == 200
-    subscriber = response.json()
-    assert subscriber["id"] == 1
-    assert subscriber["name"] == "Kyle"
-    assert subscriber["email"] == "kyle@example.com"
-    assert subscriber["source"] == "site"
-    assert subscriber["date_created"]
+    email = response.json()
+    assert email["id"] == 1
+    assert email["name"] == "Kyle"
+    assert email["email"] == "kyle@example.com"
+    assert email["source"] == "site"
+    assert email["date_created"]
     assert created_in_listmonk == [("Kyle", "kyle@example.com", "site")]
     assert sent_welcome_emails == [
         listmonk.ListmonkSubscriber(id=3, name="Kyle", email="kyle@example.com")
@@ -45,12 +43,12 @@ def test_subscriber_crud(client, monkeypatch):
         ("New Email Subscriber", "Kyle <kyle@example.com> subscribed from site")
     ]
 
-    response = client.get("/api/v1/subscriber/1")
+    response = client.get("/api/v1/emails/1")
     assert response.status_code == 200
-    assert response.json() == subscriber
+    assert response.json() == email
 
     response = client.put(
-        "/api/v1/subscriber/1",
+        "/api/v1/emails/1",
         json={"name": "K", "email": "k@example.com", "source": None},
     )
     assert response.status_code == 200
@@ -60,26 +58,26 @@ def test_subscriber_crud(client, monkeypatch):
     assert updated["email"] == "k@example.com"
     assert updated["source"] is None
 
-    response = client.get("/api/v1/subscribers")
+    response = client.get("/api/v1/emails")
     assert response.status_code == 200
     assert response.json() == [updated]
 
-    response = client.delete("/api/v1/subscriber/1")
+    response = client.delete("/api/v1/emails/1")
     assert response.status_code == 200
     assert response.json() == updated
 
-    response = client.get("/api/v1/subscribers")
+    response = client.get("/api/v1/emails")
     assert response.status_code == 200
     assert response.json() == []
 
 
-def test_subscriber_not_found(client):
-    assert client.get("/api/v1/subscriber/404").status_code == 404
+def test_email_not_found(client):
+    assert client.get("/api/v1/emails/404").status_code == 404
     assert (
         client.put(
-            "/api/v1/subscriber/404",
+            "/api/v1/emails/404",
             json={"name": "No", "email": "no@example.com"},
         ).status_code
         == 404
     )
-    assert client.delete("/api/v1/subscriber/404").status_code == 404
+    assert client.delete("/api/v1/emails/404").status_code == 404

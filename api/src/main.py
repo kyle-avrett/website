@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from src.routes.emails import router as emails_router
 from src.routes.item import router as item_router
 from src.routes.social_media import router as social_media_router
-from src.routes.subscriber import router as subscriber_router
 from src.settings import settings
 
 # fast api app
@@ -23,7 +23,7 @@ app.add_middleware(
 # routes
 app.include_router(item_router, prefix="/api/v1")
 app.include_router(social_media_router, prefix="/api/v1")
-app.include_router(subscriber_router, prefix="/api/v1")
+app.include_router(emails_router, prefix="/api/v1")
 
 
 @app.get("/")
