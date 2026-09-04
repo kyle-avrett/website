@@ -64,7 +64,7 @@ const apiUrl = import.meta.env.API_URL ?? '';
                 status.className = 'text-base-content/70 min-h-5 text-sm';
 
                 try {
-                    const response = await fetch(`${apiUrl}/api/v1/emails`, {
+                    const response = await fetch(`${apiUrl}/api/v1/emails/subscribe`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({

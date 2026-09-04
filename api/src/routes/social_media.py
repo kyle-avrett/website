@@ -8,7 +8,7 @@ from src.services import gotify
 # ----------------------------------------------------------------------------------------
 
 
-class SocialMediaIntegration(BaseModel):
+class SocialMediaRequestIntegration(BaseModel):
     id: str
     name: str
     providerIdentifier: str
@@ -16,13 +16,17 @@ class SocialMediaIntegration(BaseModel):
     type: str
 
 
-class SocialMediaPost(BaseModel):
+class SocialMediaRequest(BaseModel):
     id: str
     content: str
     publishDate: datetime
     releaseURL: str
     state: str
-    integration: SocialMediaIntegration
+    integration: SocialMediaRequestIntegration
+
+
+class SocialMediaResponse(BaseModel):
+    notifications_sent: int
 
 
 # ----------------------------------------------------------------------------------------
@@ -34,8 +38,8 @@ router = APIRouter(tags=["Social Media"])
 # ----------------------------------------------------------------------------------------
 
 
-@router.post("/social-media/notify")
-async def notify_social_media(posts: list[SocialMediaPost]):
+@router.post("/social-media/notify", response_model=SocialMediaResponse)
+async def notify(posts: list[SocialMediaRequest]):
     # notify
     for post in posts:
         await gotify.notify_social_media(
@@ -44,4 +48,4 @@ async def notify_social_media(posts: list[SocialMediaPost]):
         )
 
     # return
-    return {"notifications_sent": len(posts)}
+    return SocialMediaResponse(notifications_sent=len(posts))

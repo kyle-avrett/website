@@ -25,7 +25,7 @@ def test_email_crud(client, monkeypatch):
     monkeypatch.setattr("src.routes.emails.gotify.notify_website", fake_notify_website)
 
     response = client.post(
-        "/api/v1/emails",
+        "/api/v1/emails/subscribe",
         json={"name": "Kyle", "email": "kyle@example.com", "source": "site"},
     )
     assert response.status_code == 200
@@ -42,42 +42,3 @@ def test_email_crud(client, monkeypatch):
     assert sent_messages == [
         ("New Email Subscriber", "Kyle <kyle@example.com> subscribed from site")
     ]
-
-    response = client.get("/api/v1/emails/1")
-    assert response.status_code == 200
-    assert response.json() == email
-
-    response = client.put(
-        "/api/v1/emails/1",
-        json={"name": "K", "email": "k@example.com", "source": None},
-    )
-    assert response.status_code == 200
-    updated = response.json()
-    assert updated["id"] == 1
-    assert updated["name"] == "K"
-    assert updated["email"] == "k@example.com"
-    assert updated["source"] is None
-
-    response = client.get("/api/v1/emails")
-    assert response.status_code == 200
-    assert response.json() == [updated]
-
-    response = client.delete("/api/v1/emails/1")
-    assert response.status_code == 200
-    assert response.json() == updated
-
-    response = client.get("/api/v1/emails")
-    assert response.status_code == 200
-    assert response.json() == []
-
-
-def test_email_not_found(client):
-    assert client.get("/api/v1/emails/404").status_code == 404
-    assert (
-        client.put(
-            "/api/v1/emails/404",
-            json={"name": "No", "email": "no@example.com"},
-        ).status_code
-        == 404
-    )
-    assert client.delete("/api/v1/emails/404").status_code == 404

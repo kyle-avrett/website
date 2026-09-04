@@ -1,11 +1,10 @@
 from datetime import datetime
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel, ConfigDict
 from sqlalchemy import func
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.types import DateTime, String
 
@@ -56,8 +55,8 @@ Database = Annotated[AsyncSession, Depends(get_db)]
 # ----------------------------------------------------------------------------------------
 
 
-@router.post("/emails", response_model=EmailResponse)
-async def create_email(request: EmailRequest, db: Database):
+@router.post("/emails/subscribe", response_model=EmailResponse)
+async def subscribe(request: EmailRequest, db: Database):
     # database
     email = Email(name=request.name, email=request.email, source=request.source)
     db.add(email)
