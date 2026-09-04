@@ -70,7 +70,7 @@ async def create_subscriber(request: SubscriberRequest, db: Database):
     await listmonk.send_welcome_email(listmonk_subscriber)
 
     # notify
-    await gotify.send_message(
+    await gotify.notify_website(
         f"{subscriber.name} <{subscriber.email}> subscribed"
         + (f" from {subscriber.source}" if subscriber.source else "")
     )

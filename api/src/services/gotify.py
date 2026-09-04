@@ -5,7 +5,7 @@ from gotify import AsyncGotify
 from src.settings import settings
 
 
-async def send_message(message: str, title: str = "New subscriber") -> None:
+async def notify_website(message: str, title: str = "New subscriber") -> None:
     if not settings.GOTIFY_URL:
         raise ValueError("GOTIFY_URL not set")
 
