@@ -1,6 +1,6 @@
 import { satteri, satteriHeadingIdsPlugin } from '@astrojs/markdown-satteri';
 import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
+import sitemap, { ChangeFreqEnum } from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import expressiveCode from 'astro-expressive-code';
 import icon from 'astro-icon';
@@ -32,7 +32,8 @@ const SKIP_RSS_SITEMAP = process.env.CI_SKIP_RSS_SITEMAP === 'true';
  * We use path segments (e.g. "posts/my-slug") rather than full URLs so
  * the check works regardless of `SITE_URL` or `BASE_PATH` values.
  */
-const unlistedPathSegments = new Set();
+const unlistedPathSegments = new Set<string>();
+const sitemapLastmod = new Map<string, Date>();
 
 /**
  * Integration that reads the content collection at build time and
@@ -49,11 +50,24 @@ function collectUnlistedUrls() {
                     // Dynamically import so this only runs during builds (not in
                     // the config evaluation phase where astro:content isn't ready).
                     const { getCollection } = await import('astro:content');
-                    const entries = await getCollection('posts');
-                    for (const entry of entries) {
-                        if (!entry.data.unlisted) continue;
+                    const [posts, pages] = await Promise.all([
+                        getCollection('posts'),
+                        getCollection('pages'),
+                    ]);
+
+                    for (const entry of posts) {
                         const slug = entry.id.replace(/\.(md|mdx)$/i, '');
-                        unlistedPathSegments.add(`posts/${slug}`);
+                        sitemapLastmod.set(
+                            `/posts/${slug}`,
+                            entry.data.updatedDate ?? entry.data.pubDate,
+                        );
+                        if (entry.data.unlisted) unlistedPathSegments.add(`posts/${slug}`);
+                    }
+
+                    for (const entry of pages) {
+                        const lastmod = entry.data.updatedDate ?? entry.data.pubDate;
+                        if (lastmod)
+                            sitemapLastmod.set(`/${entry.id.replace(/\.(md|mdx)$/i, '')}`, lastmod);
                     }
                 } catch {
                     // Content collections aren't available in all build contexts
@@ -77,6 +91,27 @@ function collectUnlistedUrls() {
  *
  * Crawlers ignore `<?xml-stylesheet ?>` entirely, so SEO is unaffected.
  */
+function sitemapPath(url: string): string {
+    const path = new URL(url).pathname;
+    if (!BASE) return path;
+    if (path === BASE) return '/';
+    return path.startsWith(`${BASE}/`) ? path.slice(BASE.length) : path;
+}
+
+function changefreqFor(path: string): ChangeFreqEnum {
+    if (path === '/') return ChangeFreqEnum.DAILY;
+    if (path.startsWith('/posts/')) return ChangeFreqEnum.WEEKLY;
+    if (path.startsWith('/tags') || path.startsWith('/categories')) return ChangeFreqEnum.WEEKLY;
+    return ChangeFreqEnum.MONTHLY;
+}
+
+function priorityFor(path: string): number {
+    if (path === '/') return 1;
+    if (path.startsWith('/posts/')) return 0.8;
+    if (path.startsWith('/tags') || path.startsWith('/categories')) return 0.4;
+    return 0.6;
+}
+
 function rewriteSitemapXslToRelative() {
     return {
         name: 'chirpy:rewrite-sitemap-xsl',
@@ -224,9 +259,18 @@ export default defineConfig({
                           if (page.includes('/draft/') || page.endsWith('/404')) return false;
                           // Exclude unlisted posts from the sitemap.
                           for (const seg of unlistedPathSegments) {
-                              if (page.includes(String(seg))) return false;
+                              if (page.includes(seg)) return false;
                           }
                           return true;
+                      },
+                      serialize: (item) => {
+                          const path = sitemapPath(item.url);
+                          return {
+                              ...item,
+                              lastmod: sitemapLastmod.get(path)?.toISOString(),
+                              changefreq: changefreqFor(path),
+                              priority: priorityFor(path),
+                          };
                       },
                   }),
                   rewriteSitemapXslToRelative(),
