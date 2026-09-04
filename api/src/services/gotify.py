@@ -9,8 +9,8 @@ async def send_message(message: str, title: str = "New subscriber") -> None:
     if not settings.GOTIFY_URL:
         raise ValueError("GOTIFY_URL not set")
 
-    if not settings.GOTIFY_PASS:
-        raise ValueError("GOTIFY_PASS not set")
+    if not settings.GOTIFY_TOKEN_WEBSITE:
+        raise ValueError("GOTIFY_TOKEN_WEBSITE not set")
 
     url = urlparse(settings.GOTIFY_URL)
     if url.scheme not in {"http", "https"} or not url.hostname:
@@ -18,6 +18,6 @@ async def send_message(message: str, title: str = "New subscriber") -> None:
 
     client = AsyncGotify(
         base_url=settings.GOTIFY_URL.rstrip("/"),
-        app_token=settings.GOTIFY_PASS,
+        app_token=settings.GOTIFY_TOKEN_WEBSITE,
     )
     await client.create_message(message, title=title)

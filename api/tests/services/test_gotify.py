@@ -17,15 +17,15 @@ def test_send_message_requires_url(monkeypatch):
 
 def test_send_message_requires_pass(monkeypatch):
     monkeypatch.setattr(gotify.settings, "GOTIFY_URL", "https://gotify.test")
-    monkeypatch.setattr(gotify.settings, "GOTIFY_PASS", "")
+    monkeypatch.setattr(gotify.settings, "GOTIFY_TOKEN_WEBSITE", "")
 
-    with pytest.raises(ValueError, match="GOTIFY_PASS not set"):
+    with pytest.raises(ValueError, match="GOTIFY_TOKEN_WEBSITE not set"):
         run_send_message()
 
 
 def test_send_message_rejects_invalid_url(monkeypatch):
     monkeypatch.setattr(gotify.settings, "GOTIFY_URL", "ftp://gotify.test")
-    monkeypatch.setattr(gotify.settings, "GOTIFY_PASS", "token")
+    monkeypatch.setattr(gotify.settings, "GOTIFY_TOKEN_WEBSITE", "token")
 
     with pytest.raises(ValueError, match="GOTIFY_URL must be http or https"):
         run_send_message()
@@ -43,7 +43,7 @@ def test_send_message_posts_to_gotify(monkeypatch):
             self.__class__.sent = (message, title)
 
     monkeypatch.setattr(gotify.settings, "GOTIFY_URL", "https://gotify.test/")
-    monkeypatch.setattr(gotify.settings, "GOTIFY_PASS", "token")
+    monkeypatch.setattr(gotify.settings, "GOTIFY_TOKEN_WEBSITE", "token")
     monkeypatch.setattr(gotify, "AsyncGotify", FakeGotify)
 
     run_send_message()

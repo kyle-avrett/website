@@ -17,7 +17,7 @@ class Settings(BaseSettings):
 
     # gotify
     GOTIFY_URL: str = ""
-    GOTIFY_PASS: str = ""
+    GOTIFY_TOKEN_WEBSITE: str = ""
 
     # database
     POSTGRES_DB: str = ""
