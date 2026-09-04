@@ -13,8 +13,8 @@ def test_subscriber_crud(client, monkeypatch):
     async def fake_send_welcome_email(listmonk_subscriber):
         sent_welcome_emails.append(listmonk_subscriber)
 
-    async def fake_notify_website(message, title="New subscriber"):
-        sent_messages.append((message, title))
+    async def fake_notify_website(title, message):
+        sent_messages.append((title, message))
 
     monkeypatch.setattr(
         "src.routes.subscriber.listmonk.create_subscriber", fake_create_subscriber
@@ -22,7 +22,9 @@ def test_subscriber_crud(client, monkeypatch):
     monkeypatch.setattr(
         "src.routes.subscriber.listmonk.send_welcome_email", fake_send_welcome_email
     )
-    monkeypatch.setattr("src.routes.subscriber.gotify.notify_website", fake_notify_website)
+    monkeypatch.setattr(
+        "src.routes.subscriber.gotify.notify_website", fake_notify_website
+    )
 
     response = client.post(
         "/api/v1/subscriber",
@@ -40,7 +42,7 @@ def test_subscriber_crud(client, monkeypatch):
         listmonk.ListmonkSubscriber(id=3, name="Kyle", email="kyle@example.com")
     ]
     assert sent_messages == [
-        ("Kyle <kyle@example.com> subscribed from site", "New subscriber")
+        ("New Email Subscriber", "Kyle <kyle@example.com> subscribed from site")
     ]
 
     response = client.get("/api/v1/subscriber/1")

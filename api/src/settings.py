@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     # gotify
     GOTIFY_URL: str = ""
     GOTIFY_TOKEN_WEBSITE: str = ""
+    GOTIFY_TOKEN_SOCIAL_MEDIA: str = ""
 
     # database
     POSTGRES_DB: str = ""

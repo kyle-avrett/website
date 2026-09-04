@@ -71,8 +71,9 @@ async def create_subscriber(request: SubscriberRequest, db: Database):
 
     # notify
     await gotify.notify_website(
+        "New Email Subscriber",
         f"{subscriber.name} <{subscriber.email}> subscribed"
-        + (f" from {subscriber.source}" if subscriber.source else "")
+        + (f" from {subscriber.source}" if subscriber.source else ""),
     )
 
     # return
