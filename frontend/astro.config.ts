@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import expressiveCode from 'astro-expressive-code';
 import icon from 'astro-icon';
 import { defineConfig, fontProviders, svgoOptimizer } from 'astro/config';
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { globSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import process from 'node:process';
 import { fileURLToPath, URL } from 'node:url';
@@ -35,49 +35,41 @@ const SKIP_RSS_SITEMAP = process.env.CI_SKIP_RSS_SITEMAP === 'true';
 const unlistedPathSegments = new Set<string>();
 const sitemapLastmod = new Map<string, Date>();
 
-/**
- * Integration that reads the content collection at build time and
- * populates `unlistedPathSegments` with the URL path segments of every
- * unlisted post. Must be listed BEFORE `@astrojs/sitemap` in the
- * integrations array.
- */
-function collectUnlistedUrls() {
-    return {
-        name: 'chirpy:collect-unlisted-urls',
-        hooks: {
-            'astro:build:start': async () => {
-                try {
-                    // Dynamically import so this only runs during builds (not in
-                    // the config evaluation phase where astro:content isn't ready).
-                    const { getCollection } = await import('astro:content');
-                    const [posts, pages] = await Promise.all([
-                        getCollection('posts'),
-                        getCollection('pages'),
-                    ]);
-
-                    for (const entry of posts) {
-                        const slug = entry.id.replace(/\.(md|mdx)$/i, '');
-                        sitemapLastmod.set(
-                            `/posts/${slug}`,
-                            entry.data.updatedDate ?? entry.data.pubDate,
-                        );
-                        if (entry.data.unlisted) unlistedPathSegments.add(`posts/${slug}`);
-                    }
-
-                    for (const entry of pages) {
-                        const lastmod = entry.data.updatedDate ?? entry.data.pubDate;
-                        if (lastmod)
-                            sitemapLastmod.set(`/${entry.id.replace(/\.(md|mdx)$/i, '')}`, lastmod);
-                    }
-                } catch {
-                    // Content collections aren't available in all build contexts
-                    // (e.g. CI fast mode). Silently skip — the sitemap will include
-                    // unlisted posts in that case, which is acceptable for CI.
-                }
-            },
-        },
-    };
+function frontmatterValue(frontmatter: string, key: string): string | undefined {
+    return frontmatter
+        .match(new RegExp(`^${key}:\\s*(.+)$`, 'm'))?.[1]
+        ?.trim()
+        .replace(/^['"]|['"]$/g, '');
 }
+
+function collectSitemapMetadata() {
+    for (const collection of ['posts', 'pages'] as const) {
+        const root = join(process.cwd(), 'src/content', collection);
+        for (const file of globSync('**/*.{md,mdx}', { cwd: root })) {
+            const frontmatter = readFileSync(join(root, String(file)), 'utf8').match(
+                /^---\n([\s\S]*?)\n---/,
+            )?.[1];
+            if (!frontmatter) continue;
+
+            const slug = String(file)
+                .replace(/\\/g, '/')
+                .replace(/\.(md|mdx)$/i, '');
+            const date =
+                frontmatterValue(frontmatter, 'updatedDate') ??
+                frontmatterValue(frontmatter, 'pubDate');
+            if (date)
+                sitemapLastmod.set(
+                    collection === 'posts' ? `/posts/${slug}` : `/${slug}`,
+                    new Date(date),
+                );
+            if (collection === 'posts' && frontmatterValue(frontmatter, 'unlisted') === 'true') {
+                unlistedPathSegments.add(`posts/${slug}`);
+            }
+        }
+    }
+}
+
+collectSitemapMetadata();
 
 /**
  * Tiny inline integration: after `@astrojs/sitemap` runs, rewrite the
@@ -100,14 +92,14 @@ function sitemapPath(url: string): string {
 
 function changefreqFor(path: string): ChangeFreqEnum {
     if (path === '/') return ChangeFreqEnum.DAILY;
-    if (path.startsWith('/posts/')) return ChangeFreqEnum.WEEKLY;
-    if (path.startsWith('/tags') || path.startsWith('/categories')) return ChangeFreqEnum.WEEKLY;
+    if (path.startsWith('/posts') || path.startsWith('/tags') || path.startsWith('/categories'))
+        return ChangeFreqEnum.WEEKLY;
     return ChangeFreqEnum.MONTHLY;
 }
 
 function priorityFor(path: string): number {
     if (path === '/') return 1;
-    if (path.startsWith('/posts/')) return 0.8;
+    if (path.startsWith('/posts')) return 0.8;
     if (path.startsWith('/tags') || path.startsWith('/categories')) return 0.4;
     return 0.6;
 }
@@ -246,7 +238,6 @@ export default defineConfig({
         ...(SKIP_RSS_SITEMAP
             ? []
             : [
-                  collectUnlistedUrls(),
                   sitemap({
                       // Browsers (and only browsers) apply this XSL to render a
                       // human-readable view of `sitemap-index.xml` and `sitemap-0.xml`.
