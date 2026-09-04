@@ -40,6 +40,9 @@ router = APIRouter(tags=["Item"])
 Database = Annotated[AsyncSession, Depends(get_db)]
 
 
+# ----------------------------------------------------------------------------------------
+
+
 @router.post("/item", response_model=ItemResponse)
 async def create_item(request: ItemRequest, db: Database):
     item = Item(name=request.name)

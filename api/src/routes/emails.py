@@ -53,6 +53,9 @@ router = APIRouter(tags=["Emails"])
 Database = Annotated[AsyncSession, Depends(get_db)]
 
 
+# ----------------------------------------------------------------------------------------
+
+
 @router.post("/emails", response_model=EmailResponse)
 async def create_email(request: EmailRequest, db: Database):
     # database
@@ -76,45 +79,3 @@ async def create_email(request: EmailRequest, db: Database):
 
     # return
     return email
-
-
-@router.get("/emails/{email_id}", response_model=EmailResponse)
-async def read_email(email_id: int, db: Database):
-    result = await db.execute(select(Email).where(Email.id == email_id))
-    email = result.scalar_one_or_none()
-    if email is None:
-        raise HTTPException(status_code=404, detail="Email not found")
-    return email
-
-
-@router.put("/emails/{email_id}", response_model=EmailResponse)
-async def update_email(email_id: int, request: EmailRequest, db: Database):
-    result = await db.execute(select(Email).where(Email.id == email_id))
-    email = result.scalar_one_or_none()
-    if email is None:
-        raise HTTPException(status_code=404, detail="Email not found")
-
-    email.name = request.name
-    email.email = request.email
-    email.source = request.source
-    await db.commit()
-    await db.refresh(email)
-    return email
-
-
-@router.delete("/emails/{email_id}", response_model=EmailResponse)
-async def delete_email(email_id: int, db: Database):
-    result = await db.execute(select(Email).where(Email.id == email_id))
-    email = result.scalar_one_or_none()
-    if email is None:
-        raise HTTPException(status_code=404, detail="Email not found")
-
-    await db.delete(email)
-    await db.commit()
-    return email
-
-
-@router.get("/emails", response_model=list[EmailResponse])
-async def list_emails(db: Database):
-    result = await db.execute(select(Email))
-    return result.scalars().all()

@@ -27,16 +27,21 @@ class SocialMediaPost(BaseModel):
 
 # ----------------------------------------------------------------------------------------
 
+
 router = APIRouter(tags=["Social Media"])
+
 
 # ----------------------------------------------------------------------------------------
 
 
 @router.post("/social-media/notify")
 async def notify_social_media(posts: list[SocialMediaPost]):
+    # notify
     for post in posts:
         await gotify.notify_social_media(
             f"Posted to {post.integration.providerIdentifier}",
             f"{post.content}\n\n{post.releaseURL}",
         )
+
+    # return
     return {"notifications_sent": len(posts)}
