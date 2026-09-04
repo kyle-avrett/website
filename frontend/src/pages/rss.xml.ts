@@ -11,6 +11,7 @@ export const GET: APIRoute = async (context) => {
             title: SITE.title,
             description: SITE.description,
             site: siteWithBase,
+            trailingSlash: false,
             stylesheet: `${base}/rss/styles.xsl`,
             items: [],
             customData: `<language>en-us</language>`,
@@ -22,6 +23,7 @@ export const GET: APIRoute = async (context) => {
         title: SITE.title,
         description: SITE.description,
         site: siteWithBase,
+        trailingSlash: false,
         stylesheet: `${base}/rss/styles.xsl`,
         items: posts.map((post) => ({
             title: post.data.title,
