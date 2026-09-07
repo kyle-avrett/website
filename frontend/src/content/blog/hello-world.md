@@ -5,3 +5,7 @@ pubDate: 2026-09-07
 ---
 
 Hello, world.
+
+```js
+console.log('hello world');
+```

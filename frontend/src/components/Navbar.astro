@@ -1,5 +1,12 @@
 ---
-
+import { Icon } from 'astro-icon/components';
 ---
 
-<div>navbar</div>
+<nav>
+    <a href="/">Home</a>
+    <a href="/blog/hello-world/">Blog</a>
+    <a href="/search/">
+        <Icon name="search" size="1em" aria-hidden="true" />
+        Search
+    </a>
+</nav>

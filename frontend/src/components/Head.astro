@@ -1,31 +1,43 @@
 ---
+import { SEO } from 'astro-seo';
 
+interface Props {
+    title?: string;
+    description?: string;
+}
+
+const { title = 'Kyle Avrett', description = 'Kyle Avrett website.' } =
+    Astro.props;
 ---
 
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="text-scale" content="scale" />
-
-<title>Page Title</title>
-<meta name="description" content="A concise description of the page content." />
-<link rel="canonical" href="https://example.com" />
-
-<meta property="og:title" content="Page Title" />
-<meta
-    property="og:description"
-    content="A concise description of the page content."
+<SEO
+    charset="utf-8"
+    title={title}
+    description={description}
+    titleTemplate="%s | Kyle Avrett"
+    titleDefault="Kyle Avrett"
+    twitter={{
+        card: 'summary_large_image',
+    }}
+    extend={{
+        meta: [
+            {
+                name: 'viewport',
+                content: 'width=device-width, initial-scale=1.0',
+            },
+            { name: 'text-scale', content: 'scale' },
+            { name: 'fediverse:creator', content: '@username@domain.social' },
+        ],
+        link: [
+            {
+                rel: 'alternate',
+                type: 'application/rss+xml',
+                href: '/rss.xml',
+                title: 'RSS Feed',
+            },
+            { rel: 'sitemap', href: '/sitemap-index.xml' },
+            { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+            { rel: 'icon', href: '/favicon.ico', sizes: '32x32' },
+        ],
+    }}
 />
-<meta property="og:image" content="https://example.com" />
-<meta property="og:url" content="https://example.com" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="fediverse:creator" content="@username@domain.social" />
-
-<link
-    rel="alternate"
-    type="text/markdown"
-    href="https://example.com.md"
-    title="Markdown Version"
-/>
-
-<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-<link rel="icon" href="/favicon.ico" sizes="32x32" id="ico-fallback" />
