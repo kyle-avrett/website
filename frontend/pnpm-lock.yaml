@@ -25,9 +25,21 @@ importers:
             astro:
                 specifier: ^7.3.1
                 version: 7.3.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0)
+            astro-compressor:
+                specifier: ^1.3.0
+                version: 1.3.0
+            astro-font:
+                specifier: ^1.2.0
+                version: 1.2.0
             astro-icon:
                 specifier: ^1.2.0
                 version: 1.2.0
+            astro-llms-md:
+                specifier: ^3.0.1
+                version: 3.0.1(astro@7.3.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0))
+            astro-robots-txt:
+                specifier: ^1.0.0
+                version: 1.0.0
             astro-seo:
                 specifier: ^1.2.0
                 version: 1.2.0
@@ -1114,6 +1126,12 @@ packages:
                 integrity: sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA==,
             }
 
+    '@mixmark-io/domino@2.2.0':
+        resolution:
+            {
+                integrity: sha512-Y28PR25bHXUg88kCV7nivXrP2Nj2RueZ3/l/jdx6J9f8J4nsEGcgX0Qe6lt7Pa+J79+kPiJU3LguR6O/6zrLOw==,
+            }
+
     '@napi-rs/wasm-runtime@1.2.3':
         resolution:
             {
@@ -1833,6 +1851,13 @@ packages:
             }
         engines: { node: '>=12' }
 
+    astro-compressor@1.3.0:
+        resolution:
+            {
+                integrity: sha512-SrTcio7wSyaraYoeH7M1oRtfiqZKdpT73EfMUlA6tGoYV42oNyQw13nzumvZkXlgeCXTMXDho0AebfcNwaadoQ==,
+            }
+        engines: { node: '>=22' }
+
     astro-eslint-parser@3.1.0:
         resolution:
             {
@@ -1840,12 +1865,33 @@ packages:
             }
         engines: { node: ^22.22.3 || ^24.16.0 || >=26.3.0 }
 
+    astro-font@1.2.0:
+        resolution:
+            {
+                integrity: sha512-Jcgag+vUQQIlw/RBMrQ+lsDc+m0Weyjke3+ilK9lWIJVkTn24jUKBS0FE7Zi+ojDMVSyasJ8HEmHzKizJL3SkA==,
+            }
+
     astro-icon@1.2.0:
         resolution:
             {
                 integrity: sha512-0848V2WZuTPhqGSqLeZimLJZ5wmamMtWYzvA2kvg8s2DrUPZ3/nrTcHJWN0eJHt62jy7uvNxgTNiUJGIr7JNxg==,
             }
         engines: { node: '>=22.12.0' }
+
+    astro-llms-md@3.0.1:
+        resolution:
+            {
+                integrity: sha512-5F0ZvXY80ZR5krSm5QkdcIvnumj0HVFtIan9o/Cw3T8PSsI8BbQDlJBfaTkqTbzh1daq4RxSMHKopcptHqd6ww==,
+            }
+        engines: { node: '>=18.0.0' }
+        peerDependencies:
+            astro: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
+
+    astro-robots-txt@1.0.0:
+        resolution:
+            {
+                integrity: sha512-6JQSLid4gMhoWjOm85UHLkgrw0+hHIjnJVIUqxjU2D6feKlVyYukMNYjH44ZDZBK1P8hNxd33PgWlHzCASvedA==,
+            }
 
     astro-seo@1.2.0:
         resolution:
@@ -2011,6 +2057,12 @@ packages:
                 integrity: sha512-ojKiDvcmByhwa8YYqbQI/hg7MEU0NC03+pSdEq4ZUnZR9xXpwk7E43SMNGkn+JxJGPFtNvQ48+vV2p+P1ml5PA==,
             }
 
+    css-select@5.2.2:
+        resolution:
+            {
+                integrity: sha512-TizTzUddG/xYLA3NXodFM0fSbNizXjOKhqiQQwvhlspadZokn1KDy0NZFS0wuEubIYAV5/c1/lAr0TaaFXEXzw==,
+            }
+
     css-select@6.0.0:
         resolution:
             {
@@ -2031,6 +2083,13 @@ packages:
                 integrity: sha512-X7sjQzceUhu1u7Y/ylrRZFU2FS6LRiFVp6rKLPg23y3x3c3DOKAwuXGDp+PAGjh6CSnCjYeAul8pcT8bAl+lSA==,
             }
         engines: { node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0 }
+
+    css-what@6.2.2:
+        resolution:
+            {
+                integrity: sha512-u/O3vwbptzhMs3L1fQE82ZSLHQQfto5gyZzwteVIEyeaY5Fc7R4dapF/BvRoSYFeqfBk4m0V1Vafq5Pjv25wvA==,
+            }
+        engines: { node: '>= 6' }
 
     css-what@7.0.0:
         resolution:
@@ -2175,6 +2234,13 @@ packages:
                 integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==,
             }
         engines: { node: '>=0.12' }
+
+    entities@8.0.0:
+        resolution:
+            {
+                integrity: sha512-zwfzJecQ/Uej6tusMqwAqU/6KL2XaB2VZ2Jg54Je6ahNBGNH6Ek6g3jjNCF0fG9EWQKGZNddNjU5F1ZQn/sBnA==,
+            }
+        engines: { node: '>=20.19.0' }
 
     es-module-lexer@2.3.2:
         resolution:
@@ -2405,6 +2471,13 @@ packages:
                 integrity: sha512-+PFTHITI08JIGhnNpGNI8T8inUpgZfk3GNEqfT9R2zZV2iFXg3CvqzSl/uEhs7TSGujYRELEANyDvS8Fj7+S7Q==,
             }
 
+    filename-reserved-regex@3.0.0:
+        resolution:
+            {
+                integrity: sha512-hn4cQfU6GOT/7cFHXBqeBg2TbrMBgdD0kcjLhvSQYYwm3s4B6cjvBfb7nBALJLAXqmU5xajSa7X2NnUud/VCdw==,
+            }
+        engines: { node: ^12.20.0 || ^14.13.1 || >=16.0.0 }
+
     find-proc@0.1.0:
         resolution:
             {
@@ -2492,6 +2565,13 @@ packages:
                 integrity: sha512-XxwI8EOhVQgWp6iDL+3b0r86f4d6AX6zSU55HfB4ydCEuXLXc5FcYeOu+nnGftS4TEju/11rt4KJPTMgbfmv4A==,
             }
         engines: { node: '>=10.13.0' }
+
+    glob@13.0.6:
+        resolution:
+            {
+                integrity: sha512-Wjlyrolmm8uDpm/ogGyXZXb1Z+Ca2B8NbJwqBVg0axK9GbBeoS7yGV6vjXnYdGm6X53iehEuxxbyiKp8QmN4Vw==,
+            }
+        engines: { node: 18 || 20 || >=22 }
 
     globals@17.12.0:
         resolution:
@@ -3006,6 +3086,13 @@ packages:
             }
         engines: { node: 18 || 20 || >=22 }
 
+    minipass@7.1.3:
+        resolution:
+            {
+                integrity: sha512-tEBHqDnIoM/1rXME1zgka9g6Q2lcoCkxHLuc7ODJ5BxbP5d4c2Z5cGgtXAku59200Cx7diuHTOYfSBD8n6mm8A==,
+            }
+        engines: { node: '>=16 || 14 >=14.17' }
+
     modern-tar@0.8.5:
         resolution:
             {
@@ -3063,6 +3150,12 @@ packages:
         resolution:
             {
                 integrity: sha512-g9yhqoedzIUm0nTnTqAQvueMPVOuIY16bqgAJJC8XOOubYFNwz6IER9qs0Gq2Xd0+CecCKFjtdDTMA4u4xG06Q==,
+            }
+
+    node-html-parser@9.0.3:
+        resolution:
+            {
+                integrity: sha512-iaQ9rokcYNp99IY0h82q04Wtc27SObRT+OEytdJh0bFv2IN0fypnU63KUNVavkPSiwsmIELG1eUenajGhzrvpg==,
             }
 
     node-mock-http@1.0.5:
@@ -3189,6 +3282,13 @@ packages:
                 integrity: sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==,
             }
         engines: { node: '>=8' }
+
+    path-scurry@2.0.2:
+        resolution:
+            {
+                integrity: sha512-3O/iVVsJAPsOnpwWIeD+d6z/7PmqApyQePUtCndjatj/9I5LylHvt5qluFaBT3I5h3r1ejfR056c+FCv+NnNXg==,
+            }
+        engines: { node: 18 || 20 || >=22 }
 
     pathe@2.0.3:
         resolution:
@@ -3673,6 +3773,13 @@ packages:
                 integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==,
             }
 
+    turndown@7.2.4:
+        resolution:
+            {
+                integrity: sha512-I8yFsfRzmzK0WV1pNNOA4A7y4RDfFxPRxb3t+e3ui14qSGOxGtiSP6GjeX+Y6CHb7HYaFj7ECUD7VE5kQMZWGQ==,
+            }
+        engines: { node: '>=18', npm: '>=9' }
+
     type-check@0.4.0:
         resolution:
             {
@@ -3859,6 +3966,13 @@ packages:
             {
                 integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==,
             }
+
+    valid-filename@4.0.0:
+        resolution:
+            {
+                integrity: sha512-VEYTpTVPMgO799f2wI7zWf0x2C54bPX6NAfbZ2Z8kZn76p+3rEYCTYVYzMUcVSMvakxMQTriBf24s3+WeXJtEg==,
+            }
+        engines: { node: ^12.20.0 || ^14.13.1 || >=16.0.0 }
 
     vfile-message@4.0.3:
         resolution:
@@ -4235,6 +4349,12 @@ packages:
                 integrity: sha512-4LCcse/U2MHZ63HAJVE+v71o7yOdIe4cZ70Wpf8D/IyjDKYQLV5GD46B+hSTjJsvV5PztjvHoU580EftxjDZFQ==,
             }
         engines: { node: '>=12.20' }
+
+    zod@3.25.76:
+        resolution:
+            {
+                integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==,
+            }
 
     zod@4.5.4:
         resolution:
@@ -4798,6 +4918,8 @@ snapshots:
 
     '@keyv/serialize@1.1.1': {}
 
+    '@mixmark-io/domino@2.2.0': {}
+
     '@napi-rs/wasm-runtime@1.2.3(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)':
         dependencies:
             '@emnapi/core': 1.11.1
@@ -5222,6 +5344,8 @@ snapshots:
 
     assertion-error@2.0.1: {}
 
+    astro-compressor@1.3.0: {}
+
     astro-eslint-parser@3.1.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3):
         dependencies:
             '@astrojs/compiler-rs': 0.4.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)
@@ -5238,11 +5362,25 @@ snapshots:
             - '@emnapi/runtime'
             - supports-color
 
+    astro-font@1.2.0: {}
+
     astro-icon@1.2.0:
         dependencies:
             '@iconify/tools': 5.0.14
             '@iconify/types': 2.0.0
             '@iconify/utils': 3.1.7
+
+    astro-llms-md@3.0.1(astro@7.3.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0)):
+        dependencies:
+            astro: 7.3.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0)
+            glob: 13.0.6
+            node-html-parser: 9.0.3
+            turndown: 7.2.4
+
+    astro-robots-txt@1.0.0:
+        dependencies:
+            valid-filename: 4.0.0
+            zod: 3.25.76
 
     astro-seo@1.2.0: {}
 
@@ -5403,6 +5541,14 @@ snapshots:
         dependencies:
             uncrypto: 0.1.3
 
+    css-select@5.2.2:
+        dependencies:
+            boolbase: 1.0.0
+            css-what: 6.2.2
+            domhandler: 5.0.3
+            domutils: 3.2.2
+            nth-check: 2.1.1
+
     css-select@6.0.0:
         dependencies:
             boolbase: 1.0.0
@@ -5420,6 +5566,8 @@ snapshots:
         dependencies:
             mdn-data: 2.27.1
             source-map-js: 1.2.1
+
+    css-what@6.2.2: {}
 
     css-what@7.0.0: {}
 
@@ -5484,6 +5632,8 @@ snapshots:
             tapable: 2.3.3
 
     entities@4.5.0: {}
+
+    entities@8.0.0: {}
 
     es-module-lexer@2.3.2: {}
 
@@ -5661,6 +5811,8 @@ snapshots:
         dependencies:
             flat-cache: 6.1.23
 
+    filename-reserved-regex@3.0.0: {}
+
     find-proc@0.1.0: {}
 
     find-up@5.0.0:
@@ -5702,6 +5854,12 @@ snapshots:
     glob-parent@6.0.2:
         dependencies:
             is-glob: 4.0.3
+
+    glob@13.0.6:
+        dependencies:
+            minimatch: 10.2.6
+            minipass: 7.1.3
+            path-scurry: 2.0.2
 
     globals@17.12.0: {}
 
@@ -5957,6 +6115,8 @@ snapshots:
         dependencies:
             brace-expansion: 5.0.9
 
+    minipass@7.1.3: {}
+
     modern-tar@0.8.5: {}
 
     mrmime@2.0.1: {}
@@ -5976,6 +6136,11 @@ snapshots:
             '@types/nlcst': 2.0.3
 
     node-fetch-native@1.6.7: {}
+
+    node-html-parser@9.0.3:
+        dependencies:
+            css-select: 5.2.2
+            entities: 8.0.0
 
     node-mock-http@1.0.5: {}
 
@@ -6040,6 +6205,11 @@ snapshots:
     path-expression-matcher@1.6.2: {}
 
     path-key@3.1.1: {}
+
+    path-scurry@2.0.2:
+        dependencies:
+            lru-cache: 11.5.2
+            minipass: 7.1.3
 
     pathe@2.0.3: {}
 
@@ -6308,6 +6478,10 @@ snapshots:
     tslib@2.8.1:
         optional: true
 
+    turndown@7.2.4:
+        dependencies:
+            '@mixmark-io/domino': 2.2.0
+
     type-check@0.4.0:
         dependencies:
             prelude-ls: 1.2.1
@@ -6396,6 +6570,10 @@ snapshots:
             punycode: 2.3.1
 
     util-deprecate@1.0.2: {}
+
+    valid-filename@4.0.0:
+        dependencies:
+            filename-reserved-regex: 3.0.0
 
     vfile-message@4.0.3:
         dependencies:
@@ -6608,6 +6786,8 @@ snapshots:
     yocto-queue@0.1.0: {}
 
     yocto-queue@1.2.2: {}
+
+    zod@3.25.76: {}
 
     zod@4.5.4: {}
 

@@ -1,5 +1,9 @@
 // @ts-check
 import tailwindcss from '@tailwindcss/vite';
+import compressor from 'astro-compressor';
+import { astroFont } from 'astro-font/integration';
+import llms from 'astro-llms-md';
+import robotsTxt from 'astro-robots-txt';
 import { defineConfig } from 'astro/config';
 
 import mdx from '@astrojs/mdx';
@@ -19,5 +23,16 @@ export default defineConfig({
         plugins: [tailwindcss()],
     },
 
-    integrations: [mdx(), icon(), sitemap()],
+    integrations: [
+        mdx(),
+        icon(),
+        sitemap(),
+        robotsTxt(),
+        llms({
+            name: 'Kyle Avrett',
+            description: 'Kyle Avrett website.',
+        }),
+        astroFont(),
+        compressor(),
+    ],
 });

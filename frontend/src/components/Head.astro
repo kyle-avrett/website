@@ -1,4 +1,5 @@
 ---
+import { AstroFont } from 'astro-font';
 import { SEO } from 'astro-seo';
 
 interface Props {
@@ -9,6 +10,21 @@ interface Props {
 const { title = 'Kyle Avrett', description = 'Kyle Avrett website.' } =
     Astro.props;
 ---
+
+<AstroFont
+    config={[
+        {
+            name: 'Inter',
+            src: [],
+            googleFontsURL:
+                'https://fonts.googleapis.com/css2?family=Inter&display=swap',
+            preload: true,
+            display: 'swap',
+            selector: 'body',
+            fallback: 'sans-serif',
+        },
+    ]}
+/>
 
 <SEO
     charset="utf-8"
