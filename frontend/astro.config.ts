@@ -5,6 +5,7 @@ import { astroFont } from 'astro-font/integration';
 import llms from 'astro-llms-md';
 import pagefind from 'astro-pagefind';
 import robotsTxt from 'astro-robots-txt';
+import purgecss from 'astro-purgecss';
 import { defineConfig } from 'astro/config';
 
 import mdx from '@astrojs/mdx';
@@ -39,6 +40,11 @@ export default defineConfig({
         }),
         pagefind(),
         astroFont(),
+        purgecss(),
         compressor(),
     ],
+
+    build: {
+        inlineStylesheets: 'never',
+    },
 });
