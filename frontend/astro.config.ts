@@ -26,7 +26,11 @@ export default defineConfig({
 
     integrations: [
         mdx(),
-        icon(),
+        icon({
+            include: {
+                tabler: ['rss', 'search'],
+            },
+        }),
         sitemap(),
         robotsTxt(),
         llms({
