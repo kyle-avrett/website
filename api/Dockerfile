@@ -18,14 +18,14 @@ RUN apt-get update \
 
 # install dependencies
 COPY uv.lock /api/
-COPY api/pyproject.toml /api/
+COPY pyproject.toml /api/
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-install-workspace --no-dev
 
 # copy the project
-COPY api/alembic.ini /api/
-COPY api/alembic /api/alembic
-COPY api/src /api/src
+COPY alembic.ini /api/
+COPY alembic /api/alembic
+COPY src /api/src
 
 # export virtual env
 ENV PATH="/api/.venv/bin:$PATH"

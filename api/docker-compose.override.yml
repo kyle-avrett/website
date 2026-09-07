@@ -1,8 +1,7 @@
 services:
   api:
     build:
-      context: ..
-      dockerfile: api/Dockerfile
+      context: .
     ports:
       - "8000:8000"
 
@@ -12,5 +11,4 @@ services:
 
   database-migrate:
     build:
-      context: ..
-      dockerfile: api/Dockerfile
+      context: .

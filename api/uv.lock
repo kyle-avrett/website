@@ -2,11 +2,6 @@ version = 1
 revision = 3
 requires-python = ">=3.14"
 
-[manifest]
-members = [
-    "website-api",
-]
-
 [[package]]
 name = "agent-detector"
 version = "1.1.0"
@@ -1156,7 +1151,7 @@ wheels = [
 [[package]]
 name = "website-api"
 version = "1.0.0"
-source = { virtual = "api" }
+source = { virtual = "." }
 dependencies = [
     { name = "alembic" },
     { name = "asyncpg" },
