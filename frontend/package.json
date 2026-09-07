@@ -26,6 +26,7 @@
         "astro-font": "^1.2.0",
         "astro-icon": "^1.2.0",
         "astro-llms-md": "^3.0.1",
+        "astro-pagefind": "^2.0.1",
         "astro-robots-txt": "^1.0.0",
         "astro-seo": "^1.2.0",
         "shiki": "^4.4.3",

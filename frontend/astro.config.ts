@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import compressor from 'astro-compressor';
 import { astroFont } from 'astro-font/integration';
 import llms from 'astro-llms-md';
+import pagefind from 'astro-pagefind';
 import robotsTxt from 'astro-robots-txt';
 import { defineConfig } from 'astro/config';
 
@@ -32,6 +33,7 @@ export default defineConfig({
             name: 'Kyle Avrett',
             description: 'Kyle Avrett website.',
         }),
+        pagefind(),
         astroFont(),
         compressor(),
     ],
