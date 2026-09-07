@@ -1,6 +1,0 @@
-.astro/
-dist/
-node_modules/
-public/_pagefind/
-AGENTS.md
-pnpm-lock.yaml
