@@ -1,0 +1,29 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<header class="my-5">
+    <nav class="grid grid-cols-3 items-center">
+        <!-- logo -->
+        <div class="flex justify-start">
+            <a href="/" class="text-2xl font-bold">Kyle Avrett</a>
+        </div>
+
+        <!-- links -->
+        <div class="flex justify-center gap-4 text-xl font-medium">
+            <a href="/blog/">Blog</a>
+            <a href="/projects/">Projects</a>
+        </div>
+
+        <!-- search -->
+        <div class="flex justify-end">
+            <a href="/search/">
+                <Icon
+                    name="tabler:search"
+                    aria-label="Search"
+                    class="h-5 w-5"
+                />
+            </a>
+        </div>
+    </nav>
+</header>

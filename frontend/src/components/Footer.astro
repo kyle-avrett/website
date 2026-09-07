@@ -1,10 +1,48 @@
 ---
 import { Icon } from 'astro-icon/components';
+
+const socials = [
+    {
+        name: 'LinkedIn',
+        url: 'https://linkedin.com/in/kyle-avrett',
+        icon: 'tabler:brand-linkedin',
+    },
+    {
+        name: 'GitHub',
+        url: 'https://github.com/kyle-avrett',
+        icon: 'tabler:brand-github',
+    },
+    {
+        name: 'X',
+        url: 'https://x.com/kyleavrett',
+        icon: 'tabler:brand-x',
+    },
+    {
+        name: 'Email',
+        url: 'mailto:kyle@kyleavrett.com',
+        icon: 'tabler:mail',
+    },
+    {
+        name: 'RSS',
+        url: '/rss.xml',
+        icon: 'tabler:rss',
+    },
+];
 ---
 
-<div>
-    <a href="/rss.xml">
-        <Icon name="tabler:rss" size="1em" aria-hidden="true" />
-        RSS
-    </a>
-</div>
+<footer class="my-5">
+    <hr class="my-4 border-gray-300" />
+    <div class="flex items-center justify-between">
+        <p class="text-sm">© 2026 Kyle Avrett</p>
+
+        <div class="flex items-center gap-4">
+            {
+                socials.map(({ url, icon, name }) => (
+                    <a href={url}>
+                        <Icon name={icon} aria-label={name} class="h-5 w-5" />
+                    </a>
+                ))
+            }
+        </div>
+    </div>
+</footer>

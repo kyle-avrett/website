@@ -29,7 +29,14 @@ export default defineConfig({
         mdx(),
         icon({
             include: {
-                tabler: ['rss', 'search'],
+                tabler: [
+                    'search',
+                    'rss',
+                    'mail',
+                    'brand-linkedin',
+                    'brand-github',
+                    'brand-x',
+                ],
             },
         }),
         sitemap(),
