@@ -20,7 +20,7 @@
                     <xsl:for-each select="item">
                         <article>
                             <h2><a href="{link}"><xsl:value-of select="title" /></a></h2>
-                            <time><xsl:value-of select="pubDate" /></time>
+                            <time><xsl:value-of select="published" /></time>
                             <p><xsl:value-of select="description" /></p>
                         </article>
                     </xsl:for-each>

@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import compressor from 'astro-compressor';
 import { astroFont } from 'astro-font/integration';
 import llms from 'astro-llms-md';
+import expressiveCode from 'astro-expressive-code';
 import pagefind from 'astro-pagefind';
 import robotsTxt from 'astro-robots-txt';
 import purgecss from 'astro-purgecss';
@@ -15,25 +16,35 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
     site: 'http://localhost:4321',
-    markdown: {
-        syntaxHighlight: 'shiki',
-    },
 
     vite: {
         plugins: [tailwindcss()],
     },
 
     integrations: [
+        expressiveCode({
+            themes: ['one-light'],
+            styleOverrides: {
+                borderRadius: '0',
+                frames: {
+                    frameBoxShadowCssValue: 'none',
+                },
+            },
+        }),
         mdx(),
         icon({
             include: {
                 tabler: [
-                    'search',
-                    'rss',
-                    'mail',
-                    'brand-linkedin',
                     'brand-github',
+                    'brand-linkedin',
                     'brand-x',
+                    'mail',
+                    'rss',
+                    'search',
+                    'calendar',
+                    'refresh',
+                    'user',
+                    'arrow-big-left',
                 ],
             },
         }),

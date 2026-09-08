@@ -6,7 +6,7 @@ import PageHeader from '@components/PageHeader.astro';
 
 const posts = (await getCollection('blog'))
     .filter((post) => !post.data.draft)
-    .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+    .sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
 const dateFormat = new Intl.DateTimeFormat('en-US', {
     month: 'short',
     day: 'numeric',
@@ -37,9 +37,9 @@ const dateFormat = new Intl.DateTimeFormat('en-US', {
                                 </h2>
                                 <time
                                     class="text-sm text-gray-500"
-                                    datetime={post.data.pubDate.toISOString()}
+                                    datetime={post.data.published.toISOString()}
                                 >
-                                    {dateFormat.format(post.data.pubDate)}
+                                    {dateFormat.format(post.data.published)}
                                 </time>
                             </div>
                             <p class="mt-3 leading-7 text-gray-600">
