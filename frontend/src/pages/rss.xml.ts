@@ -9,12 +9,14 @@ export const GET: APIRoute = async (context) => {
         title: 'Blog',
         description: 'Blog posts',
         site: context.site!,
-        items: posts.map((post) => ({
-            title: post.data.title,
-            description: post.data.description,
-            pubDate: post.data.pubDate,
-            link: `/blog/${post.id}/`,
-        })),
+        items: posts
+            .filter((post) => !post.data.draft)
+            .map((post) => ({
+                title: post.data.title,
+                description: post.data.description,
+                pubDate: post.data.pubDate,
+                link: `/blog/${post.id}/`,
+            })),
         customData: '<language>en-us</language>',
     });
 };
