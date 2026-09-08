@@ -1,216 +1,723 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import PageHeader from '@components/PageHeader.astro';
-
-const highlights = [
-    '12+ years building software; 6+ years leading teams',
-    'Founded and exited a B2B SaaS company as Founder / CTO',
-    'Scaled software-enabled healthcare operations from zero to 53x revenue growth',
-    'Managed teams of 21 people, including 2 managers',
-    'Accountable for HIPAA-regulated systems handling PHI',
-];
-
-const experience = [
-    {
-        role: 'Co-CEO',
-        company: 'Mobile Hydration',
-        dates: 'October 2024 – March 2026',
-        summary:
-            'Scaled mobile IV therapy operations across engineering, marketing, finance, operations, and compliance.',
-        impact: [
-            'Increased revenue 53x over 16 months by formalizing operations.',
-            'Built the core software platform, improving booking speed 83% and conversion from 40% to 91%.',
-            'Moved mission-critical systems from cloud to on-premises with zero downtime, cutting ongoing costs 94%.',
-        ],
-    },
-    {
-        role: 'Fractional Chief Operating Officer',
-        company: 'Upsurge Consulting',
-        dates: 'August 2022 – October 2024',
-        summary:
-            'Built tools and operating systems for startup and scale-up clients.',
-        impact: [
-            'Turned founder goals into roadmaps, workflows, staffing plans, KPIs, and execution systems.',
-            'Designed dashboards, leadership reviews, and accountability loops that reduced founder dependency.',
-        ],
-    },
-    {
-        role: 'Founder / CTO',
-        company: 'Denver Software',
-        dates: 'February 2020 – March 2022',
-        summary:
-            'Founded and exited a SaaS company serving mechanical engineering firms.',
-        impact: [
-            'Led product and engineering across roadmap, architecture, implementation, infrastructure, and delivery.',
-            'Built full stack products with TypeScript, Vue, Nuxt, Python, Django REST Framework, PostgreSQL, Redis, Docker, Kubernetes, and Ansible.',
-            'Established CI/CD, automated testing, observability, security, alerting, and code review practices.',
-        ],
-    },
-];
-
-const earlierRoles = [
-    'Senior Software Engineer, DHI Group',
-    'Managing Technical Lead, Arrow Electronics',
-    'Lead Software Engineer, Charter Communications',
-    'Software Engineer, The Library Corporation',
-    'Integration Software Engineer, CA Technologies',
-];
-
-const stack = [
-    'TypeScript',
-    'Vue',
-    'React',
-    'Node.js',
-    'Python',
-    'Django',
-    'FastAPI',
-    'PostgreSQL',
-    'Redis',
-    'AWS',
-    'Docker',
-    'Kubernetes',
-    'Ansible',
-    'Prometheus',
-    'Grafana',
-    'RAG',
-    'MCP',
-    'LangChain',
-    'LangGraph',
-    'pgvector',
-];
 ---
 
-<BaseLayout
-    title="Work"
-    description="Work history, leadership experience, and technical background for Kyle Avrett."
->
-    <section class="space-y-10">
-        <PageHeader
-            eyebrow="Work"
-            title="Hands-on technical leader for SaaS, cloud, healthcare, and software-enabled operations."
-            description="I build products, teams, and operating systems from zero, then keep enough hands on keyboard to know what is real."
-        />
+<BaseLayout title="Work" description="Kyle Avrett resume and work history.">
+    <article class="resume" aria-labelledby="resume-title">
+        <header class="resume-head">
+            <h1 id="resume-title">Kyle Avrett</h1>
+            <p class="tagline">
+                <strong>Hands-on CTO / Head of Engineering</strong> | SaaS, Cloud,
+                Healthcare, Product Execution
+            </p>
+            <p class="contact">
+                Newton, KS •
+                <a href="mailto:kyle@kyleavrett.com">kyle@kyleavrett.com</a>
+                • <a href="tel:+19702609103">(970) 260-9103</a> •
+                <a href="https://www.linkedin.com/in/kyle-avrett">
+                    https://www.linkedin.com/in/kyle-avrett
+                </a>
+                •
+                <a href="https://github.com/kyle-avrett">
+                    https://github.com/kyle-avrett
+                </a>
+            </p>
+        </header>
 
-        <div class="grid gap-3 sm:grid-cols-2">
-            {
-                highlights.map((highlight) => (
-                    <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-                        <p class="font-medium text-gray-900">{highlight}</p>
-                    </div>
-                ))
-            }
-        </div>
+        <section class="resume-section" aria-labelledby="summary-heading">
+            <h2 id="summary-heading">Executive Summary</h2>
+            <p>
+                A results-driven, hands-on technical leader with 12+ years in
+                software engineering and 6+ years leading teams across SaaS,
+                healthcare, cloud infrastructure, and software-enabled
+                operations. Founded and exited a B2B SaaS company, with a track
+                record of building products, teams, and technical architectures
+                from zero. Combines deep technical execution with executive
+                leadership to translate strategy into measurable business
+                outcomes.
+            </p>
 
-        <section class="space-y-4">
-            <h2 class="text-2xl font-semibold">Selected experience</h2>
-            <div class="space-y-5">
-                {
-                    experience.map(
-                        ({ role, company, dates, summary, impact }) => (
-                            <article class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-                                <div class="flex flex-wrap items-baseline justify-between gap-2">
-                                    <h3 class="text-xl font-semibold">
-                                        {role}, {company}
-                                    </h3>
-                                    <p class="text-sm text-gray-500">{dates}</p>
-                                </div>
-                                <p class="mt-3 leading-7 text-gray-600">
-                                    {summary}
-                                </p>
-                                <ul class="mt-4 list-disc space-y-2 pl-5 leading-7 text-gray-700">
-                                    {impact.map((item) => (
-                                        <li>{item}</li>
-                                    ))}
-                                </ul>
-                            </article>
-                        ),
-                    )
-                }
+            <div class="summary-grid">
+                <div>
+                    <h3>Leadership</h3>
+                    <ul>
+                        <li>12 years of software engineering experience</li>
+                        <li>6 years of engineering leadership experience</li>
+                        <li>
+                            2-time CEO with 1 successful exit as Founder/CTO
+                        </li>
+                        <li>
+                            Have built and led cross-functional teams from zero
+                        </li>
+                        <li>
+                            Managed teams of 21 people, including 2 managers
+                        </li>
+                        <li>
+                            Accountable for HIPAA regulated systems handling PHI
+                        </li>
+                        <li>
+                            Board and Shareholder reporting experience in
+                            healthcare
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>Tech Stack</h3>
+                    <ul>
+                        <li>TypeScript, Vue, React, Node.js</li>
+                        <li>Python, Django, FastAPI</li>
+                        <li>PostgreSQL, MongoDB, Redis, Celery</li>
+                        <li>AWS, Docker, Kubernetes, Ansible, GitOps/DevOps</li>
+                        <li>Prometheus, Grafana, PagerDuty</li>
+                        <li>
+                            REST, GraphQL, Microservices, Event-Driven Systems
+                        </li>
+                        <li>
+                            RAG, MCP, LangChain, LangGraph, pgvector, LiteLLM
+                        </li>
+                    </ul>
+                </div>
             </div>
         </section>
 
-        <section class="space-y-4">
-            <h2 class="text-2xl font-semibold">Earlier engineering roles</h2>
-            <ul class="grid gap-3 sm:grid-cols-2">
-                {
-                    earlierRoles.map((role) => (
-                        <li class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
-                            {role}
-                        </li>
-                    ))
-                }
-            </ul>
-        </section>
+        <section class="resume-section" aria-labelledby="experience-heading">
+            <h2 id="experience-heading">Professional Experience</h2>
 
-        <section class="space-y-4">
-            <h2 class="text-2xl font-semibold">Project</h2>
-            <article
-                class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
-            >
-                <div
-                    class="flex flex-wrap items-baseline justify-between gap-2"
-                >
-                    <h3 class="text-xl font-semibold">Guidebook Studio</h3>
-                    <a
-                        class="text-gray-600 underline underline-offset-4 hover:text-gray-900"
-                        href="https://guidebook.studio"
-                    >
-                        guidebook.studio
-                    </a>
+            <section class="role">
+                <div class="role-line">
+                    <h3>Co-CEO</h3>
+                    <p>October 2024 - March 2026</p>
                 </div>
-                <p class="mt-3 leading-7 text-gray-600">
-                    AI field guides for distributed healthcare teams. Built with
-                    TypeScript, Vue, Quasar, Python, FastAPI, LangChain,
-                    LangGraph, PostgreSQL, pgvector, Redis, Celery, S3, Docker,
-                    and Kubernetes.
+                <div class="company-line">
+                    <strong>Mobile Hydration</strong>
+                    <p>Denver, CO</p>
+                </div>
+                <p>
+                    Scaled a software-enabled mobile IV therapy company by
+                    building core teams and processes across engineering,
+                    marketing, finance, operations, and compliance
                 </p>
-                <ul
-                    class="mt-4 list-disc space-y-2 pl-5 leading-7 text-gray-700"
-                >
+                <ul>
                     <li>
-                        Designed RAG workflows for searchable, source-backed
-                        operating knowledge.
+                        Increased revenue by 53x over 16 months by expanding and
+                        formalizing the company’s operations
                     </li>
                     <li>
-                        Built an MCP service layer for approved SOPs, policies,
-                        checklists, and training docs.
+                        Built the full go-to-market engine, increasing qualified
+                        lead volume by 9x
                     </li>
                     <li>
-                        Added healthcare guardrails around scoped retrieval,
-                        citations, and unsupported claims.
+                        Personally built the company’s core software platform,
+                        improving booking speed by 83% and booking conversion
+                        rates from 40% to 91%
+                    </li>
+                    <li>
+                        Executed marketing campaigns with conversion rates
+                        between 27% and 71%, with ROAS between 12.38x and 26.31x
+                    </li>
+                    <li>
+                        Implemented mobile logistics networks, warehouse
+                        workflows, inventory controls, and accountability
+                        systems that improved booking response times by 67% and
+                        increased field capacity by 250%
+                    </li>
+                    <li>
+                        Migrated mission-critical systems from cloud
+                        infrastructure to on-premises infrastructure with zero
+                        downtime, decreasing ongoing operational costs by 94%
+                    </li>
+                    <li>
+                        Created financial models, budgets, and cash flow
+                        forecasts that improved runway visibility by 4 months
+                        and reduced operating risk by 17%
+                    </li>
+                    <li>
+                        Reported financial performance and operating briefs to
+                        the board of directors and shareholders
                     </li>
                 </ul>
-            </article>
+            </section>
+
+            <section class="role">
+                <div class="role-line">
+                    <h3>Fractional Chief Operating Officer</h3>
+                    <p>August 2022 - October 2024</p>
+                </div>
+                <div class="company-line">
+                    <strong>Upsurge Consulting</strong>
+                    <p>Denver, CO</p>
+                </div>
+                <p>
+                    Fulfilled the role of Chief Operating Officer for multiple
+                    startup and scale-up clients to help them double their
+                    revenue by building core tools and processes across
+                    marketing, operations, and finance
+                </p>
+                <ul>
+                    <li>
+                        Translated ambiguous founder goals into roadmaps,
+                        technical workflows, staffing needs, KPIs, and execution
+                        systems
+                    </li>
+                    <li>
+                        Designed dashboards, leadership reviews, decision
+                        frameworks, and accountability loops that increased
+                        operating leverage and reduced founder dependency
+                    </li>
+                    <li>
+                        Built systems across marketing, sales, delivery,
+                        finance, reporting, customer engagement, and team
+                        coordination
+                    </li>
+                    <li>
+                        Partnered with founders on positioning, pricing,
+                        delivery capacity, and process design for revenue
+                        expansion
+                    </li>
+                    <li>
+                        Made build-vs-buy decisions for workflow automation,
+                        tool selection, vendor management, and operational
+                        architecture
+                    </li>
+                </ul>
+            </section>
+
+            <section class="role page-break">
+                <div class="role-line">
+                    <h3>CEO</h3>
+                    <p>March 2022 - August 2022</p>
+                </div>
+                <div class="company-line">
+                    <strong>Denver 3D Print Company</strong>
+                    <p>Denver, CO</p>
+                </div>
+                <p>
+                    Scaled an international mechanical engineering company after
+                    it acquired Denver Software by formalizing core systems for
+                    project management, customer engagement, market positioning,
+                    and financial strategy
+                </p>
+                <ul>
+                    <li>
+                        Doubled revenue in 4 months by rebuilding intake,
+                        prioritization, customer communication, delivery, and
+                        reinvestment
+                    </li>
+                    <li>
+                        Increased project throughput by 108% per month by
+                        restructuring intake, prioritization, and technical
+                        delivery workflows
+                    </li>
+                    <li>
+                        Implemented strict financial controls and operational
+                        discipline to grow profitability by 217%
+                    </li>
+                    <li>
+                        Stabilized the company's cash position from near zero to
+                        sustainable within 5 months while reducing debt by 47%
+                    </li>
+                    <li>
+                        Owned international supply chains, project workflows,
+                        customer communication, budgeting, and delivery
+                        operations
+                    </li>
+                </ul>
+            </section>
+
+            <section class="role">
+                <div class="role-line">
+                    <h3>Founder / CTO</h3>
+                    <p>February 2020 - March 2022</p>
+                </div>
+                <div class="company-line">
+                    <strong>Denver Software</strong>
+                    <p>Denver, CO</p>
+                </div>
+                <p>
+                    Founded and successfully exited a software company selling
+                    SaaS products to mechanical engineering companies
+                </p>
+                <ul>
+                    <li>
+                        Built the teams myself, including hiring, coaching,
+                        performance management, technical direction, and
+                        delivery execution
+                    </li>
+                    <li>
+                        Established engineering practices across CI/CD,
+                        automated testing, observability, security, alerting,
+                        and code reviews
+                    </li>
+                    <li>
+                        Led product and engineering end-to-end across the
+                        product roadmap, technical architecture, implementation,
+                        infrastructure, and delivery
+                    </li>
+                    <li>
+                        Architected the software platform for low-volume,
+                        high-complexity engineering workflows where each
+                        customer required unique process modeling for project
+                        management, work management, itemized billing, and
+                        invoicing
+                    </li>
+                    <li>
+                        Built the full stack hands-on using TypeScript, Vue,
+                        Nuxt, Python, Django REST Framework, PostgreSQL, Redis,
+                        Docker, Kubernetes, and Ansible
+                    </li>
+                </ul>
+            </section>
+
+            <section class="role">
+                <div class="role-line">
+                    <h3>Senior Software Engineer</h3>
+                    <p>October 2019 - February 2020</p>
+                </div>
+                <div class="company-line">
+                    <strong>DHI Group, Inc.</strong>
+                    <p>Denver, CO</p>
+                </div>
+                <ul>
+                    <li>
+                        Deployed serverless web applications on AWS Lambda using
+                        event-driven architectures with AWS SNS/SQS
+                    </li>
+                    <li>
+                        Created RESTful API endpoints using OpenAPI and
+                        implemented CI/CD pipelines with GitHub Actions
+                    </li>
+                    <li>
+                        Implemented observability pipelines with Prometheus and
+                        Grafana to improve system visibility and incident
+                        response
+                    </li>
+                    <li>
+                        Delivered user stories in JavaScript and TypeScript on
+                        Node.js using Agile practices with Jira
+                    </li>
+                    <li>
+                        Reduced new account fraud by integrating with external
+                        vendor APIs and strengthening account validation
+                        workflows
+                    </li>
+                </ul>
+            </section>
+
+            <section class="role">
+                <div class="role-line">
+                    <h3>Managing Technical Lead</h3>
+                    <p>July 2018 - July 2019</p>
+                </div>
+                <div class="company-line">
+                    <strong>Arrow Electronics</strong>
+                    <p>Denver, CO</p>
+                </div>
+                <ul>
+                    <li>
+                        Managed a distributed team of senior software engineers
+                        responsible for delivering internal software initiatives
+                    </li>
+                    <li>
+                        Collaborated with stakeholders to create product
+                        roadmaps and broke them down into technical deliverables
+                        and a sequence of delivery milestones
+                    </li>
+                    <li>
+                        Managed delivery of project milestones using Jira while
+                        serving as the technical escalation point for the team
+                    </li>
+                    <li>
+                        Created CI/CD pipelines using Jenkins and developed
+                        frontends in HTML, CSS, and JavaScript
+                    </li>
+                </ul>
+            </section>
+
+            <section class="role">
+                <div class="role-line">
+                    <h3>Lead Software Engineer</h3>
+                    <p>August 2017 - April 2018</p>
+                </div>
+                <div class="company-line">
+                    <strong>Charter Communications</strong>
+                    <p>Denver, CO</p>
+                </div>
+                <ul>
+                    <li>
+                        Led software projects through the full software
+                        development lifecycle, making long-term technical
+                        decisions for maintainability and extensibility
+                    </li>
+                    <li>
+                        Collaborated with cross-functional stakeholders to
+                        define requirements and deliver internal microservices
+                        using Python and Django REST Framework
+                    </li>
+                    <li>
+                        Created Python-based monitoring software to reduce
+                        response time to network outages and improve network
+                        visibility
+                    </li>
+                    <li>
+                        Worked closely with implementation and operations teams
+                        to deliver stable, reliable software for internal users
+                    </li>
+                    <li>
+                        Used Agile and Redmine for development while maintaining
+                        legacy microservices written in Groovy and Python
+                    </li>
+                    <li>Built frontends using HTML, CSS, and JavaScript</li>
+                </ul>
+            </section>
+
+            <section class="role page-break">
+                <div class="role-line">
+                    <h3>Software Engineer</h3>
+                    <p>October 2016 - May 2017</p>
+                </div>
+                <div class="company-line">
+                    <strong>The Library Corporation</strong>
+                    <p>Denver, CO</p>
+                </div>
+                <ul>
+                    <li>
+                        Implemented backend user stories in C++ and Java and
+                        improved Oracle database schemas
+                    </li>
+                    <li>
+                        Created and maintained REST APIs supporting third-party
+                        developers and integrations
+                    </li>
+                    <li>
+                        Used Kanban and behavior-driven development with LeanKit
+                        and Cucumber to support rapid, testable delivery
+                    </li>
+                    <li>
+                        Maintained legacy Windows client applications using RPC
+                        and supported continuous integration with Jenkins
+                    </li>
+                    <li>
+                        Participated in code reviews using Review Board and
+                        GitLab and tracked bugs and tickets with Jira
+                    </li>
+                </ul>
+            </section>
+
+            <section class="role">
+                <div class="role-line">
+                    <h3>Founder</h3>
+                    <p>December 2015 - July 2016</p>
+                </div>
+                <div class="company-line">
+                    <strong>BlackoutClever</strong>
+                    <p>Fort Collins, CO</p>
+                </div>
+                <ul>
+                    <li>
+                        Founded a software company and built the initial
+                        product, infrastructure, data model, and business
+                        operations
+                    </li>
+                    <li>
+                        Built web crawlers, scrapers, and parsers to gather,
+                        normalize, and store online content in a custom MySQL
+                        schema
+                    </li>
+                    <li>
+                        Developed backend and user data workflows using PHP and
+                        MySQL, with Gradle and Groovy supporting dependency and
+                        build management
+                    </li>
+                    <li>
+                        Built frontend interfaces using HTML, CSS, and
+                        JavaScript and used load balancers to distribute HTTP
+                        traffic
+                    </li>
+                    <li>
+                        Implemented continuous integration in Jenkins and
+                        integrated external payment authorization APIs
+                    </li>
+                    <li>
+                        Created software design documents, feature plans,
+                        technical deliverables, budgets, receipt tracking
+                        spreadsheets, and legal compliance documents
+                    </li>
+                </ul>
+            </section>
+
+            <section class="role">
+                <div class="role-line">
+                    <h3>Integration Software Engineer</h3>
+                    <p>May 2014 - October 2014</p>
+                </div>
+                <div class="company-line">
+                    <strong>CA Technologies</strong>
+                    <p>Fort Collins, CO</p>
+                </div>
+                <ul>
+                    <li>
+                        Created automated installers using Python and Sikuli to
+                        support internal installation and integration workflows
+                    </li>
+                    <li>
+                        Used test-driven development to identify inconsistencies
+                        in configuration and log files
+                    </li>
+                    <li>
+                        Set up Jenkins CI jobs for internal teams and used JUnit
+                        for integration tests validating system interactions
+                    </li>
+                    <li>
+                        Participated in Agile sprints, stand-ups, Kanban
+                        planning in Trello, and technical demos
+                    </li>
+                </ul>
+            </section>
+
+            <section class="role">
+                <div class="role-line">
+                    <h3>Distributed Computing Support Engineer</h3>
+                    <p>September 2013 - January 2014</p>
+                </div>
+                <div class="company-line">
+                    <strong>Academic Computing and Networking Services</strong>
+                    <p>Fort Collins, CO</p>
+                </div>
+                <ul>
+                    <li>
+                        Installed and configured hardware on personal computers
+                        and supported departmental network integrations
+                    </li>
+                    <li>
+                        Maintained central server systems and configured
+                        applications based on departmental requirements
+                    </li>
+                    <li>
+                        Deployed hard drive images and supported reliable
+                        computing environments for university users
+                    </li>
+                </ul>
+            </section>
         </section>
 
-        <section class="space-y-4">
-            <h2 class="text-2xl font-semibold">Stack</h2>
-            <ul class="flex flex-wrap gap-2">
-                {
-                    stack.map((item) => (
-                        <li class="rounded-full border border-gray-200 px-3 py-1 text-sm text-gray-700">
-                            {item}
-                        </li>
-                    ))
-                }
-            </ul>
+        <section class="resume-section" aria-labelledby="projects-heading">
+            <h2 id="projects-heading">Projects</h2>
+            <section class="role">
+                <div class="role-line">
+                    <h3>Guidebook Studio</h3>
+                    <p>
+                        <a href="https://guidebook.studio/">
+                            https://guidebook.studio
+                        </a>
+                    </p>
+                </div>
+                <p>
+                    <strong
+                        >AI Field Guides for Distributed Healthcare Teams</strong
+                    >
+                </p>
+                <ul>
+                    <li>
+                        Built a AI field-guide platform for distributed
+                        healthcare teams using TypeScript, Vue, Quasar, Python,
+                        FastAPI, LangChain, LangGraph, PostgreSQL, pgvector,
+                        Redis, Celery, S3, Docker, and Kubernetes
+                    </li>
+                    <li>
+                        Designed RAG workflows to ingest operating procedures
+                        and company knowledge into searchable guides with
+                        source-backed answers
+                    </li>
+                    <li>
+                        Built the MCP service layer exposing approved knowledge
+                        sources, enabling AI Agents to retrieve current SOPs,
+                        policies, checklists, and training docs
+                    </li>
+                    <li>
+                        Implemented guardrails for healthcare including scoped
+                        retrieval, source citation, and limits around
+                        unsupported clinical or operational claims
+                    </li>
+                    <li>
+                        Currently deployed in production with paying customers
+                    </li>
+                </ul>
+            </section>
         </section>
 
-        <section class="rounded-2xl border border-gray-200 bg-gray-50 p-5">
-            <h2 class="text-2xl font-semibold">Fit</h2>
-            <p class="mt-3 leading-7 text-gray-600">
-                Best fit: hands-on CTO, Head of Engineering, or operator role
-                where product execution, technical architecture, team building,
-                and business outcomes must move together.
-            </p>
-            <p class="mt-4">
-                <a
-                    class="font-medium text-gray-900 underline underline-offset-4"
-                    href="mailto:kyle@kyleavrett.com"
-                >
-                    kyle@kyleavrett.com
-                </a>
-            </p>
+        <section class="resume-section" aria-labelledby="education-heading">
+            <h2 id="education-heading">Education</h2>
+            <section class="role compact">
+                <div class="role-line">
+                    <h3>Bachelor of Science in Computer Science</h3>
+                    <p>January 2012 - December 2015</p>
+                </div>
+                <div class="company-line">
+                    <strong>Colorado State University</strong>
+                    <p>Fort Collins, CO</p>
+                </div>
+            </section>
         </section>
-    </section>
+    </article>
 </BaseLayout>
+
+<style>
+    .resume {
+        background: #fff;
+        color: #111;
+        font-family: 'Liberation Sans', Arial, sans-serif;
+        font-size: 10pt;
+        line-height: 1.15;
+    }
+
+    .resume-head h1 {
+        margin: 0.17in 0 0.1in;
+        font-size: 20pt;
+        line-height: 1;
+    }
+
+    .tagline {
+        margin: 0 0 0.1in;
+        font-size: 12pt;
+    }
+
+    .contact {
+        margin: 0 0 0.14in;
+        font-size: 9pt;
+    }
+
+    .resume a {
+        color: #000080;
+        text-decoration: underline;
+    }
+
+    .resume-section h2 {
+        margin: 0.14in 0 0.08in;
+        border-bottom: 1pt solid #000;
+        padding-bottom: 0.02in;
+        font-size: 14pt;
+        line-height: 1.1;
+    }
+
+    .resume-section p,
+    .resume-section ul {
+        margin-top: 0;
+    }
+
+    .summary-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 0.25in;
+        margin-top: 0.12in;
+    }
+
+    .summary-grid h3 {
+        margin: 0 0 0.04in;
+        font-size: 10pt;
+    }
+
+    .resume ul {
+        margin-bottom: 0;
+        padding-left: 0.22in;
+    }
+
+    .resume li {
+        margin: 0 0 0.04in;
+        padding-left: 0.03in;
+    }
+
+    .role {
+        border-top: 1px solid #999;
+        padding-top: 0.1in;
+    }
+
+    .role:first-of-type {
+        border-top: 0;
+        padding-top: 0;
+    }
+
+    .role + .role {
+        margin-top: 0.13in;
+    }
+
+    .role-line,
+    .company-line {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.25in;
+    }
+
+    .role h3 {
+        margin: 0;
+        font-size: 12pt;
+        line-height: 1.1;
+    }
+
+    .role-line p,
+    .company-line p {
+        margin: 0;
+        flex: 0 0 auto;
+        font-size: 9pt;
+        font-style: italic;
+        text-align: right;
+    }
+
+    .company-line {
+        margin-top: 0.03in;
+    }
+
+    .role > p {
+        margin: 0.1in 0;
+    }
+
+    .compact {
+        padding-bottom: 0;
+    }
+
+    @media (max-width: 700px) {
+        .resume {
+            padding: 1.25rem;
+        }
+
+        .summary-grid,
+        .role-line,
+        .company-line {
+            display: block;
+        }
+
+        .role-line p,
+        .company-line p {
+            margin-top: 0.15rem;
+            text-align: left;
+        }
+    }
+
+    @media print {
+        :global(body > div > header),
+        :global(body > div > header + hr),
+        :global(body > div > footer),
+        :global(body > div > hr) {
+            display: none;
+        }
+
+        :global(body > div) {
+            max-width: none;
+            padding: 0;
+        }
+
+        :global(main) {
+            padding: 0;
+        }
+
+        .resume {
+            max-width: none;
+            padding: 0.5in;
+        }
+
+        .page-break {
+            break-before: page;
+        }
+    }
+</style>
