@@ -1,28 +1,23 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHeader from '@components/PageHeader.astro';
 ---
 
 <BaseLayout title="Search" description="Search Kyle Avrett website.">
-    <section class="mx-auto max-w-2xl py-10">
-        <div class="mb-8 space-y-3">
-            <p
-                class="text-sm font-medium tracking-wide text-gray-500 uppercase"
-            >
-                Site search
-            </p>
-            <h1 class="text-4xl font-bold tracking-tight">Find anything</h1>
-            <p class="text-gray-600">
-                Search posts, pages, and notes on Kyle Avrett's site.
-            </p>
-        </div>
+    <section>
+        <PageHeader
+            eyebrow="search"
+            title="Find anything"
+            description="Search posts, pages, and notes on Kyle Avrett's site."
+        />
 
         <label class="sr-only" for="search-input">Search this site</label>
         <div
-            class="rounded-2xl border border-gray-200 bg-white p-3 shadow-sm focus-within:border-gray-400"
+            class="rounded-2xl border border-gray-200 p-1 focus-within:border-gray-400"
         >
             <input
                 id="search-input"
-                class="w-full rounded-xl px-4 py-3 text-lg outline-none"
+                class="w-full px-4 py-3 text-lg outline-none"
                 type="search"
                 autocomplete="off"
                 placeholder="Search..."
@@ -31,7 +26,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 
         <p
             id="search-status"
-            class="mt-4 min-h-6 text-sm text-gray-500"
+            class="mt-2 min-h-6 text-sm text-gray-500"
             aria-live="polite"
         >
         </p>
@@ -85,18 +80,21 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 
                 const item = document.createElement('li');
                 const link = document.createElement('a');
+                const title = document.createElement('span');
                 const excerpt = document.createElement('p');
 
-                item.className =
-                    'rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md';
-                link.className = 'text-lg font-semibold';
-                excerpt.className = 'mt-2 text-sm leading-6 text-gray-600';
+                link.className =
+                    'block rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md';
+                title.className = 'text-lg font-semibold';
+                excerpt.className =
+                    'mt-2 text-sm leading-6 font-normal text-gray-600';
 
                 link.href = data.url;
-                link.textContent = data.meta.title || data.url;
+                title.textContent = data.meta.title || data.url;
                 excerpt.innerHTML = data.excerpt;
 
-                item.append(link, excerpt);
+                link.append(title, excerpt);
+                item.append(link);
                 results.append(item);
             }
         });
