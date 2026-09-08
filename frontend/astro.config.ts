@@ -6,7 +6,7 @@ import expressiveCode from 'astro-expressive-code';
 import pagefind from 'astro-pagefind';
 import robotsTxt from 'astro-robots-txt';
 import purgecss from 'astro-purgecss';
-import { defineConfig, fontProviders } from 'astro/config';
+import { defineConfig, envField, fontProviders } from 'astro/config';
 import mdx from '@astrojs/mdx';
 
 import icon from 'astro-icon';
@@ -18,6 +18,15 @@ export default defineConfig({
 
     vite: {
         plugins: [tailwindcss()],
+    },
+
+    env: {
+        schema: {
+            API_URL: envField.string({
+                context: 'client',
+                access: 'public',
+            }),
+        },
     },
 
     fonts: [

@@ -1,9 +1,12 @@
 ---
+import { API_URL } from 'astro:env/client';
 
+const endpoint = new URL('/api/v1/emails/subscribe', API_URL).toString();
 ---
 
 <form
     data-email-subscribe
+    data-endpoint={endpoint}
     class="space-y-4 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
 >
     <div>
@@ -46,8 +49,6 @@
 </form>
 
 <script>
-    const endpoint = 'http://localhost:8000/api/v1/emails/subscribe';
-
     document.querySelectorAll('form[data-email-subscribe]').forEach((form) => {
         const status = form.querySelector('[data-email-status]');
         const button = form.querySelector('button[type="submit"]');
@@ -56,6 +57,8 @@
             event.preventDefault();
 
             if (!(form instanceof HTMLFormElement)) return;
+            const endpoint = form.dataset.endpoint;
+            if (!endpoint) return;
             const body = new FormData(form);
 
             if (button instanceof HTMLButtonElement) button.disabled = true;
