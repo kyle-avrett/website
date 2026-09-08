@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import PageHeader from '@components/PageHeader.astro';
 ---
 
 <BaseLayout title="Work" description="Kyle Avrett resume and work history.">
@@ -14,13 +13,17 @@ import PageHeader from '@components/PageHeader.astro';
         </section>
 
         <section
-            class="header-contact flex gap-x-3 gap-y-1 text-sm text-gray-600"
+            class="header-contact flex gap-x-2 text-sm text-gray-600"
             aria-label="Contact"
         >
             <span>Newton, KS</span>
+            <span> • </span>
             <a href="mailto:kyle@kyleavrett.com">kyle@kyleavrett.com</a>
+            <span> • </span>
             <a href="tel:+19702609103">(970) 260-9103</a>
+            <span> • </span>
             <a href="https://www.linkedin.com/in/kyle-avrett">LinkedIn</a>
+            <span> • </span>
             <a href="https://github.com/kyle-avrett">GitHub</a>
         </section>
 
@@ -579,6 +582,11 @@ import PageHeader from '@components/PageHeader.astro';
 
     .header-contact {
         margin-bottom: 2rem;
+        color: #1f2937;
+    }
+
+    .header-contact a {
+        color: inherit;
     }
 
     .resume-section + .resume-section {
@@ -601,15 +609,15 @@ import PageHeader from '@components/PageHeader.astro';
 
     .resume-section p {
         margin: 0;
-        color: #4b5563;
-        line-height: 1.75;
+        color: #1f2937;
+        line-height: 1.5;
     }
 
     .summary-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 1.25rem;
-        margin-top: 0.75rem;
+        margin-top: 1rem;
     }
 
     .summary-grid ul {
@@ -619,13 +627,12 @@ import PageHeader from '@components/PageHeader.astro';
     ul {
         margin: 0.75rem 0 0;
         padding-left: 1.25rem;
-        color: #4b5563;
-        line-height: 1.75;
+        color: #1f2937;
+        line-height: 1.5;
         list-style: disc;
     }
 
     li + li {
-        margin-top: 0.35rem;
     }
 
     .role + .role {
@@ -645,7 +652,7 @@ import PageHeader from '@components/PageHeader.astro';
     .role-line p,
     .company-line p {
         flex: 0 0 auto;
-        color: #6b7280;
+        color: #1f2937;
         font-size: 0.875rem;
         text-align: right;
     }
