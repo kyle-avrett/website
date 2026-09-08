@@ -1,13 +1,12 @@
 // @ts-check
 import tailwindcss from '@tailwindcss/vite';
 import compressor from 'astro-compressor';
-import { astroFont } from 'astro-font/integration';
 import llms from 'astro-llms-md';
 import expressiveCode from 'astro-expressive-code';
 import pagefind from 'astro-pagefind';
 import robotsTxt from 'astro-robots-txt';
 import purgecss from 'astro-purgecss';
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import mdx from '@astrojs/mdx';
 
 import icon from 'astro-icon';
@@ -20,6 +19,17 @@ export default defineConfig({
     vite: {
         plugins: [tailwindcss()],
     },
+
+    fonts: [
+        {
+            name: 'Inter',
+            cssVariable: '--font-inter',
+            provider: fontProviders.google(),
+            weights: [400, 500, 600, 700],
+            styles: ['normal'],
+            subsets: ['latin'],
+        },
+    ],
 
     integrations: [
         expressiveCode({
@@ -57,7 +67,6 @@ export default defineConfig({
             description: 'Kyle Avrett website.',
         }),
         pagefind(),
-        astroFont(),
         purgecss(),
         compressor(),
     ],

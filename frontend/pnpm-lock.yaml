@@ -41,9 +41,6 @@ importers:
       astro-expressive-code:
         specifier: ^0.44.2
         version: 0.44.2(astro@7.3.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0))
-      astro-font:
-        specifier: ^1.2.0
-        version: 1.2.0
       astro-icon:
         specifier: ^1.2.0
         version: 1.2.0
@@ -1757,9 +1754,6 @@ packages:
     resolution: {integrity: sha512-avop7nZcRwC7quvIxVguhwEZ9Tp6IoTzKUCLwP30Fb7+er+pWQgcysP01dcuzRIJo81kLGg30q/YAI2Yb1Sdzg==}
     peerDependencies:
       astro: ^4.0.0-beta || ^5.0.0-beta || ^3.3.0 || ^6.0.0-beta || ^7.0.0
-
-  astro-font@1.2.0:
-    resolution: {integrity: sha512-Jcgag+vUQQIlw/RBMrQ+lsDc+m0Weyjke3+ilK9lWIJVkTn24jUKBS0FE7Zi+ojDMVSyasJ8HEmHzKizJL3SkA==}
 
   astro-icon@1.2.0:
     resolution: {integrity: sha512-0848V2WZuTPhqGSqLeZimLJZ5wmamMtWYzvA2kvg8s2DrUPZ3/nrTcHJWN0eJHt62jy7uvNxgTNiUJGIr7JNxg==}
@@ -5026,8 +5020,6 @@ snapshots:
       astro: 7.3.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0)
       rehype-expressive-code: 0.44.2
       url-extras: 0.1.0
-
-  astro-font@1.2.0: {}
 
   astro-icon@1.2.0:
     dependencies:

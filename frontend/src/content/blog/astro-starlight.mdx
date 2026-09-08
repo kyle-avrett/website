@@ -263,9 +263,9 @@ Some of the most common examples are shown below:
     }
     ```
 
-                  <Tabs syncKey="content-type">
+                    <Tabs syncKey="content-type">
 
-                  <TabItem label="Markdown/MDX">
+                    <TabItem label="Markdown/MDX">
 
     ````md
     ```js {2-3}
@@ -276,9 +276,9 @@ Some of the most common examples are shown below:
     ```
     ````
 
-                  </TabItem>
+                    </TabItem>
 
-                  <TabItem label="Markdoc">
+                    <TabItem label="Markdoc">
 
     ````markdoc
     ```js {% meta="{2-3}" %}
@@ -289,9 +289,9 @@ Some of the most common examples are shown below:
     ```
     ````
 
-                  </TabItem>
+                    </TabItem>
 
-                  </Tabs>
+                    </Tabs>
 
 - [Mark selections of text using the `" "` marker or regular expressions](https://expressive-code.com/key-features/text-markers/#marking-individual-text-inside-lines):
 
@@ -302,9 +302,9 @@ Some of the most common examples are shown below:
     }
     ```
 
-                  <Tabs syncKey="content-type">
+                    <Tabs syncKey="content-type">
 
-                  <TabItem label="Markdown/MDX">
+                    <TabItem label="Markdown/MDX">
 
     ````md
     ```js "Individual terms" /Even.*supported/
@@ -315,9 +315,9 @@ Some of the most common examples are shown below:
     ```
     ````
 
-                  </TabItem>
+                    </TabItem>
 
-                  <TabItem label="Markdoc">
+                    <TabItem label="Markdoc">
 
     ````markdoc
     ```js {% meta="'Individual terms' /Even.*supported/" %}
@@ -328,9 +328,9 @@ Some of the most common examples are shown below:
     ```
     ````
 
-                  </TabItem>
+                    </TabItem>
 
-                  </Tabs>
+                    </Tabs>
 
 - [Mark text or lines as inserted or deleted with `ins` or `del`](https://expressive-code.com/key-features/text-markers/#selecting-inline-marker-types-mark-ins-del):
 
@@ -342,9 +342,9 @@ Some of the most common examples are shown below:
     }
     ```
 
-                  <Tabs syncKey="content-type">
+                    <Tabs syncKey="content-type">
 
-                  <TabItem label="Markdown/MDX">
+                    <TabItem label="Markdown/MDX">
 
     ````md
     ```js "return true;" ins="inserted" del="deleted"
@@ -356,9 +356,9 @@ Some of the most common examples are shown below:
     ```
     ````
 
-                  </TabItem>
+                    </TabItem>
 
-                  <TabItem label="Markdoc">
+                    <TabItem label="Markdoc">
 
     ````markdoc
     ```js {% meta="'return true;' ins='inserted' del='deleted'" %}
@@ -370,9 +370,9 @@ Some of the most common examples are shown below:
     ```
     ````
 
-                  </TabItem>
+                    </TabItem>
 
-                  </Tabs>
+                    </Tabs>
 
 - [Combine syntax highlighting with `diff`-like syntax](https://expressive-code.com/key-features/text-markers/#combining-syntax-highlighting-with-diff-like-syntax):
 
@@ -385,9 +385,9 @@ Some of the most common examples are shown below:
       }
     ```
 
-                  <Tabs syncKey="content-type">
+                    <Tabs syncKey="content-type">
 
-                  <TabItem label="Markdown/MDX">
+                    <TabItem label="Markdown/MDX">
 
     ````md
     ```diff lang="js"
@@ -400,9 +400,9 @@ Some of the most common examples are shown below:
     ```
     ````
 
-                  </TabItem>
+                    </TabItem>
 
-                  <TabItem label="Markdoc">
+                    <TabItem label="Markdoc">
 
     ````markdoc
     ```diff {% meta="lang='js'" %}
@@ -415,9 +415,9 @@ Some of the most common examples are shown below:
     ```
     ````
 
-                  </TabItem>
+                    </TabItem>
 
-                  </Tabs>
+                    </Tabs>
 
 #### Frames and titles
 
@@ -434,20 +434,9 @@ A code block’s optional title can be set either with a `title="..."` attribute
     console.log('Hello World!');
     ```
 
-                  <Tabs syncKey="content-type">
+                    <Tabs syncKey="content-type">
 
-                  <TabItem label="Markdown/MDX">
-
-    ````md
-    ```js
-    // my-test-file.js
-    console.log('Hello World!');
-    ```
-    ````
-
-                  </TabItem>
-
-                  <TabItem label="Markdoc">
+                    <TabItem label="Markdown/MDX">
 
     ````md
     ```js
@@ -456,9 +445,20 @@ A code block’s optional title can be set either with a `title="..."` attribute
     ```
     ````
 
-                  </TabItem>
+                    </TabItem>
 
-                  </Tabs>
+                    <TabItem label="Markdoc">
+
+    ````md
+    ```js
+    // my-test-file.js
+    console.log('Hello World!');
+    ```
+    ````
+
+                    </TabItem>
+
+                    </Tabs>
 
 - [Add a title to a Terminal window](https://expressive-code.com/key-features/frames/#terminal-frames)
 
@@ -466,9 +466,9 @@ A code block’s optional title can be set either with a `title="..."` attribute
     npm install
     ```
 
-                  <Tabs syncKey="content-type">
+                    <Tabs syncKey="content-type">
 
-                  <TabItem label="Markdown/MDX">
+                    <TabItem label="Markdown/MDX">
 
     ````md
     ```bash title="Installing dependencies…"
@@ -476,9 +476,9 @@ A code block’s optional title can be set either with a `title="..."` attribute
     ```
     ````
 
-                  </TabItem>
+                    </TabItem>
 
-                  <TabItem label="Markdoc">
+                    <TabItem label="Markdoc">
 
     ````markdoc
     ```bash {% title="Installing dependencies…" %}
@@ -486,9 +486,9 @@ A code block’s optional title can be set either with a `title="..."` attribute
     ```
     ````
 
-                  </TabItem>
+                    </TabItem>
 
-                  </Tabs>
+                    </Tabs>
 
 - [Disable window frames with `frame="none"`](https://expressive-code.com/key-features/frames/#overriding-frame-types)
 
@@ -496,9 +496,9 @@ A code block’s optional title can be set either with a `title="..."` attribute
     echo "This is not rendered as a terminal despite using the bash language"
     ```
 
-                  <Tabs syncKey="content-type">
+                    <Tabs syncKey="content-type">
 
-                  <TabItem label="Markdown/MDX">
+                    <TabItem label="Markdown/MDX">
 
     ````md
     ```bash frame="none"
@@ -506,9 +506,9 @@ A code block’s optional title can be set either with a `title="..."` attribute
     ```
     ````
 
-                  </TabItem>
+                    </TabItem>
 
-                  <TabItem label="Markdoc">
+                    <TabItem label="Markdoc">
 
     ````markdoc
     ```bash {% frame="none" %}
@@ -516,9 +516,9 @@ A code block’s optional title can be set either with a `title="..."` attribute
     ```
     ````
 
-                  </TabItem>
+                    </TabItem>
 
-                  </Tabs>
+                    </Tabs>
 
 ## Details
 

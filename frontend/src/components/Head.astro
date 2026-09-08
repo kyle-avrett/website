@@ -1,6 +1,6 @@
 ---
 import { SEO } from 'astro-seo';
-import { AstroFont } from 'astro-font';
+import { Font } from 'astro:assets';
 
 interface Props {
     title: string;
@@ -49,23 +49,10 @@ const { title, description } = Astro.props;
     }}
 />
 
+<Font cssVariable="--font-inter" preload />
+
 <script
     src="https://data.upsurge.consulting/data/script.js"
     data-site-id="f43075f6e879"
     is:inline
     defer></script>
-
-<AstroFont
-    config={[
-        {
-            name: 'Inter',
-            src: [],
-            googleFontsURL:
-                'https://fonts.googleapis.com/css2?family=Inter:ital,wght@100;200;300;400;500;600;700;800;900&display=swap',
-            preload: true,
-            display: 'swap',
-            selector: 'body',
-            fallback: 'sans-serif',
-        },
-    ]}
-/>
