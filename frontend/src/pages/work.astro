@@ -13,17 +13,17 @@ import BaseLayout from '@layouts/BaseLayout.astro';
         </section>
 
         <section
-            class="header-contact flex gap-x-2 text-sm text-gray-600"
+            class="header-contact flex flex-wrap gap-x-2 gap-y-1 text-sm text-gray-600"
             aria-label="Contact"
         >
             <span>Newton, KS</span>
-            <span> • </span>
+            <span class="separator" aria-hidden="true"> • </span>
             <a href="mailto:kyle@kyleavrett.com">kyle@kyleavrett.com</a>
-            <span> • </span>
+            <span class="separator" aria-hidden="true"> • </span>
             <a href="tel:+19702609103">(970) 260-9103</a>
-            <span> • </span>
+            <span class="separator" aria-hidden="true"> • </span>
             <a href="https://www.linkedin.com/in/kyle-avrett">LinkedIn</a>
-            <span> • </span>
+            <span class="separator" aria-hidden="true"> • </span>
             <a href="https://github.com/kyle-avrett">GitHub</a>
         </section>
 
@@ -666,6 +666,15 @@ import BaseLayout from '@layouts/BaseLayout.astro';
     }
 
     @media (max-width: 700px) {
+        h1 {
+            font-size: 2rem;
+            line-height: 1.1;
+        }
+
+        .header-contact .separator {
+            display: none;
+        }
+
         .summary-grid {
             grid-template-columns: 1fr;
         }
