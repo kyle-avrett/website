@@ -4,6 +4,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Pros from '@components/Pros.astro';
 import BlogHeader from '@components/BlogHeader.astro';
+import Comments from '@components/Comments.astro';
 
 export async function getStaticPaths() {
     const posts = await getCollection('blog');
@@ -27,5 +28,7 @@ const { Content } = await render(post);
         <Pros>
             <Content />
         </Pros>
+
+        <Comments/>
     </article>
 </BaseLayout>
