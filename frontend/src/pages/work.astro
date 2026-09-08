@@ -567,17 +567,17 @@ import PageHeader from '@components/PageHeader.astro';
         color: #111827;
     }
 
-    .resume a {
+    a {
         color: #374151;
         text-decoration: underline;
         text-underline-offset: 4px;
     }
 
-    .resume a:hover {
+    a:hover {
         color: #111827;
     }
 
-    .resume .header-contact {
+    .header-contact {
         margin-bottom: 2rem;
     }
 
@@ -585,12 +585,18 @@ import PageHeader from '@components/PageHeader.astro';
         margin-top: 2rem;
     }
 
-    .resume-section h2 {
+    h2 {
         margin: 0 0 1rem;
+        border-bottom: 1px solid #374151;
         font-size: 1.5rem;
         font-weight: 600;
         letter-spacing: -0.025em;
-        border-bottom: 1px solid #374151;
+    }
+
+    h3 {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 600;
     }
 
     .resume-section p {
@@ -606,18 +612,11 @@ import PageHeader from '@components/PageHeader.astro';
         margin-top: 0.75rem;
     }
 
-    .summary-grid h3,
-    .role h3 {
-        margin: 0;
-        font-size: 1.25rem;
-        font-weight: 600;
-    }
-
     .summary-grid ul {
         margin-top: 0 !important;
     }
 
-    .resume ul {
+    ul {
         margin: 0.75rem 0 0;
         padding-left: 1.25rem;
         color: #4b5563;
@@ -625,7 +624,7 @@ import PageHeader from '@components/PageHeader.astro';
         list-style: disc;
     }
 
-    .resume li + li {
+    li + li {
         margin-top: 0.35rem;
     }
 
@@ -649,9 +648,6 @@ import PageHeader from '@components/PageHeader.astro';
         color: #6b7280;
         font-size: 0.875rem;
         text-align: right;
-    }
-
-    .company-line {
     }
 
     .role > p {
