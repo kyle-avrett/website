@@ -17,6 +17,7 @@ export const GET: APIRoute = async (context) => {
                 pubDate: post.data.pubDate,
                 link: `/blog/${post.id}/`,
             })),
+        stylesheet: '/rss.xsl',
         customData: '<language>en-us</language>',
     });
 };

@@ -15,7 +15,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://example.com',
+    site: 'http://localhost:4321',
 
     markdown: {
         syntaxHighlight: 'shiki',
@@ -39,7 +39,9 @@ export default defineConfig({
                 ],
             },
         }),
-        sitemap(),
+        sitemap({
+            xslURL: '/sitemap.xsl',
+        }),
         robotsTxt(),
         llms({
             name: 'Kyle Avrett',
