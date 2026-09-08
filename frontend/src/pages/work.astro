@@ -1,28 +1,28 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHeader from '@components/PageHeader.astro';
 ---
 
 <BaseLayout title="Work" description="Kyle Avrett resume and work history.">
-    <article class="resume" aria-labelledby="resume-title">
-        <header class="resume-head">
-            <h1 id="resume-title">Kyle Avrett</h1>
-            <p class="tagline">
-                <strong>Hands-on CTO / Head of Engineering</strong> | SaaS, Cloud,
-                Healthcare, Product Execution
+    <article class="resume">
+        <section class="mb-2 space-y-2" aria-labelledby="Header">
+            <h1 class="text-4xl font-bold tracking-tight">Kyle Avrett</h1>
+            <p class="text-xl tracking-tight">
+                <span class="font-bold">Hands-on CTO / Head of Engineering</span
+                > | SaaS, Cloud, Healthcare, Product Execution
             </p>
-            <p class="contact">
-                Newton, KS •
-                <a href="mailto:kyle@kyleavrett.com">kyle@kyleavrett.com</a>
-                • <a href="tel:+19702609103">(970) 260-9103</a> •
-                <a href="https://www.linkedin.com/in/kyle-avrett">
-                    https://www.linkedin.com/in/kyle-avrett
-                </a>
-                •
-                <a href="https://github.com/kyle-avrett">
-                    https://github.com/kyle-avrett
-                </a>
-            </p>
-        </header>
+        </section>
+
+        <section
+            class="header-contact flex gap-x-3 gap-y-1 text-sm text-gray-600"
+            aria-label="Contact"
+        >
+            <span>Newton, KS</span>
+            <a href="mailto:kyle@kyleavrett.com">kyle@kyleavrett.com</a>
+            <a href="tel:+19702609103">(970) 260-9103</a>
+            <a href="https://www.linkedin.com/in/kyle-avrett">LinkedIn</a>
+            <a href="https://github.com/kyle-avrett">GitHub</a>
+        </section>
 
         <section class="resume-section" aria-labelledby="summary-heading">
             <h2 id="summary-heading">Executive Summary</h2>
@@ -512,11 +512,11 @@ import BaseLayout from '@layouts/BaseLayout.astro';
                         </a>
                     </p>
                 </div>
-                <p>
+                <div class="company-line">
                     <strong
                         >AI Field Guides for Distributed Healthcare Teams</strong
                     >
-                </p>
+                </div>
                 <ul>
                     <li>
                         Built a AI field-guide platform for distributed
@@ -564,81 +564,75 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 
 <style>
     .resume {
-        background: #fff;
-        color: #111;
-        font-family: 'Liberation Sans', Arial, sans-serif;
-        font-size: 10pt;
-        line-height: 1.15;
-    }
-
-    .resume-head h1 {
-        margin: 0.17in 0 0.1in;
-        font-size: 20pt;
-        line-height: 1;
-    }
-
-    .tagline {
-        margin: 0 0 0.1in;
-        font-size: 12pt;
-    }
-
-    .contact {
-        margin: 0 0 0.14in;
-        font-size: 9pt;
+        color: #111827;
     }
 
     .resume a {
-        color: #000080;
+        color: #374151;
         text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+
+    .resume a:hover {
+        color: #111827;
+    }
+
+    .resume .header-contact {
+        margin-bottom: 2rem;
+    }
+
+    .resume-section + .resume-section {
+        margin-top: 2rem;
     }
 
     .resume-section h2 {
-        margin: 0.14in 0 0.08in;
-        border-bottom: 1pt solid #000;
-        padding-bottom: 0.02in;
-        font-size: 14pt;
-        line-height: 1.1;
+        margin: 0 0 1rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        border-bottom: 1px solid #374151;
     }
 
-    .resume-section p,
-    .resume-section ul {
-        margin-top: 0;
+    .resume-section p {
+        margin: 0;
+        color: #4b5563;
+        line-height: 1.75;
     }
 
     .summary-grid {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        gap: 0.25in;
-        margin-top: 0.12in;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.25rem;
+        margin-top: 0.75rem;
     }
 
-    .summary-grid h3 {
-        margin: 0 0 0.04in;
-        font-size: 10pt;
+    .summary-grid h3,
+    .role h3 {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+
+    .summary-grid ul {
+        margin-top: 0 !important;
     }
 
     .resume ul {
-        margin-bottom: 0;
-        padding-left: 0.22in;
+        margin: 0.75rem 0 0;
+        padding-left: 1.25rem;
+        color: #4b5563;
+        line-height: 1.75;
+        list-style: disc;
     }
 
-    .resume li {
-        margin: 0 0 0.04in;
-        padding-left: 0.03in;
-    }
-
-    .role {
-        border-top: 1px solid #999;
-        padding-top: 0.1in;
-    }
-
-    .role:first-of-type {
-        border-top: 0;
-        padding-top: 0;
+    .resume li + li {
+        margin-top: 0.35rem;
     }
 
     .role + .role {
-        margin-top: 0.13in;
+        margin-top: 1.5rem;
+        border-top: 1px solid #d1d5dc;
+        padding-top: 1.5rem;
     }
 
     .role-line,
@@ -646,42 +640,33 @@ import BaseLayout from '@layouts/BaseLayout.astro';
         display: flex;
         align-items: baseline;
         justify-content: space-between;
-        gap: 0.25in;
-    }
-
-    .role h3 {
-        margin: 0;
-        font-size: 12pt;
-        line-height: 1.1;
+        gap: 1rem;
     }
 
     .role-line p,
     .company-line p {
-        margin: 0;
         flex: 0 0 auto;
-        font-size: 9pt;
-        font-style: italic;
+        color: #6b7280;
+        font-size: 0.875rem;
         text-align: right;
     }
 
     .company-line {
-        margin-top: 0.03in;
     }
 
     .role > p {
-        margin: 0.1in 0;
+        margin-top: 0.75rem;
     }
 
-    .compact {
-        padding-bottom: 0;
+    .company-line strong {
+        font-weight: 600;
     }
 
     @media (max-width: 700px) {
-        .resume {
-            padding: 1.25rem;
+        .summary-grid {
+            grid-template-columns: 1fr;
         }
 
-        .summary-grid,
         .role-line,
         .company-line {
             display: block;
@@ -689,35 +674,8 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 
         .role-line p,
         .company-line p {
-            margin-top: 0.15rem;
+            margin-top: 0.25rem;
             text-align: left;
-        }
-    }
-
-    @media print {
-        :global(body > div > header),
-        :global(body > div > header + hr),
-        :global(body > div > footer),
-        :global(body > div > hr) {
-            display: none;
-        }
-
-        :global(body > div) {
-            max-width: none;
-            padding: 0;
-        }
-
-        :global(main) {
-            padding: 0;
-        }
-
-        .resume {
-            max-width: none;
-            padding: 0.5in;
-        }
-
-        .page-break {
-            break-before: page;
         }
     }
 </style>
