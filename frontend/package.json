@@ -16,6 +16,7 @@
         "test": "vitest run --passWithNoTests"
     },
     "dependencies": {
+        "@astrojs/cloudflare": "^14.3.0",
         "@astrojs/markdown-satteri": "^0.4.0",
         "@astrojs/mdx": "^8.0.0",
         "@astrojs/rss": "^4.0.19",
@@ -33,7 +34,8 @@
         "astro-seo": "^1.2.0",
         "purgecss": "^8.0.0",
         "shiki": "^4.4.3",
-        "tailwindcss": "^4.3.3"
+        "tailwindcss": "^4.3.3",
+        "wrangler": "^4.129.1"
     },
     "allowScripts": {
         "esbuild": true
