@@ -1,0 +1,93 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHeader from '@components/PageHeader.astro';
+
+const stack = [
+    'TypeScript',
+    'Vue',
+    'Quasar',
+    'Python',
+    'FastAPI',
+    'LangChain',
+    'LangGraph',
+    'PostgreSQL',
+    'pgvector',
+    'Redis',
+    'Celery',
+    'S3',
+    'Docker',
+    'Kubernetes',
+];
+---
+
+<BaseLayout
+    title="Guidebook Studio"
+    description="Guidebook Studio: AI field guides for distributed healthcare teams."
+>
+    <article class="space-y-10">
+        <PageHeader
+            eyebrow="Project"
+            title="Guidebook Studio"
+            description="AI field guides for distributed healthcare teams, built for source-backed answers from current operating knowledge."
+        />
+
+        <section
+            class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
+        >
+            <div class="space-y-4 leading-7 text-gray-700">
+                <p>
+                    Guidebook Studio helps healthcare teams turn SOPs, policies,
+                    checklists, and training docs into searchable field guides.
+                    Answers stay grounded in approved sources instead of guessy
+                    chat output.
+                </p>
+                <p>
+                    I built the platform with RAG workflows, an MCP service
+                    layer, and guardrails for scoped retrieval, source citation,
+                    and unsupported clinical or operational claims.
+                </p>
+            </div>
+            <p class="mt-6">
+                <a
+                    class="font-medium text-gray-900 underline underline-offset-4"
+                    href="https://guidebook.studio"
+                >
+                    Visit guidebook.studio
+                </a>
+            </p>
+        </section>
+
+        <section class="space-y-4">
+            <h2 class="text-2xl font-semibold">What it does</h2>
+            <ul class="list-disc space-y-2 pl-5 leading-7 text-gray-700">
+                <li>
+                    Ingests operating procedures and company knowledge into
+                    searchable guides with source-backed answers.
+                </li>
+                <li>
+                    Exposes approved knowledge sources through MCP so AI agents
+                    can retrieve current SOPs, policies, checklists, and
+                    training docs.
+                </li>
+                <li>
+                    Limits unsupported claims with healthcare-focused
+                    guardrails, scoped retrieval, and source citations.
+                </li>
+                <li>Runs in production with paying customers.</li>
+            </ul>
+        </section>
+
+        <section class="space-y-4">
+            <h2 class="text-2xl font-semibold">Stack</h2>
+            <ul class="flex flex-wrap gap-2">
+                {
+                    stack.map((item) => (
+                        <li class="rounded-full border border-gray-200 px-3 py-1 text-sm text-gray-700">
+                            {item}
+                        </li>
+                    ))
+                }
+            </ul>
+        </section>
+    </article>
+</BaseLayout>

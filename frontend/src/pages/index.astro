@@ -1,7 +1,150 @@
 ---
+import { getCollection } from 'astro:content';
+
 import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHeader from '@components/PageHeader.astro';
+
+const posts = (await getCollection('blog'))
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
+
+const projects = [
+    {
+        name: 'Guidebook Studio',
+        href: '/projects/guidebook-studio/',
+        description:
+            'AI field guides for distributed healthcare teams, with source-backed RAG, MCP-backed knowledge access, and healthcare guardrails.',
+    },
+    {
+        name: 'Mobile Hydration platform',
+        href: '/work/',
+        description:
+            'Core booking and operations software that improved booking speed by 83% and conversion from 40% to 91%.',
+    },
+    {
+        name: 'Denver Software',
+        href: '/work/',
+        description:
+            'B2B SaaS products for low-volume, high-complexity mechanical engineering workflows.',
+    },
+];
+
+const dateFormat = new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'UTC',
+});
 ---
 
-<BaseLayout title="Home" description="Kyle Avrett website.">
-    <h1>hello world</h1>
+<BaseLayout
+    title="Home"
+    description="Kyle Avrett builds software products, engineering teams, and operating systems for SaaS, cloud, healthcare, and software-enabled companies."
+>
+    <section class="space-y-12">
+        <PageHeader
+            eyebrow="Hello"
+            title="I’m Kyle Avrett."
+            description="I’m a hands-on technical leader who likes turning messy business problems into useful software, steady teams, and measurable outcomes."
+        />
+
+        <section
+            class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
+        >
+            <div class="space-y-4 leading-7 text-gray-700">
+                <p>
+                    I’ve spent 12+ years building software and 6+ years leading
+                    engineering teams across SaaS, cloud infrastructure,
+                    healthcare, and software-enabled operations.
+                </p>
+                <p>
+                    I’ve founded and exited a B2B SaaS company, led teams from
+                    zero, managed HIPAA-regulated systems, and still stay close
+                    enough to the code to know what will work.
+                </p>
+            </div>
+            <div class="mt-6 flex flex-wrap gap-3">
+                <a
+                    class="rounded-full bg-gray-900 px-4 py-2 text-sm font-medium text-white"
+                    href="/work/"
+                >
+                    See work history
+                </a>
+                <a
+                    class="rounded-full border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700"
+                    href="mailto:kyle@kyleavrett.com"
+                >
+                    Get in touch
+                </a>
+            </div>
+        </section>
+
+        <section class="space-y-5">
+            <div class="flex flex-wrap items-baseline justify-between gap-3">
+                <h2 class="text-2xl font-semibold">Projects</h2>
+                <a
+                    class="text-sm font-medium text-gray-600 underline underline-offset-4 hover:text-gray-900"
+                    href="/projects/"
+                >
+                    All projects
+                </a>
+            </div>
+            <div class="grid gap-5">
+                {
+                    projects.map((project) => (
+                        <a
+                            class="block rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md"
+                            href={project.href}
+                        >
+                            <h3 class="text-xl font-semibold">
+                                {project.name}
+                            </h3>
+                            <p class="mt-3 leading-7 text-gray-600">
+                                {project.description}
+                            </p>
+                        </a>
+                    ))
+                }
+            </div>
+        </section>
+
+        <section class="space-y-5">
+            <div class="flex flex-wrap items-baseline justify-between gap-3">
+                <h2 class="text-2xl font-semibold">Blog</h2>
+                <a
+                    class="text-sm font-medium text-gray-600 underline underline-offset-4 hover:text-gray-900"
+                    href="/blog/"
+                >
+                    All posts
+                </a>
+            </div>
+            <ol class="space-y-5">
+                {
+                    posts.map((post) => (
+                        <li>
+                            <a
+                                class="block rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md"
+                                href={`/blog/${post.id}/`}
+                            >
+                                <div class="flex flex-wrap items-baseline justify-between gap-3">
+                                    <h3 class="text-xl font-semibold">
+                                        {post.data.title}
+                                    </h3>
+                                    <time
+                                        class="text-sm text-gray-500"
+                                        datetime={post.data.published.toISOString()}
+                                    >
+                                        {dateFormat.format(post.data.published)}
+                                    </time>
+                                </div>
+                                <p class="mt-3 leading-7 text-gray-600">
+                                    {post.data.description}
+                                </p>
+                            </a>
+                        </li>
+                    ))
+                }
+            </ol>
+        </section>
+    </section>
 </BaseLayout>

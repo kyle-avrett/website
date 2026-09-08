@@ -1,0 +1,216 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHeader from '@components/PageHeader.astro';
+
+const highlights = [
+    '12+ years building software; 6+ years leading teams',
+    'Founded and exited a B2B SaaS company as Founder / CTO',
+    'Scaled software-enabled healthcare operations from zero to 53x revenue growth',
+    'Managed teams of 21 people, including 2 managers',
+    'Accountable for HIPAA-regulated systems handling PHI',
+];
+
+const experience = [
+    {
+        role: 'Co-CEO',
+        company: 'Mobile Hydration',
+        dates: 'October 2024 – March 2026',
+        summary:
+            'Scaled mobile IV therapy operations across engineering, marketing, finance, operations, and compliance.',
+        impact: [
+            'Increased revenue 53x over 16 months by formalizing operations.',
+            'Built the core software platform, improving booking speed 83% and conversion from 40% to 91%.',
+            'Moved mission-critical systems from cloud to on-premises with zero downtime, cutting ongoing costs 94%.',
+        ],
+    },
+    {
+        role: 'Fractional Chief Operating Officer',
+        company: 'Upsurge Consulting',
+        dates: 'August 2022 – October 2024',
+        summary:
+            'Built tools and operating systems for startup and scale-up clients.',
+        impact: [
+            'Turned founder goals into roadmaps, workflows, staffing plans, KPIs, and execution systems.',
+            'Designed dashboards, leadership reviews, and accountability loops that reduced founder dependency.',
+        ],
+    },
+    {
+        role: 'Founder / CTO',
+        company: 'Denver Software',
+        dates: 'February 2020 – March 2022',
+        summary:
+            'Founded and exited a SaaS company serving mechanical engineering firms.',
+        impact: [
+            'Led product and engineering across roadmap, architecture, implementation, infrastructure, and delivery.',
+            'Built full stack products with TypeScript, Vue, Nuxt, Python, Django REST Framework, PostgreSQL, Redis, Docker, Kubernetes, and Ansible.',
+            'Established CI/CD, automated testing, observability, security, alerting, and code review practices.',
+        ],
+    },
+];
+
+const earlierRoles = [
+    'Senior Software Engineer, DHI Group',
+    'Managing Technical Lead, Arrow Electronics',
+    'Lead Software Engineer, Charter Communications',
+    'Software Engineer, The Library Corporation',
+    'Integration Software Engineer, CA Technologies',
+];
+
+const stack = [
+    'TypeScript',
+    'Vue',
+    'React',
+    'Node.js',
+    'Python',
+    'Django',
+    'FastAPI',
+    'PostgreSQL',
+    'Redis',
+    'AWS',
+    'Docker',
+    'Kubernetes',
+    'Ansible',
+    'Prometheus',
+    'Grafana',
+    'RAG',
+    'MCP',
+    'LangChain',
+    'LangGraph',
+    'pgvector',
+];
+---
+
+<BaseLayout
+    title="Work"
+    description="Work history, leadership experience, and technical background for Kyle Avrett."
+>
+    <section class="space-y-10">
+        <PageHeader
+            eyebrow="Work"
+            title="Hands-on technical leader for SaaS, cloud, healthcare, and software-enabled operations."
+            description="I build products, teams, and operating systems from zero, then keep enough hands on keyboard to know what is real."
+        />
+
+        <div class="grid gap-3 sm:grid-cols-2">
+            {
+                highlights.map((highlight) => (
+                    <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+                        <p class="font-medium text-gray-900">{highlight}</p>
+                    </div>
+                ))
+            }
+        </div>
+
+        <section class="space-y-4">
+            <h2 class="text-2xl font-semibold">Selected experience</h2>
+            <div class="space-y-5">
+                {
+                    experience.map(
+                        ({ role, company, dates, summary, impact }) => (
+                            <article class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+                                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                                    <h3 class="text-xl font-semibold">
+                                        {role}, {company}
+                                    </h3>
+                                    <p class="text-sm text-gray-500">{dates}</p>
+                                </div>
+                                <p class="mt-3 leading-7 text-gray-600">
+                                    {summary}
+                                </p>
+                                <ul class="mt-4 list-disc space-y-2 pl-5 leading-7 text-gray-700">
+                                    {impact.map((item) => (
+                                        <li>{item}</li>
+                                    ))}
+                                </ul>
+                            </article>
+                        ),
+                    )
+                }
+            </div>
+        </section>
+
+        <section class="space-y-4">
+            <h2 class="text-2xl font-semibold">Earlier engineering roles</h2>
+            <ul class="grid gap-3 sm:grid-cols-2">
+                {
+                    earlierRoles.map((role) => (
+                        <li class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+                            {role}
+                        </li>
+                    ))
+                }
+            </ul>
+        </section>
+
+        <section class="space-y-4">
+            <h2 class="text-2xl font-semibold">Project</h2>
+            <article
+                class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
+            >
+                <div
+                    class="flex flex-wrap items-baseline justify-between gap-2"
+                >
+                    <h3 class="text-xl font-semibold">Guidebook Studio</h3>
+                    <a
+                        class="text-gray-600 underline underline-offset-4 hover:text-gray-900"
+                        href="https://guidebook.studio"
+                    >
+                        guidebook.studio
+                    </a>
+                </div>
+                <p class="mt-3 leading-7 text-gray-600">
+                    AI field guides for distributed healthcare teams. Built with
+                    TypeScript, Vue, Quasar, Python, FastAPI, LangChain,
+                    LangGraph, PostgreSQL, pgvector, Redis, Celery, S3, Docker,
+                    and Kubernetes.
+                </p>
+                <ul
+                    class="mt-4 list-disc space-y-2 pl-5 leading-7 text-gray-700"
+                >
+                    <li>
+                        Designed RAG workflows for searchable, source-backed
+                        operating knowledge.
+                    </li>
+                    <li>
+                        Built an MCP service layer for approved SOPs, policies,
+                        checklists, and training docs.
+                    </li>
+                    <li>
+                        Added healthcare guardrails around scoped retrieval,
+                        citations, and unsupported claims.
+                    </li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="space-y-4">
+            <h2 class="text-2xl font-semibold">Stack</h2>
+            <ul class="flex flex-wrap gap-2">
+                {
+                    stack.map((item) => (
+                        <li class="rounded-full border border-gray-200 px-3 py-1 text-sm text-gray-700">
+                            {item}
+                        </li>
+                    ))
+                }
+            </ul>
+        </section>
+
+        <section class="rounded-2xl border border-gray-200 bg-gray-50 p-5">
+            <h2 class="text-2xl font-semibold">Fit</h2>
+            <p class="mt-3 leading-7 text-gray-600">
+                Best fit: hands-on CTO, Head of Engineering, or operator role
+                where product execution, technical architecture, team building,
+                and business outcomes must move together.
+            </p>
+            <p class="mt-4">
+                <a
+                    class="font-medium text-gray-900 underline underline-offset-4"
+                    href="mailto:kyle@kyleavrett.com"
+                >
+                    kyle@kyleavrett.com
+                </a>
+            </p>
+        </section>
+    </section>
+</BaseLayout>
