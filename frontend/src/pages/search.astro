@@ -42,6 +42,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
         const input = document.querySelector('#search-input');
         const status = document.querySelector('#search-status');
         const results = document.querySelector('#search-results');
+        const arrowIcon = `<svg aria-hidden="true" class="absolute right-5 top-5 h-5 w-5 text-gray-400 group-hover:text-gray-600" viewBox="0 0 24 24"><path d="M17 7L7 17M8 7h9v9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" /></svg>`;
         let lastSearch = 0;
 
         input.addEventListener('input', async () => {
@@ -82,8 +83,8 @@ import BaseLayout from '@layouts/BaseLayout.astro';
                 const excerpt = document.createElement('p');
 
                 link.className =
-                    'block rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md';
-                title.className = 'text-lg font-semibold';
+                    'group relative block rounded-2xl border border-gray-200 bg-white p-5 pr-12 shadow-sm transition hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md';
+                title.className = 'block pr-8 text-lg font-semibold';
                 excerpt.className =
                     'mt-2 text-sm leading-6 font-normal text-gray-600';
 
@@ -91,6 +92,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
                 title.textContent = data.meta.title || data.url;
                 excerpt.innerHTML = data.excerpt;
 
+                link.insertAdjacentHTML('beforeend', arrowIcon);
                 link.append(title, excerpt);
                 item.append(link);
                 results.append(item);
