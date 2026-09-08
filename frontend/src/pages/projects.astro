@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import PageHeader from '@components/PageHeader.astro';
 const projects = [
     {
         name: 'Guidebook Studio',
@@ -13,11 +12,12 @@ const projects = [
 
 <BaseLayout title="Projects" description="Projects by Kyle Avrett.">
     <section>
-        <PageHeader
-            eyebrow="Projects"
-            title="Projects"
-            description="Selected products, experiments, and technical work."
-        />
+        <div class="mb-6 space-y-2">
+            <h1 class="text-4xl font-bold tracking-tight">Projects</h1>
+            <p class="text-gray-600">
+                Software Products and Businesses I've shipped
+            </p>
+        </div>
 
         <ol class="space-y-5">
             {

@@ -1,15 +1,13 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import PageHeader from '@components/PageHeader.astro';
 ---
 
 <BaseLayout title="Search" description="Search Kyle Avrett website.">
     <section>
-        <PageHeader
-            eyebrow="search"
-            title="Find anything"
-            description="Search posts, pages, and notes on Kyle Avrett's site."
-        />
+        <div class="mb-6 space-y-2">
+            <h1 class="text-4xl font-bold tracking-tight">Search</h1>
+            <p class="text-gray-600">Search this site's full plain text</p>
+        </div>
 
         <label class="sr-only" for="search-input">Search this site</label>
         <div
@@ -99,6 +97,6 @@ import PageHeader from '@components/PageHeader.astro';
             }
         });
 
-        status.textContent = 'Type to search this site.';
+        status.textContent = 'Type to search this site';
     </script>
 </BaseLayout>

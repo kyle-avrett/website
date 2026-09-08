@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 
 import BaseLayout from '@layouts/BaseLayout.astro';
-import PageHeader from '@components/PageHeader.astro';
 
 const posts = (await getCollection('blog'))
     .filter((post) => !post.data.draft)
@@ -41,12 +40,15 @@ const dateFormat = new Intl.DateTimeFormat('en-US', {
     title="Home"
     description="Kyle Avrett builds software products, engineering teams, and operating systems for SaaS, cloud, healthcare, and software-enabled companies."
 >
-    <section class="space-y-12">
-        <PageHeader
-            eyebrow="Hello"
-            title="I’m Kyle Avrett."
-            description="I’m a hands-on technical leader who likes turning messy business problems into useful software, steady teams, and measurable outcomes."
-        />
+    <section class="space-y-14">
+        <div class="mb-6 space-y-2">
+            <h1 class="text-4xl font-bold tracking-tight">Hi, I’m Kyle</h1>
+            <p class="text-gray-600">
+                I’m a hands-on technical leader who likes turning messy business
+                problems into useful software, steady teams, and measurable
+                outcomes
+            </p>
+        </div>
 
         <section
             class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
@@ -81,7 +83,7 @@ const dateFormat = new Intl.DateTimeFormat('en-US', {
 
         <section class="space-y-5">
             <div class="flex flex-wrap items-baseline justify-between gap-3">
-                <h2 class="text-2xl font-semibold">Projects</h2>
+                <h2 class="text-3xl font-semibold">Projects</h2>
                 <a
                     class="text-sm font-medium text-gray-600 underline underline-offset-4 hover:text-gray-900"
                     href="/projects/"
@@ -110,7 +112,7 @@ const dateFormat = new Intl.DateTimeFormat('en-US', {
 
         <section class="space-y-5">
             <div class="flex flex-wrap items-baseline justify-between gap-3">
-                <h2 class="text-2xl font-semibold">Blog</h2>
+                <h2 class="text-3xl font-semibold">Blog</h2>
                 <a
                     class="text-sm font-medium text-gray-600 underline underline-offset-4 hover:text-gray-900"
                     href="/blog/"

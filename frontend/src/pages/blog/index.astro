@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 
 import BaseLayout from '@layouts/BaseLayout.astro';
-import PageHeader from '@components/PageHeader.astro';
 
 const posts = (await getCollection('blog'))
     .filter((post) => !post.data.draft)
@@ -17,11 +16,10 @@ const dateFormat = new Intl.DateTimeFormat('en-US', {
 
 <BaseLayout title="Blog" description="Posts by Kyle Avrett.">
     <section>
-        <PageHeader
-            eyebrow="Blog"
-            title="Writing"
-            description="Notes, experiments, and work in progress."
-        />
+        <div class="mb-6 space-y-2">
+            <h1 class="text-4xl font-bold tracking-tight">Blog</h1>
+            <p class="text-gray-600">Interesting things I've written about</p>
+        </div>
 
         <ol class="space-y-5">
             {
