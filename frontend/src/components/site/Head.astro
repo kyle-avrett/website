@@ -5,19 +5,84 @@ import { Font } from 'astro:assets';
 interface Props {
     title: string;
     description: string;
+    type?: 'website' | 'article';
+    published?: Date;
+    updated?: Date;
+    noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
+const SITE_NAME = 'Kyle Avrett';
+const SITE_URL = 'https://kyleavrett.com';
+const SOCIAL_IMAGE_PATH = '/android-chrome-512x512.png';
+
+const {
+    title,
+    description,
+    type = 'website',
+    published,
+    updated,
+    noindex = false,
+} = Astro.props;
+const site = Astro.site ?? new URL(SITE_URL);
+const canonical = new URL(Astro.url.pathname, site);
+const socialImage = new URL(SOCIAL_IMAGE_PATH, site);
+const fullTitle = title === SITE_NAME ? SITE_NAME : `${title} | ${SITE_NAME}`;
+const personSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: SITE_NAME,
+    url: new URL('/', site).href,
+    email: 'mailto:kyle@kyleavrett.com',
+    jobTitle: 'Hands-on CTO / Head of Engineering',
+    sameAs: [
+        'https://linkedin.com/in/kyle-avrett',
+        'https://github.com/kyle-avrett',
+        'https://x.com/kyleavrett',
+    ],
+};
 ---
 
 <SEO
     charset="utf-8"
-    title={title}
+    title={fullTitle}
     description={description}
-    titleTemplate="%s | Kyle Avrett"
-    titleDefault="Kyle Avrett"
+    canonical={canonical}
+    noindex={noindex}
+    robotsExtras="max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    openGraph={{
+        basic: {
+            title: fullTitle,
+            type,
+            image: socialImage.href,
+            url: canonical.href,
+        },
+        optional: {
+            description,
+            locale: 'en_US',
+            siteName: SITE_NAME,
+        },
+        image: {
+            width: 512,
+            height: 512,
+            alt: 'Kyle Avrett site icon',
+        },
+        article:
+            type === 'article'
+                ? {
+                      publishedTime: published?.toISOString(),
+                      modifiedTime: updated?.toISOString(),
+                      authors: [SITE_NAME],
+                  }
+                : undefined,
+    }}
     twitter={{
-        card: 'summary_large_image',
+        card: 'summary',
+        site: '@kyleavrett',
+        creator: '@kyleavrett',
+        title: fullTitle,
+        description,
+        image: socialImage.href,
+        imageAlt: 'Kyle Avrett site icon',
     }}
     extend={{
         meta: [
@@ -25,10 +90,9 @@ const { title, description } = Astro.props;
                 name: 'viewport',
                 content: 'width=device-width, initial-scale=1.0',
             },
-            { name: 'text-scale', content: 'scale' },
             {
-                name: 'fediverse:creator',
-                content: '@username@domain.social',
+                name: 'author',
+                content: SITE_NAME,
             },
         ],
         link: [
@@ -60,6 +124,12 @@ const { title, description } = Astro.props;
             { rel: 'manifest', href: '/site.webmanifest' },
         ],
     }}
+/>
+
+<script
+    type="application/ld+json"
+    set:html={JSON.stringify(personSchema)}
+    is:inline
 />
 
 <Font cssVariable="--font-inter" preload />

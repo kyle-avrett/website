@@ -14,10 +14,7 @@ const projects = (await getCollection('projects'))
     .sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout
-    title="Home"
-    description="Kyle Avrett builds software products, engineering teams, and operating systems for SaaS, cloud, healthcare, and software-enabled companies."
->
+<BaseLayout title="Kyle Avrett">
     <section class="space-y-14">
         <div class="mb-6 space-y-2">
             <h1 class="text-4xl font-bold tracking-tight">Hi, I’m Kyle</h1>
@@ -40,8 +37,8 @@ const projects = (await getCollection('projects'))
                 and software-enabled operations
             </p>
             <p>
-                I’ve been a CEO twice, founded and exited a B2B SaaS company, built teams from zero,
-                and still program every day
+                I’ve been a CEO twice, founded and exited a B2B SaaS company,
+                built teams from zero, and still program every day
             </p>
         </OverviewCard>
 

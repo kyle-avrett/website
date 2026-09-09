@@ -8,7 +8,10 @@ const projects = (await getCollection('projects'))
     .sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout title="Projects" description="Projects by Kyle Avrett.">
+<BaseLayout
+    title="Projects"
+    description="Software products and businesses shipped by Kyle Avrett"
+>
     <section>
         <div class="mb-6 space-y-2">
             <h1 class="text-4xl font-bold tracking-tight">Projects</h1>

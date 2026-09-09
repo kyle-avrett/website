@@ -14,7 +14,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'http://localhost:4321',
+    site: 'https://kyleavrett.com',
 
     vite: {
         plugins: [tailwindcss()],
@@ -69,6 +69,7 @@ export default defineConfig({
             },
         }),
         sitemap({
+            filter: (page) => !page.endsWith('/search/'),
             xslURL: '/sitemap.xsl',
         }),
         robotsTxt(),

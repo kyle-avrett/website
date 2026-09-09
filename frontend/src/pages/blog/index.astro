@@ -9,7 +9,10 @@ const posts = (await getCollection('blog'))
     .sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
 ---
 
-<BaseLayout title="Blog" description="Posts by Kyle Avrett.">
+<BaseLayout
+    title="Blog"
+    description="Software, product, and engineering leadership posts by Kyle Avrett"
+>
     <section>
         <div class="mb-6 space-y-2">
             <h1 class="text-4xl font-bold tracking-tight">Blog</h1>
