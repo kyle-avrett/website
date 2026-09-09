@@ -1,0 +1,20 @@
+---
+interface Props {
+    stack: string[];
+}
+
+const { stack } = Astro.props;
+---
+
+<section class="mt-10 space-y-4">
+    <h2 class="text-2xl font-semibold">Stack</h2>
+    <ul class="flex list-none flex-wrap gap-x-2 pl-0">
+        {
+            stack.map((item) => (
+                <li class="rounded-full border border-gray-400 px-3 py-1 text-sm text-gray-700">
+                    {item}
+                </li>
+            ))
+        }
+    </ul>
+</section>

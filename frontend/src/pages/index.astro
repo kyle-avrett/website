@@ -7,26 +7,9 @@ const posts = (await getCollection('blog'))
     .filter((post) => !post.data.draft)
     .sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
 
-const projects = [
-    {
-        name: 'Guidebook Studio',
-        href: '/projects/guidebook-studio/',
-        description:
-            'AI field guides for distributed healthcare teams, with source-backed RAG, MCP-backed knowledge access, and healthcare guardrails.',
-    },
-    {
-        name: 'Mobile Hydration platform',
-        href: '/work/',
-        description:
-            'Core booking and operations software that improved booking speed by 83% and conversion from 40% to 91%.',
-    },
-    {
-        name: 'Denver Software',
-        href: '/work/',
-        description:
-            'B2B SaaS products for low-volume, high-complexity mechanical engineering workflows.',
-    },
-];
+const projects = (await getCollection('projects'))
+    .filter((project) => !project.data.draft)
+    .sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout
@@ -88,9 +71,9 @@ const projects = [
                 {
                     projects.map((project) => (
                         <LinkCard
-                            href={project.href}
-                            title={project.name}
-                            description={project.description}
+                            href={`/projects/${project.id}/`}
+                            title={project.data.title}
+                            description={project.data.description}
                             titleElement="h3"
                         />
                     ))
