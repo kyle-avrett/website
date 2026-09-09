@@ -134,8 +134,24 @@ const personSchema = {
 
 <Font cssVariable="--font-inter" preload />
 
-<script
-    src="https://data.upsurge.consulting/data/script.js"
-    data-site-id="f43075f6e879"
-    is:inline
-    defer></script>
+<script is:inline>
+    window.addEventListener(
+        'load',
+        () => {
+            const loadUpsurge = () => {
+                const script = document.createElement('script');
+                script.src = 'https://data.upsurge.consulting/data/script.js';
+                script.dataset.siteId = 'f43075f6e879';
+                script.async = true;
+                document.head.append(script);
+            };
+
+            if ('requestIdleCallback' in window) {
+                window.requestIdleCallback(loadUpsurge, { timeout: 3000 });
+            } else {
+                window.setTimeout(loadUpsurge, 3000);
+            }
+        },
+        { once: true },
+    );
+</script>
