@@ -1,16 +1,17 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import LinkCard from '@components/LinkCard.astro';
+import EmptyCard from '@components/EmptyCard.astro';
 ---
 
-<BaseLayout title="Search" description="Search Kyle Avrett website.">
+<BaseLayout title="Search" description="Search this website">
     <section>
         <div class="mb-6 space-y-2">
             <h1 class="text-4xl font-bold tracking-tight">Search</h1>
-            <p class="text-gray-600">Search this site's full plain text</p>
+            <p class="text-gray-600">Search this website's full plain text</p>
         </div>
 
-        <label class="sr-only" for="search-input">Search this site</label>
+        <label class="sr-only" for="search-input">Search this website</label>
         <div
             class="rounded-2xl border border-gray-200 p-1 focus-within:border-gray-400"
         >
@@ -41,6 +42,12 @@ import LinkCard from '@components/LinkCard.astro';
                 descriptionClass="mt-2 text-sm leading-6 font-normal text-gray-600"
             />
         </template>
+
+        <template id="search-empty-card">
+            <li>
+                <EmptyCard message="No matches. Try a different search." />
+            </li>
+        </template>
     </section>
 
     <script is:inline type="module">
@@ -55,6 +62,7 @@ import LinkCard from '@components/LinkCard.astro';
         const status = document.querySelector('#search-status');
         const results = document.querySelector('#search-results');
         const cardTemplate = document.querySelector('#search-result-card');
+        const emptyTemplate = document.querySelector('#search-empty-card');
         let lastSearch = 0;
 
         input.addEventListener('input', async () => {
@@ -63,7 +71,7 @@ import LinkCard from '@components/LinkCard.astro';
             results.textContent = '';
 
             if (!query) {
-                status.textContent = 'Type to search this site.';
+                status.textContent = 'Type to search this website';
                 return;
             }
 
@@ -77,11 +85,9 @@ import LinkCard from '@components/LinkCard.astro';
                     : `${search.results.length} results`;
 
             if (!search.results.length) {
-                const empty = document.createElement('li');
-                empty.className =
-                    'rounded-2xl border border-dashed border-gray-300 p-6 text-gray-500';
-                empty.textContent = 'No matches. Try a different search.';
-                results.append(empty);
+                results.append(
+                    emptyTemplate.content.firstElementChild.cloneNode(true),
+                );
                 return;
             }
 
@@ -106,6 +112,6 @@ import LinkCard from '@components/LinkCard.astro';
             }
         });
 
-        status.textContent = 'Type to search this site';
+        status.textContent = 'Type to search this website';
     </script>
 </BaseLayout>
