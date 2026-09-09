@@ -1,7 +1,7 @@
 {
     "extends": "astro/tsconfigs/strict",
-    "include": [".astro/types.d.ts", "**/*", "src/env.d.ts"],
-    "exclude": ["dist", "node_modules"],
+    "include": [".astro/types.d.ts", "**/*"],
+    "exclude": ["dist"],
     "compilerOptions": {
         "paths": {
             "~/*": ["./src/*"],
@@ -9,16 +9,8 @@
             "@layouts/*": ["./src/layouts/*"],
             "@utils/*": ["./src/utils/*"],
             "@styles/*": ["./src/styles/*"],
-            "@content/*": ["./src/content/*"]
-        },
-        "strict": true,
-        "noImplicitAny": true,
-        "noImplicitOverride": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true,
-        "verbatimModuleSyntax": true,
-        "jsx": "preserve",
-        "types": ["astro/client"]
+            "@content/*": ["./src/content/*"],
+            "@assets/*": ["./src/assets/*"]
+        }
     }
 }

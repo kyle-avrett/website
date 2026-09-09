@@ -1,17 +1,121 @@
 ---
-import { getEntry, render } from 'astro:content';
-import PageLayout from '~/layouts/PageLayout.astro';
-import { SITE } from '~/config';
+import { getCollection } from 'astro:content';
 
-const entry = await getEntry('pages', 'index');
-if (!entry) return Astro.rewrite('/404');
-const { Content } = await render(entry);
+import BaseLayout from '@layouts/BaseLayout.astro';
+import LinkCard from '@components/LinkCard.astro';
+import EmptyCard from '@components/EmptyCard.astro';
+import OverviewCard from '@components/OverviewCard.astro';
+const posts = (await getCollection('blog'))
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
+
+const projects = (await getCollection('projects'))
+    .filter((project) => !project.data.draft)
+    .sort((a, b) => a.data.order - b.data.order);
 ---
 
-<PageLayout
-    title={entry.data.title}
-    description={entry.data.description ?? SITE.description}
-    math={entry.data.math}
+<BaseLayout
+    title="Kyle Avrett"
+    description="Hands-On CTO / Head of Engineering"
 >
-    <Content />
-</PageLayout>
+    <section class="space-y-14">
+        <OverviewCard
+            link="mailto:kyle@kyleavrett.com"
+            linkText="Email Me"
+            secondLink="/work/"
+            secondLinkText="Work History"
+        >
+            <h1 class="text-4xl font-bold tracking-tight text-black">
+                Hi, I’m Kyle
+            </h1>
+            <p>I’m a Hands-On CTO / Head of Engineering</p>
+            <p>
+                I’ve spent 12 years building software and 6 years leading
+                engineering teams across SaaS, cloud infrastructure, healthcare,
+                and software-enabled operations
+            </p>
+            <p>
+                I’ve been a CEO twice, founded and exited a B2B SaaS company,
+                and <a
+                    href="https://github.com/kyle-avrett"
+                    class="underline underline-offset-4 hover:text-gray-900"
+                    >still write code every day</a
+                >
+            </p>
+        </OverviewCard>
+
+        <section class="space-y-5">
+            <div class="space-y-1">
+                <div
+                    class="flex flex-wrap items-baseline justify-between gap-3"
+                >
+                    <h2 class="text-3xl font-semibold">Projects</h2>
+                    <a
+                        class="text-sm font-medium text-gray-600 underline underline-offset-4 hover:text-gray-900"
+                        href="/projects/"
+                    >
+                        All projects
+                    </a>
+                </div>
+                <p class="text-gray-600">
+                    Software Products and Businesses I've shipped
+                </p>
+            </div>
+            <div class="grid gap-5">
+                {
+                    projects.length ? (
+                        projects.map((project) => (
+                            <LinkCard
+                                href={`/projects/${project.id}/`}
+                                title={project.data.title}
+                                description={project.data.description}
+                                titleElement="h3"
+                            />
+                        ))
+                    ) : (
+                        <EmptyCard message="No projects yet" />
+                    )
+                }
+            </div>
+        </section>
+
+        <section class="space-y-5">
+            <div class="space-y-1">
+                <div
+                    class="flex flex-wrap items-baseline justify-between gap-3"
+                >
+                    <h2 class="text-3xl font-semibold">Blog</h2>
+                    <a
+                        class="text-sm font-medium text-gray-600 underline underline-offset-4 hover:text-gray-900"
+                        href="/blog/"
+                    >
+                        All posts
+                    </a>
+                </div>
+                <p class="text-gray-600">
+                    Interesting things I've written about
+                </p>
+            </div>
+            <ol class="space-y-5">
+                {
+                    posts.length ? (
+                        posts.map((post) => (
+                            <li>
+                                <LinkCard
+                                    href={`/blog/${post.id}/`}
+                                    title={post.data.title}
+                                    description={post.data.description}
+                                    titleElement="h3"
+                                />
+                            </li>
+                        ))
+                    ) : (
+                        <li>
+                            <EmptyCard message="No posts yet" />
+                        </li>
+                    )
+                }
+            </ol>
+        </section>
+    </section>
+</BaseLayout>

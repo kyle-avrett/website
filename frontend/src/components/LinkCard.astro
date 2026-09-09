@@ -1,0 +1,46 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+    href: string;
+    title: string;
+    description?: string;
+    titleElement?: 'h2' | 'h3' | 'span';
+    titleClass?: string;
+    descriptionClass?: string;
+}
+
+const {
+    href,
+    title,
+    description,
+    titleElement = 'h2',
+    titleClass = 'text-xl',
+    descriptionClass = 'mt-3 leading-7 text-gray-600',
+} = Astro.props;
+const Title = titleElement;
+---
+
+<a
+    class="group relative block rounded-2xl border border-gray-300 bg-slate-50 p-5 pr-12 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-400 hover:shadow-md"
+    href={href}
+>
+    <Icon
+        name="tabler:arrow-up-right"
+        aria-hidden="true"
+        class="absolute top-5 right-5 h-5 w-5 text-gray-400 group-hover:text-gray-600"
+    />
+    <Title
+        data-link-card-title
+        class={`block pr-8 font-semibold ${titleClass}`}
+    >
+        {title}
+    </Title>
+    {
+        description !== undefined && (
+            <p data-link-card-description class={descriptionClass}>
+                {description}
+            </p>
+        )
+    }
+</a>

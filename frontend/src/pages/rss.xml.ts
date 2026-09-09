@@ -1,37 +1,24 @@
-import rss from '@astrojs/rss';
 import type { APIRoute } from 'astro';
-import { SITE } from '~/config';
-import { getPosts, postPath } from '~/utils/posts';
+import rss from '@astrojs/rss';
+import { getCollection } from 'astro:content';
 
 export const GET: APIRoute = async (context) => {
-    const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-    const siteWithBase = `${context.site?.origin ?? SITE.url.replace(/\/$/, '')}${base}`;
-    if (import.meta.env.CI_SKIP_RSS_SITEMAP === 'true') {
-        return rss({
-            title: SITE.title,
-            description: SITE.description,
-            site: siteWithBase,
-            trailingSlash: false,
-            stylesheet: `${base}/rss/styles.xsl`,
-            items: [],
-            customData: `<language>en-us</language>`,
-        });
-    }
+    const posts = await getCollection('blog');
 
-    const posts = await getPosts();
     return rss({
-        title: SITE.title,
-        description: SITE.description,
-        site: siteWithBase,
-        trailingSlash: false,
-        stylesheet: `${base}/rss/styles.xsl`,
-        items: posts.map((post) => ({
-            title: post.data.title,
-            pubDate: post.data.pubDate,
-            description: post.data.description,
-            link: postPath(post),
-            categories: [...post.data.tags, ...post.data.categories],
-        })),
-        customData: `<language>en-us</language>`,
+        title: "Kyle Avrett's Blog",
+        description:
+            'Software, product, and engineering leadership posts by Kyle Avrett',
+        site: context.site!,
+        items: posts
+            .filter((post) => !post.data.draft)
+            .map((post) => ({
+                title: post.data.title,
+                description: post.data.description,
+                published: post.data.published,
+                link: `/blog/${post.id}/`,
+            })),
+        stylesheet: '/rss.xsl',
+        customData: '<language>en-us</language>',
     });
 };

@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import LinkCard from '@components/LinkCard.astro';
+import EmptyCard from '@components/EmptyCard.astro';
+const projects = (await getCollection('projects'))
+    .filter((project) => !project.data.draft)
+    .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+    title="Projects"
+    description="Software products and businesses shipped by Kyle Avrett"
+>
+    <section>
+        <div class="mb-6 space-y-2">
+            <h1 class="text-4xl font-bold tracking-tight">Projects</h1>
+            <p class="text-gray-600">
+                Software Products and Businesses I've shipped
+            </p>
+        </div>
+
+        <ol class="space-y-5">
+            {
+                projects.length ? (
+                    projects.map((project) => (
+                        <li>
+                            <LinkCard
+                                href={`/projects/${project.id}/`}
+                                title={project.data.title}
+                                description={project.data.description}
+                            />
+                        </li>
+                    ))
+                ) : (
+                    <li>
+                        <EmptyCard message="No projects yet." />
+                    </li>
+                )
+            }
+        </ol>
+    </section>
+</BaseLayout>

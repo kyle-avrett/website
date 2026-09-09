@@ -1,0 +1,117 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import LinkCard from '@components/LinkCard.astro';
+import EmptyCard from '@components/EmptyCard.astro';
+---
+
+<BaseLayout title="Search" description="Search Kyle Avrett's website" noindex>
+    <section>
+        <div class="mb-6 space-y-2">
+            <h1 class="text-4xl font-bold tracking-tight">Search</h1>
+            <p class="text-gray-600">Search this website's full plain text</p>
+        </div>
+
+        <label class="sr-only" for="search-input">Search this website</label>
+        <div
+            class="rounded-2xl border border-gray-200 p-1 focus-within:border-gray-500"
+        >
+            <input
+                id="search-input"
+                class="w-full px-4 py-3 text-lg outline-none"
+                type="search"
+                autocomplete="off"
+                placeholder="Search..."
+            />
+        </div>
+
+        <p
+            id="search-status"
+            class="mt-2 min-h-6 text-sm text-gray-500"
+            aria-live="polite"
+        >
+        </p>
+        <ol id="search-results" class="mt-6 space-y-4"></ol>
+
+        <template id="search-result-card">
+            <LinkCard
+                href="#"
+                title=""
+                description=""
+                titleElement="span"
+                titleClass="text-lg"
+                descriptionClass="mt-2 text-sm leading-6 font-normal text-gray-600"
+            />
+        </template>
+
+        <template id="search-empty-card">
+            <li>
+                <EmptyCard message="No matches. Try a different search." />
+            </li>
+        </template>
+    </section>
+
+    <script is:inline type="module">
+        const pagefind = (await import('/pagefind/pagefind.js')).createInstance(
+            {
+                baseUrl: '/',
+                noWorker: true,
+            },
+        );
+        await pagefind.init();
+        const input = document.querySelector('#search-input');
+        const status = document.querySelector('#search-status');
+        const results = document.querySelector('#search-results');
+        const cardTemplate = document.querySelector('#search-result-card');
+        const emptyTemplate = document.querySelector('#search-empty-card');
+        let lastSearch = 0;
+
+        input.addEventListener('input', async () => {
+            const query = input.value.trim();
+            const searchId = ++lastSearch;
+            results.textContent = '';
+
+            if (!query) {
+                status.textContent = 'Type to search this website';
+                return;
+            }
+
+            status.textContent = `Searching for ${query}...`;
+            const search = await pagefind.search(query);
+            if (searchId !== lastSearch) return;
+
+            status.textContent =
+                search.results.length === 1
+                    ? '1 result'
+                    : `${search.results.length} results`;
+
+            if (!search.results.length) {
+                results.append(
+                    emptyTemplate.content.firstElementChild.cloneNode(true),
+                );
+                return;
+            }
+
+            for (const result of search.results.slice(0, 10)) {
+                const data = await result.data();
+                if (searchId !== lastSearch) return;
+
+                const item = document.createElement('li');
+                const link =
+                    cardTemplate.content.firstElementChild.cloneNode(true);
+                const title = link.querySelector('[data-link-card-title]');
+                const excerpt = link.querySelector(
+                    '[data-link-card-description]',
+                );
+
+                link.href = data.url;
+                title.textContent = data.meta.title || data.url;
+                excerpt.innerHTML = data.excerpt;
+
+                item.append(link);
+                results.append(item);
+            }
+        });
+
+        status.textContent = 'Type to search this website';
+    </script>
+</BaseLayout>

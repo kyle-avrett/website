@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import LinkCard from '@components/LinkCard.astro';
+import EmptyCard from '@components/EmptyCard.astro';
+const posts = (await getCollection('blog'))
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
+---
+
+<BaseLayout
+    title="Blog"
+    description="Software, product, and engineering leadership posts by Kyle Avrett"
+>
+    <section>
+        <div class="mb-6 space-y-2">
+            <h1 class="text-4xl font-bold tracking-tight">Blog</h1>
+            <p class="text-gray-600">Interesting things I've written about</p>
+        </div>
+
+        <ol class="space-y-5">
+            {
+                posts.length ? (
+                    posts.map((post) => (
+                        <li>
+                            <LinkCard
+                                href={`/blog/${post.id}/`}
+                                title={post.data.title}
+                                description={post.data.description}
+                            />
+                        </li>
+                    ))
+                ) : (
+                    <li>
+                        <EmptyCard message="No posts yet." />
+                    </li>
+                )
+            }
+        </ol>
+    </section>
+</BaseLayout>

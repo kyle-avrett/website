@@ -1,0 +1,8 @@
+---
+const { project } = Astro.props;
+---
+
+<header class="mb-6 space-y-2">
+    <h1 class="text-4xl font-bold tracking-tight">{project.data.title}</h1>
+    <p class="text-gray-600">{project.data.description}</p>
+</header>
