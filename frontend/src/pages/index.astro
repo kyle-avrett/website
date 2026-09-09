@@ -14,12 +14,15 @@ const projects = (await getCollection('projects'))
     .sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout title="Kyle Avrett">
+<BaseLayout
+    title="Kyle Avrett"
+    description="Hands-On CTO / Head of Engineering who likes turning messy business problems into useful software, steady teams, and measurable outcomes"
+>
     <section class="space-y-14">
         <div class="mb-6 space-y-2">
             <h1 class="text-4xl font-bold tracking-tight">Hi, I’m Kyle</h1>
             <p class="text-gray-600">
-                I’m a hands-on CTO / Head of Engineering who likes turning messy
+                I’m a Hands-On CTO / Head of Engineering who likes turning messy
                 business problems into useful software, steady teams, and
                 measurable outcomes
             </p>
@@ -27,9 +30,9 @@ const projects = (await getCollection('projects'))
 
         <OverviewCard
             link="/work/"
-            linkText="See work history"
+            linkText="Work History"
             secondLink="mailto:kyle@kyleavrett.com"
-            secondLinkText="Get in touch"
+            secondLinkText="Email Me"
         >
             <p>
                 I’ve spent 12 years building software and 6 years leading
@@ -38,19 +41,30 @@ const projects = (await getCollection('projects'))
             </p>
             <p>
                 I’ve been a CEO twice, founded and exited a B2B SaaS company,
-                built teams from zero, and still program every day
+                and <a
+                    href="https://github.com/kyle-avrett"
+                    class="underline underline-offset-4 hover:text-gray-900"
+                    >still program every day</a
+                >
             </p>
         </OverviewCard>
 
         <section class="space-y-5">
-            <div class="flex flex-wrap items-baseline justify-between gap-3">
-                <h2 class="text-3xl font-semibold">Projects</h2>
-                <a
-                    class="text-sm font-medium text-gray-600 underline underline-offset-4 hover:text-gray-900"
-                    href="/projects/"
+            <div class="space-y-1">
+                <div
+                    class="flex flex-wrap items-baseline justify-between gap-3"
                 >
-                    All projects
-                </a>
+                    <h2 class="text-3xl font-semibold">Projects</h2>
+                    <a
+                        class="text-sm font-medium text-gray-600 underline underline-offset-4 hover:text-gray-900"
+                        href="/projects/"
+                    >
+                        All projects
+                    </a>
+                </div>
+                <p class="text-gray-600">
+                    Software Products and Businesses I've shipped
+                </p>
             </div>
             <div class="grid gap-5">
                 {
@@ -71,14 +85,21 @@ const projects = (await getCollection('projects'))
         </section>
 
         <section class="space-y-5">
-            <div class="flex flex-wrap items-baseline justify-between gap-3">
-                <h2 class="text-3xl font-semibold">Blog</h2>
-                <a
-                    class="text-sm font-medium text-gray-600 underline underline-offset-4 hover:text-gray-900"
-                    href="/blog/"
+            <div class="space-y-1">
+                <div
+                    class="flex flex-wrap items-baseline justify-between gap-3"
                 >
-                    All posts
-                </a>
+                    <h2 class="text-3xl font-semibold">Blog</h2>
+                    <a
+                        class="text-sm font-medium text-gray-600 underline underline-offset-4 hover:text-gray-900"
+                        href="/blog/"
+                    >
+                        All posts
+                    </a>
+                </div>
+                <p class="text-gray-600">
+                    Interesting things I've written about
+                </p>
             </div>
             <ol class="space-y-5">
                 {
