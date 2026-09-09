@@ -16,23 +16,29 @@ const dateFormat = new Intl.DateTimeFormat('en-US', {
     <p class="text-gray-600">{post.data.description}</p>
 
     <!-- subline -->
-    <div
-        class="mt-3 flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400"
-    >
+    <div class="mt-3 flex flex-wrap gap-4 text-sm text-gray-600">
         <div class="flex items-center">
-            <Icon name="tabler:user" class="mr-1 h-5 w-5" />
+            <Icon name="tabler:user" aria-hidden="true" class="mr-1 h-5 w-5" />
             <span>Kyle Avrett</span>
         </div>
 
         <div class="flex items-center">
-            <Icon name="tabler:calendar" class="mr-1 h-5 w-5" />
+            <Icon
+                name="tabler:calendar"
+                aria-hidden="true"
+                class="mr-1 h-5 w-5"
+            />
             <span>{dateFormat.format(post.data.published)}</span>
         </div>
 
         {
             post.data.updated && (
                 <div class="flex items-center">
-                    <Icon name="tabler:refresh" class="mr-1 h-5 w-5" />
+                    <Icon
+                        name="tabler:refresh"
+                        aria-hidden="true"
+                        class="mr-1 h-5 w-5"
+                    />
                     <span>Updated: {dateFormat.format(post.data.updated)}</span>
                 </div>
             )

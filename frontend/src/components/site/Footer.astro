@@ -47,8 +47,12 @@ const socials = [
         <div class="flex items-center justify-center gap-4">
             {
                 socials.map(({ url, icon, name }) => (
-                    <a href={url}>
-                        <Icon name={icon} aria-label={name} class="h-5 w-5" />
+                    <a
+                        href={url}
+                        aria-label={name}
+                        class="inline-flex min-h-6 min-w-6 items-center justify-center"
+                    >
+                        <Icon name={icon} aria-hidden="true" class="h-5 w-5" />
                     </a>
                 ))
             }

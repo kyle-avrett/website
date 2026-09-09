@@ -45,7 +45,15 @@ const endpoint = new URL('/api/v1/emails/subscribe', API_URL).toString();
         Subscribe
     </button>
 
-    <p data-email-status class="text-sm text-gray-600" hidden></p>
+    <p
+        data-email-status
+        class="text-sm text-gray-600"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        hidden
+    >
+    </p>
 </form>
 
 <script>
