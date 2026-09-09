@@ -19,19 +19,16 @@ const projects = (await getCollection('projects'))
     description="Hands-On CTO / Head of Engineering"
 >
     <section class="space-y-14">
-        <div class="mb-6 space-y-2">
-            <h1 class="text-4xl font-bold tracking-tight">Hi, I’m Kyle</h1>
-            <p class="text-gray-600">
-                I’m a Hands-On CTO / Head of Engineering
-            </p>
-        </div>
-
         <OverviewCard
             link="mailto:kyle@kyleavrett.com"
             linkText="Email Me"
             secondLink="/work/"
             secondLinkText="Work History"
         >
+            <h1 class="text-4xl font-bold tracking-tight text-black">
+                Hi, I’m Kyle
+            </h1>
+            <p>I’m a Hands-On CTO / Head of Engineering</p>
             <p>
                 I’ve spent 12 years building software and 6 years leading
                 engineering teams across SaaS, cloud infrastructure, healthcare,
@@ -42,7 +39,7 @@ const projects = (await getCollection('projects'))
                 and <a
                     href="https://github.com/kyle-avrett"
                     class="underline underline-offset-4 hover:text-gray-900"
-                    >still program every day</a
+                    >still write code every day</a
                 >
             </p>
         </OverviewCard>
