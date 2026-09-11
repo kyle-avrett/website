@@ -56,8 +56,11 @@ export default defineConfig({
                 tabler: [
                     'brand-github',
                     'brand-linkedin',
+                    'brand-bluesky',
+                    'brand-facebook',
                     'brand-x',
                     'mail',
+                    'link',
                     'rss',
                     'search',
                     'calendar',

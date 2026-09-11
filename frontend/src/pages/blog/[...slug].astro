@@ -4,6 +4,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Pros from '@components/blog/Pros.astro';
 import BlogHeader from '@components/blog/BlogHeader.astro';
+import Share from '@components/blog/Share.astro';
 import Comments from '@components/blog/Comments.astro';
 
 export async function getStaticPaths() {
@@ -34,6 +35,8 @@ const { Content } = await render(post);
         <Pros>
             <Content />
         </Pros>
+
+        <Share title={post.data.title} url={`/blog/${post.id}/`} />
 
         <Comments />
     </article>

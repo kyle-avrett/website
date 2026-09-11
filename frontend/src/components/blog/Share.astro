@@ -1,0 +1,116 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+    title: string;
+    url?: string;
+}
+
+const { title, url = Astro.url.pathname } = Astro.props;
+const shareUrl = new URL(url, Astro.site ?? Astro.url).toString();
+const encodedTitle = encodeURIComponent(title);
+const encodedUrl = encodeURIComponent(shareUrl);
+const encodedSummary = encodeURIComponent(`${title} ${shareUrl}`);
+
+const links = [
+    {
+        name: 'X',
+        href: `https://twitter.com/share?text=${encodedTitle}&url=${encodedUrl}`,
+        icon: 'tabler:brand-x',
+        label: 'Share',
+    },
+    {
+        name: 'Bluesky',
+        href: `https://bsky.app/intent/compose?text=${encodedSummary}`,
+        icon: 'tabler:brand-bluesky',
+        label: 'Share',
+    },
+    {
+        name: 'Facebook',
+        href: `https://www.facebook.com/sharer.php?u=${encodedUrl}`,
+        icon: 'tabler:brand-facebook',
+        label: 'Share',
+    },
+    {
+        name: 'LinkedIn',
+        href: `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}&summary=${encodedTitle}`,
+        icon: 'tabler:brand-linkedin',
+        label: 'Share',
+    },
+    {
+        name: 'Email',
+        href: `mailto:?subject=${encodedTitle}&body=${encodedSummary}`,
+        icon: 'tabler:mail',
+        label: 'Email',
+    },
+];
+
+const buttonClass =
+    'inline-flex flex-1 items-center justify-center gap-1.5 rounded-full border border-gray-300 bg-white px-3 py-2 leading-tight text-gray-700 transition hover:border-gray-400 hover:bg-slate-50 hover:text-gray-900 cursor-pointer';
+---
+
+<section class="mt-8" data-share aria-label="Share this post">
+    <div
+        class="flex flex-wrap items-center justify-center gap-3 border-t border-gray-300 pt-6 text-sm font-medium text-gray-700 sm:justify-start"
+    >
+        <span
+            class="flex-1 basis-full text-center text-base sm:basis-auto sm:text-left"
+        >
+            Share
+        </span>
+
+        {
+            links.map(({ name, href, icon, label }) => (
+                <a
+                    class={buttonClass}
+                    href={href}
+                    target={href.startsWith('mailto:') ? undefined : '_blank'}
+                    rel={
+                        href.startsWith('mailto:')
+                            ? undefined
+                            : 'noopener noreferrer'
+                    }
+                    title={
+                        name === 'Email' ? 'Share by email' : `Share on ${name}`
+                    }
+                    aria-label={name === 'Email' ? 'Email' : `Share on ${name}`}
+                >
+                    <Icon name={icon} aria-hidden="true" class="h-4 w-4" />
+                    <span>{label}</span>
+                </a>
+            ))
+        }
+
+        <button
+            class={buttonClass}
+            type="button"
+            data-share-copy
+            data-url={shareUrl}
+            data-label="Copy"
+            data-success="Copied!"
+            title="Copy URL"
+            aria-label="Copy URL"
+        >
+            <Icon name="tabler:link" aria-hidden="true" class="h-4 w-4" />
+            <span>Copy</span>
+        </button>
+    </div>
+</section>
+
+<script>
+    document.querySelectorAll('[data-share-copy]').forEach((button) => {
+        button.addEventListener('click', async () => {
+            if (!(button instanceof HTMLButtonElement)) return;
+            const label = button.querySelector('span');
+            const url = button.dataset.url;
+            if (!url || !(label instanceof HTMLElement)) return;
+
+            if (!navigator.clipboard) return;
+            await navigator.clipboard.writeText(url);
+            label.textContent = button.dataset.success ?? 'Copied!';
+            window.setTimeout(() => {
+                label.textContent = button.dataset.label ?? 'Copy';
+            }, 2000);
+        });
+    });
+</script>
