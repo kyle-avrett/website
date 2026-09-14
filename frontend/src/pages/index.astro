@@ -5,6 +5,8 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import LinkCard from '@components/LinkCard.astro';
 import EmptyCard from '@components/EmptyCard.astro';
 import OverviewCard from '@components/OverviewCard.astro';
+import Newsletter from '@components/Newsletter.astro';
+
 const posts = (await getCollection('blog'))
     .filter((post) => !post.data.draft)
     .sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
@@ -116,6 +118,20 @@ const projects = (await getCollection('projects'))
                     )
                 }
             </ol>
+        </section>
+
+        <section class="space-y-5">
+            <div class="space-y-1">
+                <div
+                    class="flex flex-wrap items-baseline justify-between gap-3"
+                >
+                    <h2 class="text-3xl font-semibold">Newsletter</h2>
+                </div>
+                <p class="text-gray-600">
+                    Get notified when I post. No spam, no slop, I promise
+                </p>
+            </div>
+            <Newsletter />
         </section>
     </section>
 </BaseLayout>
