@@ -38,7 +38,7 @@ def test_docs_index_links_to_api_and_mcp_docs(client):
     assert "<h2>MCP</h2>" in response.text
     assert 'href="/mcp"' in response.text
     assert 'href="/docs/mcp"' in response.text
-    assert 'href="/mcp/tools.json"' in response.text
+    assert 'href="/docs/mcp/tools.json"' in response.text
     assert 'href="/docs/mcp/openapi.json"' in response.text
     assert "font-family: system-ui, sans-serif" in response.text
     assert client.get("/openapi.json").status_code == 404
@@ -47,7 +47,7 @@ def test_docs_index_links_to_api_and_mcp_docs(client):
 def test_mcp_exposes_llm_friendly_tools(client):
     assert client.post("/mcp", json={}).status_code == 400
     docs_response = client.get("/docs/mcp")
-    tools_response = client.get("/mcp/tools.json")
+    tools_response = client.get("/docs/mcp/tools.json")
 
     assert docs_response.status_code == 200
     assert "MCP tools" in docs_response.text

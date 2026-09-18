@@ -1,14 +1,14 @@
 # Kyle Avrett's website
 
-Personal website for Kyle Avrett. The repo has two apps:
+Personal website for Kyle Avrett. Repo has two apps:
 
-- `frontend/`: Astro site for pages, blog posts, RSS, sitemap, search, and email signup UI.
-- `api/`: FastAPI service for email signup, social media notifications, and a small item CRUD route.
+- `frontend/`: Astro site for static pages, MDX content collections, RSS, sitemap, Pagefind search, SEO metadata, and email signup UI.
+- `api/`: FastAPI service for email signup, social media notifications, outbound webhooks, generated MCP tools, and a small item CRUD route.
 
 ## Stack
 
-- Frontend: Astro, MDX, Tailwind CSS, Pagefind, RSS, sitemap, robots.txt, Astro SEO.
-- API: FastAPI, FastMCP, SQLAlchemy async, Alembic, PostgreSQL, listmonk, Gotify.
+- Frontend: Astro, MDX, Tailwind CSS, Cloudflare adapter, Astro Icon, Pagefind, RSS, sitemap, robots.txt, Astro SEO, `llms.txt`.
+- API: FastAPI, FastMCP, FastMCP docs, SQLAlchemy async, Alembic, PostgreSQL, listmonk, Gotify.
 - Tooling: `just`, `pnpm`, `uv`, Ruff, ty, pytest, ESLint, Prettier, Vitest.
 
 ## Requirements
@@ -71,7 +71,7 @@ From repo root:
 just dev
 ```
 
-That runs API and frontend dev recipes in parallel. Both recipes run their checks first.
+That runs API and frontend dev recipes in parallel. Both recipes run `all` first, so setup, format, lint, typecheck, and test run before servers start.
 
 Manual frontend:
 
@@ -132,15 +132,16 @@ just preview
 
 ## Frontend
 
-Routes live in `frontend/src/pages/`:
+Astro routes live in `frontend/src/pages/`:
 
-- `/`: home page with projects and blog posts.
-- `/blog/` and `/blog/[slug]/`: content collection backed by `frontend/src/content/blog/`.
-- `/projects/`: project index.
-- `/projects/guidebook-studio/`: Guidebook Studio case study.
+- `/`: home page with overview, project cards, blog cards, and newsletter signup.
+- `/blog/`: blog index backed by `frontend/src/content/blog/`.
+- `/blog/[slug]/`: non-draft blog posts from the blog content collection.
+- `/projects/`: project index backed by `frontend/src/content/projects/`.
+- `/projects/[slug]/`: non-draft project case studies from the project content collection.
 - `/work/`: resume and work history.
 - `/search/`: Pagefind client search.
-- `/rss.xml`: RSS feed.
+- `/rss.xml`: RSS feed for non-draft blog posts.
 - `/privacy/` and `/terms/`: legal pages.
 
 Shared layout and UI live in `frontend/src/layouts/` and `frontend/src/components/`.
@@ -149,24 +150,25 @@ Shared layout and UI live in `frontend/src/layouts/` and `frontend/src/component
 
 FastAPI app entry point: `api/src/main.py`.
 
-Routes mount under `/api/v1`:
+REST routes:
 
-- `POST /emails/subscribe`: stores an email in PostgreSQL, creates a listmonk subscriber, sends a welcome email, sends a Gotify website notification, and emits `email.subscribed` webhooks when configured.
-- `POST /social-media/notify`: sends Gotify notifications for social media posts and emits `social_media.published` webhooks when configured.
-- `/item` and `/items`: small CRUD route backed by PostgreSQL.
 - `GET /`: health check.
+- `POST /api/v1/emails/subscribe`: stores an email in PostgreSQL, creates a listmonk subscriber, sends a welcome email, sends a Gotify website notification, and emits `email.subscribed` webhooks when configured.
+- `POST /api/v1/social-media/notify`: sends Gotify notifications for social media posts and emits `social_media.published` webhooks when configured.
+- `POST /api/v1/item`, `GET /api/v1/item/{item_id}`, `PUT /api/v1/item/{item_id}`, `DELETE /api/v1/item/{item_id}`, and `GET /api/v1/items`: small CRUD route backed by PostgreSQL.
 
 Database models live beside routes. Alembic migrations live in `api/alembic/versions/`.
 
-Docs live under `/docs`:
+Docs and MCP routes:
 
 - `/docs`: docs index.
 - `/docs/api`: FastAPI Swagger UI.
 - `/docs/api/redoc`: FastAPI ReDoc.
-- `/docs/mcp`: FastMCP docs.
 - `/docs/api/openapi.json`: FastAPI OpenAPI schema.
+- `/mcp`: FastMCP HTTP endpoint.
+- `/docs/mcp`: FastMCP docs.
 - `/docs/mcp/openapi.json`: FastMCP docs OpenAPI schema.
-- `/mcp/tools.json`: FastMCP tool metadata.
+- `/docs/mcp/tools.json`: FastMCP tool metadata.
 
 The API also exposes an MCP server generated from the FastAPI OpenAPI schema. It gives agents the same API as MCP tools:
 

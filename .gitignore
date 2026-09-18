@@ -10,3 +10,6 @@ htmlcov/
 dist/
 node_modules/
 .env
+
+# misc
+.codebase-memory/
