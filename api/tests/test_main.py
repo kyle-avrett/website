@@ -46,6 +46,14 @@ def test_docs_index_links_to_api_and_mcp_docs(client):
 
 def test_mcp_exposes_llm_friendly_tools(client):
     assert client.post("/mcp", json={}).status_code == 400
+    stale_session_response = client.post(
+        "/mcp",
+        json={"jsonrpc": "2.0", "id": 1, "method": "tools/list", "params": {}},
+        headers={"mcp-session-id": "stale"},
+    )
+    assert stale_session_response.status_code == 200
+    assert "health_check" in stale_session_response.text
+
     docs_response = client.get("/docs/mcp")
     tools_response = client.get("/docs/mcp/tools.json")
 

@@ -37,7 +37,7 @@ def health_check():
 # FastMCP generates tool definitions from the REST API OpenAPI schema.
 mcp = FastMCP.from_fastapi(app=api_app, name=f"{settings.APP_NAME} MCP")
 setup_mcp_docs(mcp)
-mcp_app = mcp.http_app(path="/mcp")
+mcp_app = mcp.http_app(path="/mcp", stateless_http=True)
 
 # The public app serves FastMCP first, then falls through to REST routes.
 
