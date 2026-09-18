@@ -9,7 +9,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.types import DateTime, String
 
 from src.database import Base, get_db
-from src.services import gotify, listmonk
+from src.services import gotify, listmonk, webhooks
 
 # ----------------------------------------------------------------------------------------
 
@@ -74,6 +74,10 @@ async def subscribe(request: EmailRequest, db: Database):
         "New Email Subscriber",
         f"{email.name} <{email.email}> subscribed"
         + (f" from {email.source}" if email.source else ""),
+    )
+    await webhooks.deliver(
+        "email.subscribed",
+        EmailResponse.model_validate(email).model_dump(mode="json"),
     )
 
     # return

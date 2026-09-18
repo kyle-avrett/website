@@ -47,6 +47,8 @@ LISTMONK_TEMPLATE_WELCOME_EMAIL=
 GOTIFY_URL=
 GOTIFY_TOKEN_WEBSITE=
 GOTIFY_TOKEN_SOCIAL_MEDIA=
+WEBHOOK_URLS=
+WEBHOOK_SECRET=
 POSTGRES_DB=
 POSTGRES_HOST=
 POSTGRES_USER=
@@ -148,8 +150,8 @@ FastAPI app entry point: `api/src/main.py`.
 
 Routes mount under `/api/v1`:
 
-- `POST /emails/subscribe`: stores an email in PostgreSQL, creates a listmonk subscriber, sends a welcome email, and sends a Gotify website notification.
-- `POST /social-media/notify`: sends Gotify notifications for social media posts.
+- `POST /emails/subscribe`: stores an email in PostgreSQL, creates a listmonk subscriber, sends a welcome email, sends a Gotify website notification, and emits `email.subscribed` webhooks when configured.
+- `POST /social-media/notify`: sends Gotify notifications for social media posts and emits `social_media.published` webhooks when configured.
 - `/item` and `/items`: small CRUD route backed by PostgreSQL.
 - `GET /`: health check.
 

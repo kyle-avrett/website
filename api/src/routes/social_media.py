@@ -3,7 +3,7 @@ from datetime import datetime
 from fastapi import APIRouter
 from pydantic import BaseModel
 
-from src.services import gotify
+from src.services import gotify, webhooks
 
 # ----------------------------------------------------------------------------------------
 
@@ -45,6 +45,10 @@ async def notify(posts: list[SocialMediaRequest]):
         await gotify.notify_social_media(
             f"Posted to {post.integration.providerIdentifier}",
             f"{post.content}\n\n{post.releaseURL}",
+        )
+        await webhooks.deliver(
+            "social_media.published",
+            post.model_dump(mode="json"),
         )
 
     # return

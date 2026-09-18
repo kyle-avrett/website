@@ -32,13 +32,18 @@ EXAMPLE_POSTS = [
 
 def test_social_media_notify(client, monkeypatch):
     sent = []
+    sent_webhooks = []
 
     async def fake_notify_social_media(title, message):
         sent.append((title, message))
 
+    async def fake_deliver(event, data):
+        sent_webhooks.append((event, data))
+
     monkeypatch.setattr(
         "src.routes.social_media.gotify.notify_social_media", fake_notify_social_media
     )
+    monkeypatch.setattr("src.routes.social_media.webhooks.deliver", fake_deliver)
 
     response = client.post("/api/v1/social-media/notify", json=EXAMPLE_POSTS)
 
@@ -53,4 +58,12 @@ def test_social_media_notify(client, monkeypatch):
             "Posted to facebook",
             "This is the second post to facebook\n\nhttps://facebook.com/release2/release2",
         ),
+    ]
+    expected_posts = [
+        {**EXAMPLE_POSTS[0], "publishDate": "2025-02-06T13:09:00Z"},
+        {**EXAMPLE_POSTS[1], "publishDate": "2025-02-06T13:09:00Z"},
+    ]
+    assert sent_webhooks == [
+        ("social_media.published", expected_posts[0]),
+        ("social_media.published", expected_posts[1]),
     ]

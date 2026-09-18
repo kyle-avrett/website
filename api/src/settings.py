@@ -20,6 +20,10 @@ class Settings(BaseSettings):
     GOTIFY_TOKEN_WEBSITE: str = ""
     GOTIFY_TOKEN_SOCIAL_MEDIA: str = ""
 
+    # webhooks
+    WEBHOOK_URLS: str = ""
+    WEBHOOK_SECRET: str = ""
+
     # database
     POSTGRES_DB: str = ""
     POSTGRES_HOST: str = ""
@@ -31,6 +35,10 @@ class Settings(BaseSettings):
         return [
             origin.strip() for origin in self.CORS_ORIGINS.split(",") if origin.strip()
         ]
+
+    @property
+    def WEBHOOK_URL_LIST(self) -> list[str]:
+        return [url.strip() for url in self.WEBHOOK_URLS.split(",") if url.strip()]
 
     @property
     def DATABASE_URL(self) -> str:

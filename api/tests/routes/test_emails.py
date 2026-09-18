@@ -5,6 +5,7 @@ def test_email_crud(client, monkeypatch):
     created_in_listmonk = []
     sent_welcome_emails = []
     sent_messages = []
+    sent_webhooks = []
 
     async def fake_create_subscriber(name, email, source=None):
         created_in_listmonk.append((name, email, source))
@@ -16,6 +17,9 @@ def test_email_crud(client, monkeypatch):
     async def fake_notify_website(title, message):
         sent_messages.append((title, message))
 
+    async def fake_deliver(event, data):
+        sent_webhooks.append((event, data))
+
     monkeypatch.setattr(
         "src.routes.emails.listmonk.create_subscriber", fake_create_subscriber
     )
@@ -23,6 +27,7 @@ def test_email_crud(client, monkeypatch):
         "src.routes.emails.listmonk.send_welcome_email", fake_send_welcome_email
     )
     monkeypatch.setattr("src.routes.emails.gotify.notify_website", fake_notify_website)
+    monkeypatch.setattr("src.routes.emails.webhooks.deliver", fake_deliver)
 
     response = client.post(
         "/api/v1/emails/subscribe",
@@ -41,4 +46,16 @@ def test_email_crud(client, monkeypatch):
     ]
     assert sent_messages == [
         ("New Email Subscriber", "Kyle <kyle@example.com> subscribed from site")
+    ]
+    assert sent_webhooks == [
+        (
+            "email.subscribed",
+            {
+                "id": 1,
+                "name": "Kyle",
+                "email": "kyle@example.com",
+                "source": "site",
+                "date_created": email["date_created"],
+            },
+        )
     ]
