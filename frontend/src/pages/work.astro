@@ -659,6 +659,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
         flex: 0 0 auto;
         color: #1f2937;
         font-size: 0.875rem;
+        font-style: italic;
         text-align: right;
     }
 
@@ -670,7 +671,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
         font-weight: 600;
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 585px) {
         h1 {
             font-size: 2rem;
             line-height: 1.1;
@@ -684,9 +685,35 @@ import BaseLayout from '@layouts/BaseLayout.astro';
             grid-template-columns: 1fr;
         }
 
+        .role {
+            display: flex;
+            flex-direction: column;
+        }
+
         .role-line,
         .company-line {
-            display: block;
+            display: contents;
+        }
+
+        .role-line h3 {
+            order: 1;
+        }
+
+        .company-line strong {
+            order: 2;
+        }
+
+        .role-line p {
+            order: 3;
+        }
+
+        .company-line p {
+            order: 4;
+        }
+
+        .role > p,
+        .role > ul {
+            order: 5;
         }
 
         .role-line p,
