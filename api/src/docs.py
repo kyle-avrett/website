@@ -35,6 +35,12 @@ DOCS_SECTIONS = [
             ("/docs/mcp/openapi.json", "OpenAPI Schema"),
         ],
     ),
+    (
+        "README",
+        [
+            ("https://github.com/kyle-avrett/website", "GitHub"),
+        ],
+    ),
 ]
 
 
