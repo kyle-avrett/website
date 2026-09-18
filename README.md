@@ -8,7 +8,7 @@ Personal website for Kyle Avrett. The repo has two apps:
 ## Stack
 
 - Frontend: Astro, MDX, Tailwind CSS, Pagefind, RSS, sitemap, robots.txt, Astro SEO.
-- API: FastAPI, SQLAlchemy async, Alembic, PostgreSQL, listmonk, Gotify.
+- API: FastAPI, FastMCP, SQLAlchemy async, Alembic, PostgreSQL, listmonk, Gotify.
 - Tooling: `just`, `pnpm`, `uv`, Ruff, ty, pytest, ESLint, Prettier, Vitest.
 
 ## Requirements
@@ -87,7 +87,7 @@ POSTGRES_HOST=localhost uv run alembic upgrade head
 POSTGRES_HOST=localhost uv run fastapi dev src/main.py --host 0.0.0.0
 ```
 
-API docs are at `http://localhost:8000/docs`. Frontend defaults to `http://localhost:4321`.
+API docs are at `http://localhost:8000/docs`. MCP endpoint is `http://localhost:8000/mcp`. Frontend defaults to `http://localhost:4321`.
 
 ## Commands
 
@@ -156,6 +156,32 @@ Routes mount under `/api/v1`:
 - `GET /`: health check.
 
 Database models live beside routes. Alembic migrations live in `api/alembic/versions/`.
+
+The API also exposes an MCP server generated from the FastAPI OpenAPI schema. It gives agents the same API as MCP tools:
+
+- `health_check`
+- `subscribe_email`
+- `notify_social_media`
+- `create_item`
+- `read_item`
+- `update_item`
+- `delete_item`
+- `list_items`
+
+Example agent config for MCP over HTTP:
+
+```json
+{
+  "mcpServers": {
+    "kyle-avrett-website-api": {
+      "type": "http",
+      "url": "http://localhost:8000/mcp"
+    }
+  }
+}
+```
+
+Use production API origin instead of `localhost:8000` when connecting to deployed API.
 
 ## Production API
 

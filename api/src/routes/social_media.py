@@ -38,7 +38,11 @@ router = APIRouter(tags=["Social Media"])
 # ----------------------------------------------------------------------------------------
 
 
-@router.post("/social-media/notify", response_model=SocialMediaResponse)
+@router.post(
+    "/social-media/notify",
+    response_model=SocialMediaResponse,
+    operation_id="notify_social_media",
+)
 async def notify(posts: list[SocialMediaRequest]):
     # notify
     for post in posts:

@@ -43,7 +43,7 @@ Database = Annotated[AsyncSession, Depends(get_db)]
 # ----------------------------------------------------------------------------------------
 
 
-@router.post("/item", response_model=ItemResponse)
+@router.post("/item", response_model=ItemResponse, operation_id="create_item")
 async def create_item(request: ItemRequest, db: Database):
     item = Item(name=request.name)
     db.add(item)
@@ -52,7 +52,7 @@ async def create_item(request: ItemRequest, db: Database):
     return item
 
 
-@router.get("/item/{item_id}", response_model=ItemResponse)
+@router.get("/item/{item_id}", response_model=ItemResponse, operation_id="read_item")
 async def read_item(item_id: int, db: Database):
     result = await db.execute(select(Item).where(Item.id == item_id))
     item = result.scalar_one_or_none()
@@ -61,7 +61,7 @@ async def read_item(item_id: int, db: Database):
     return item
 
 
-@router.put("/item/{item_id}", response_model=ItemResponse)
+@router.put("/item/{item_id}", response_model=ItemResponse, operation_id="update_item")
 async def update_item(item_id: int, request: ItemRequest, db: Database):
     result = await db.execute(select(Item).where(Item.id == item_id))
     item = result.scalar_one_or_none()
@@ -74,7 +74,9 @@ async def update_item(item_id: int, request: ItemRequest, db: Database):
     return item
 
 
-@router.delete("/item/{item_id}", response_model=ItemResponse)
+@router.delete(
+    "/item/{item_id}", response_model=ItemResponse, operation_id="delete_item"
+)
 async def delete_item(item_id: int, db: Database):
     result = await db.execute(select(Item).where(Item.id == item_id))
     item = result.scalar_one_or_none()
@@ -86,7 +88,7 @@ async def delete_item(item_id: int, db: Database):
     return item
 
 
-@router.get("/items", response_model=list[ItemResponse])
+@router.get("/items", response_model=list[ItemResponse], operation_id="list_items")
 async def list_items(db: Database):
     result = await db.execute(select(Item))
     return result.scalars().all()

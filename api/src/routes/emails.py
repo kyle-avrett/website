@@ -55,7 +55,9 @@ Database = Annotated[AsyncSession, Depends(get_db)]
 # ----------------------------------------------------------------------------------------
 
 
-@router.post("/emails/subscribe", response_model=EmailResponse)
+@router.post(
+    "/emails/subscribe", response_model=EmailResponse, operation_id="subscribe_email"
+)
 async def subscribe(request: EmailRequest, db: Database):
     # database
     email = Email(name=request.name, email=request.email, source=request.source)
