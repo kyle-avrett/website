@@ -596,6 +596,19 @@ wheels = [
 ]
 
 [[package]]
+name = "fastmcp-docs"
+version = "1.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "fastmcp" },
+    { name = "starlette" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/66/4b/edd0a230d9496404a0057c0ac146dc7ec665557cb62eb807f4345fec5dce/fastmcp_docs-1.0.0.tar.gz", hash = "sha256:a874f1d659b1e112bd6f6ce9969a494364f2217fabf41c180c4785cba26d146d", size = 15979, upload-time = "2026-02-23T10:53:42.197Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a8/30/0e8cd27f4bc98338e281793c332dd6fd4ee3d97e65f5564a4638986666ee/fastmcp_docs-1.0.0-py3-none-any.whl", hash = "sha256:bdaffd2c09b39fb2e77f0871c15f5094f2c7026dc0b701dc03cb71ec7392f3ec", size = 15083, upload-time = "2026-02-23T10:53:40.886Z" },
+]
+
+[[package]]
 name = "fastmcp-slim"
 version = "4.0.5"
 source = { registry = "https://pypi.org/simple" }
@@ -1860,6 +1873,7 @@ dependencies = [
     { name = "asyncpg" },
     { name = "fastapi", extra = ["standard"] },
     { name = "fastmcp" },
+    { name = "fastmcp-docs" },
     { name = "gotify" },
     { name = "httpx2" },
     { name = "pydantic-settings" },
@@ -1882,6 +1896,7 @@ requires-dist = [
     { name = "asyncpg", specifier = ">=0.31.0" },
     { name = "fastapi", extras = ["standard"], specifier = ">=0.139.0" },
     { name = "fastmcp", specifier = ">=4.0.5" },
+    { name = "fastmcp-docs", specifier = ">=1.0.0" },
     { name = "gotify", specifier = ">=0.6.0" },
     { name = "httpx2", specifier = ">=2.5.0" },
     { name = "pydantic-settings", specifier = ">=2.14.2" },

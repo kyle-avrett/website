@@ -6,6 +6,7 @@ class Settings(BaseSettings):
 
     # api
     APP_NAME: str = ""
+    BASE_URL: str = ""
     CORS_ORIGINS: str = ""
 
     # listmonk

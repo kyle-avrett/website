@@ -38,6 +38,7 @@ API environment:
 
 ```sh
 APP_NAME=api
+BASE_URL=http://localhost:8000
 CORS_ORIGINS=https://kyleavrett.com,http://localhost:4321
 LISTMONK_URL=http://localhost:9000
 LISTMONK_USER=
@@ -87,7 +88,7 @@ POSTGRES_HOST=localhost uv run alembic upgrade head
 POSTGRES_HOST=localhost uv run fastapi dev src/main.py --host 0.0.0.0
 ```
 
-API docs are at `http://localhost:8000/docs`. MCP endpoint is `http://localhost:8000/mcp`. Frontend defaults to `http://localhost:4321`.
+Docs index is at `http://localhost:8000/docs`. API docs are at `/docs/api`. MCP docs are at `/docs/mcp`. MCP endpoint is `http://localhost:8000/mcp`. Frontend defaults to `http://localhost:4321`.
 
 ## Commands
 
@@ -156,6 +157,16 @@ Routes mount under `/api/v1`:
 - `GET /`: health check.
 
 Database models live beside routes. Alembic migrations live in `api/alembic/versions/`.
+
+Docs live under `/docs`:
+
+- `/docs`: docs index.
+- `/docs/api`: FastAPI Swagger UI.
+- `/docs/api/redoc`: FastAPI ReDoc.
+- `/docs/mcp`: FastMCP docs.
+- `/docs/api/openapi.json`: FastAPI OpenAPI schema.
+- `/docs/mcp/openapi.json`: FastMCP docs OpenAPI schema.
+- `/mcp/tools.json`: FastMCP tool metadata.
 
 The API also exposes an MCP server generated from the FastAPI OpenAPI schema. It gives agents the same API as MCP tools:
 
