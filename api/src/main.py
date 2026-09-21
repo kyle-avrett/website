@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastmcp import FastMCP
 
-from src.docs import register_docs_index, setup_mcp_docs
+from src.routes.docs import register_docs_index, setup_mcp_docs
 from src.routes.emails import router as emails_router
 from src.routes.item import router as item_router
 from src.routes.social_media import router as social_media_router
