@@ -7,7 +7,7 @@ from sqlalchemy.future import select
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.types import String
 
-from src.database import Base, get_db
+from src.services.database import Base, get_db
 
 # ----------------------------------------------------------------------------------------
 

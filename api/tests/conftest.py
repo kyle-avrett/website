@@ -9,8 +9,8 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
-from src.database import Base, get_db
 from src.main import app
+from src.services.database import Base, get_db
 
 # database connection
 DATABASE_URL = "sqlite+aiosqlite:///:memory:"

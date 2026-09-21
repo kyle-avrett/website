@@ -1,6 +1,6 @@
 import anyio
 
-from src import database
+from src.services import database
 
 
 class FakeSessionContext:

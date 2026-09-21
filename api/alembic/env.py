@@ -6,9 +6,9 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from alembic import context
-from src.database import Base
 from src.routes import emails as _emails  # noqa: F401
 from src.routes import item as _item  # noqa: F401
+from src.services.database import Base
 from src.settings import settings
 
 # this is the Alembic Config object, which provides

@@ -8,8 +8,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.types import DateTime, String
 
-from src.database import Base, get_db
 from src.services import gotify, listmonk, webhooks
+from src.services.database import Base, get_db
 
 # ----------------------------------------------------------------------------------------
 
